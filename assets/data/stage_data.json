@@ -1,0 +1,31 @@
+{
+  "stages": [
+   {
+    "stage": 1,
+    "map": "stage_1_map",
+    "ceiling": "stage_1_ceiling",
+    "floor": "stage_1_floor",
+    "layer1": "stage_1_layer1",
+    "layer2": "stage_1_layer2",
+    "layer4": "stage_1_layer4"
+    },
+   {
+    "stage": 2,
+    "map": "stage_2_map",
+    "ceiling": "stage_2_ceiling",
+    "floor": "stage_2_floor",
+    "layer1": "stage_2_layer1",
+    "layer2": "stage_2_layer2",
+    "layer4": "stage_2_layer4"
+    },
+   {
+    "stage": 3,
+    "map": "stage_3_map",
+    "ceiling": "stage_3_ceiling",
+    "floor": "stage_3_floor",
+    "layer1": "stage_3_layer1",
+    "layer2": "stage_3_layer2",
+    "layer4": "stage_3_layer4"
+    }
+  ]
+}
