@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1.0">
+    <title>Jailus2</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color:#000;
+        }
+        #game-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+        @media (max-width: 768px) {
+            html, body {
+                height: 100%;
+                min-height: 100vh;
+            }
+            #game-container {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+
+    <script type="module">
+        import { AssetLoader } from './AssetLoader.js';
+        import { TitleScene } from './js/scenes/TitleScene.js';
+        import { AttractScene } from './js/scenes/AttractScene.js';
+        import { GameScene } from './js/scenes/GameScene.js';
+        import { UIScene } from './js/scenes/UIScene.js';
+        import { GameOverScene } from './js/scenes/GameOverScene.js';
+        import { GameClearScene } from './js/scenes/GameClearScene.js';
+        import { NameEntryScene } from './js/scenes/NameEntryScene.js';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const isPortrait = () => {
+                return window.innerHeight > window.innerWidth;
+            };
+
+            const GAME_WIDTH = isPortrait() ? 800 : 800;
+            const GAME_HEIGHT = isPortrait() ? 600 : 600;
+            const config = {
+                type: Phaser.AUTO,
+                scale: {
+                    mode: Phaser.Scale.FIT,
+                    autoCenter: Phaser.Scale.CENTER_BOTH,
+                    width: GAME_WIDTH,
+                    height: GAME_HEIGHT,
+                    parent: 'game-container',
+                },
+                fps: {limit:120},
+                fx: { glow: { distance: 32, quality: 0.1 } },
+                input: { gamepad: true , keyboard: true },
+                backgroundColor: '#203050',
+                // インポートしたクラス名を直接使用
+                scene: [AssetLoader, TitleScene, AttractScene, GameScene, UIScene, GameOverScene, GameClearScene, NameEntryScene]
+            };
+
+            new Phaser.Game(config);
+        });
+    </script>
+
+    <script type="x-shader/x-fragment" id="scrollShader">
+    precision mediump float;
+    uniform sampler2D uMainSampler;
+
+    uniform float uOffsetX;
+    uniform float uOffsetY;
+    uniform float uSqueeze;
+
+    uniform float uScaleTop;    // create() 時に設定 (>0)
+    uniform float uScaleBottom; // create() 時に設定 (>0)
+
+    varying vec2 outTexCoord;
+
+    void main(void)
+    {
+        vec2 uv = outTexCoord;
+
+        // 描画範囲外は透明
+        if (uv.y > uSqueeze) {
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+            return;
+        }
+
+        // 正規化された縦位置（0..1）
+        float y_local = uv.y / max(uSqueeze, 1e-6);
+
+        // 数値安全用EPS（log の引数やゼロ割回避）
+        const float EPS = 1e-6;
+
+        // 安全にスケール値を扱う（0 以下を回避）
+        float st = max(uScaleTop, EPS);
+        float sb = max(uScaleBottom, EPS);
+
+        // 横スケール/速度の補間（その行の scale と speed）
+        float scale = mix(st, sb, y_local);
+        float speed = mix(uScaleTop, uScaleBottom, y_local);
+
+        // --- 縦方向のマップ（累積逆スケール） ---
+        // scale(t) = st + a * t  where a = sb - st
+        float a = sb - st;
+        float y_src;
+
+        if (abs(a) < 1e-7) {
+            // 退化ケース: scale は定数 -> 縦マップは線形
+            y_src = y_local;
+        } else {
+            // 不定積分 ∫ 1/(a t + b) dt = (1/a) * ln(a t + b) + C
+            // 正規化して 0..1 にするための式：
+            // y_src = [ ln(a*y_local + b) - ln(b) ] / [ ln(a*1 + b) - ln(b) ]
+            float numerator_val = max(a * y_local + st, EPS);
+            float denom_val = max(a + st, EPS); // = sb
+
+            // natural logs
+            float num = log(numerator_val) - log(st);
+            float den = log(denom_val) - log(st);
+
+            // den ≠ 0 なので安全に割る
+            y_src = num / den;
+        }
+
+        // 縦方向の無限タイル化
+        y_src = fract(y_src + uOffsetY);
+
+        // --- 横方向の変形 ---
+        float x = uv.x + uOffsetX * speed;
+        x = (x - 0.5) / max(scale, EPS) + 0.5;
+
+        // 横方向の無限タイル化
+        x = fract(x);
+
+        vec2 newUV = vec2(x, y_src);
+        vec4 texColor = texture2D(uMainSampler, newUV);
+        texColor.rgb *= scale;
+
+        gl_FragColor = texColor;
+    }
+    </script>
+
+    <script type="x-shader/x-fragment" id="rippleShader">
+        precision mediump float;
+
+        uniform float     time;
+        uniform float     amplitude;
+        uniform float     frequency;
+        uniform sampler2D uMainSampler;
+        uniform float     alpha;
+        varying vec2      outTexCoord;
+
+        void main() {
+            vec2 uv = outTexCoord;
+            uv.x += sin(uv.y * frequency + time) * amplitude;
+            vec4 texColor = texture2D(uMainSampler, uv);
+            texColor.rgb *= alpha;
+            texColor.a *= alpha;
+            gl_FragColor = texColor;
+        }
+    </script>
+
+</body>
+</html>

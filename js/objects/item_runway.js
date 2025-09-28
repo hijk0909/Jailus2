@@ -1,0 +1,57 @@
+// item_port.js
+import { GLOBALS } from '../GameConst.js';
+import { GameState } from '../GameState.js';
+import { MyMath } from '../utils/MathUtils.js';
+import { Item } from './item.js';
+
+export class Item_Runway extends Item {
+
+    constructor(scene){
+        super(scene);
+        this.collision = { width : 32, height : 4};
+        this.grahpics_r = null;
+        this.z = GLOBALS.LAYER.LAYER3.Z;
+        this.color_counter = 0;
+    }
+
+    init(pos){
+        super.init(pos);
+        // スプライトの設定
+        // this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_item')
+        // .setOrigin(0.5, 0.5)
+        // .setFrame(0)
+        // .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 1);
+        // Runway描画用
+        this.graphics_r = this.scene.add.graphics().setDepth(MyMath.z_to_depth(this.z));
+        // this.graphics = this.scene.add.graphics().setDepth(3);
+    }
+
+    set_collision(obj_width, obj_height){
+        // console.log("obj_width", obj_width);
+        this.collision = { width : obj_width, height : obj_height};
+    }
+
+    update(){
+        this.color_counter = (this.color_counter + 13) % 360;
+        const phaserColorInstance = Phaser.Display.Color.HSLToColor(this.color_counter / 360, 1, 0.5);
+        const color = phaserColorInstance.color32;
+
+        this.graphics_r.clear();
+        this.graphics_r.lineStyle(3, color);
+        this.graphics_r.strokeRect(
+            MyMath.global_x_to_disp_x(this.pos.x - this.collision.width / 2, this.z),
+            MyMath.global_y_to_disp_y(this.pos.y - this.collision.height / 2, this.z),
+            this.collision.width * MyMath.get_disp_ratio(this.z),
+            this.collision.height * MyMath.get_disp_ratio(this.z)
+        )
+        super.update();
+    }
+
+    destroy(){
+        if ( this.graphics_r ){
+            this.graphics_r.destroy();
+            this.graphics_r = null;
+        }
+        super.destroy();
+    }
+}
