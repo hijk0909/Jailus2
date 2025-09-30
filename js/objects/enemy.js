@@ -28,11 +28,11 @@ export class Enemy extends Drawable {
         super.update();
     }
 
-    shoot(){
+    shoot(angle = 0){
         // 敵弾の射出
         const be = new Bullet_E(this.scene);
         be.init(this.pos);
-        be.set_velocity(this.pos, GameState.player.pos);
+        be.set_velocity(this.pos, GameState.player.pos, angle);
         GameState.bullets_e.push(be);
     }
 

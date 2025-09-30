@@ -17,6 +17,7 @@ export class Enemy_B1 extends Enemy {
         this.life = 80;
         this.speed = 0.3;
         this.count = COOLDOWN_INTERVAL;
+        this.score = 3000;
     }
 
     init(pos){
@@ -49,6 +50,10 @@ export class Enemy_B1 extends Enemy {
         if (this.count < 0){
             this.count = COOLDOWN_INTERVAL;
             this.shoot();
+            this.shoot(-15);
+            this.shoot(+15);
+            this.shoot(-30);
+            this.shoot(+30);
         }
     }
 

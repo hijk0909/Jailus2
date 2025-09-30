@@ -22,10 +22,11 @@ export class Bullet extends Drawable {
         this.type = type;
     }
 
-    set_velocity(pos1, pos2){
-        this.velocity = pos2.clone().subtract(pos1).normalize().scale(this.speed);
+    set_velocity(pos1, pos2, angle = 0){
+        const direction = pos2.clone().subtract(pos1).normalize();
+        direction.rotate(Phaser.Math.DegToRad(angle));
+        this.velocity = direction.scale(this.speed);
     }
-
 
     update(){
         super.update();

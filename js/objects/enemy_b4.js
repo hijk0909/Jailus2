@@ -17,6 +17,7 @@ export class Enemy_B4 extends Enemy {
         this.life = 140;
         this.speed = 0.3;
         this.count = COOLDOWN_INTERVAL;
+        this.score = 3000;
     }
 
     init(pos){
