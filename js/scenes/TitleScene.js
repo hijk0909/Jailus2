@@ -46,6 +46,13 @@ export class TitleScene extends Phaser.Scene {
 
         this.add.text(this.cx, this.hy - 125, 'PUSH SPACE KEY',{ fontSize: '24px', fill: '#fff' }).setOrigin(0.5,0.5);
         this.show_text(`VERSION : ${GLOBALS.VERSION}`);
+
+        const btn_play = this.add.image(this.cx, this.hy - 10, 'btn_tap')
+        .setOrigin(0.5,1)
+        .setInteractive()
+        .on('pointerdown', () => {this.start_game();})
+        .on('pointerover', () => {btn_play.setTint(0xcccccc);})
+        .on('pointerout', () => {btn_play.clearTint();});
     }
 
     update(time, delta){
