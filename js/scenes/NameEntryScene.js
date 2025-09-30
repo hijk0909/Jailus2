@@ -10,9 +10,6 @@ export class NameEntryScene extends Phaser.Scene {
     }
 
     create(){
-        // 入力ユーティリティクラス
-        this.my_input = new MyInput(this);
-
         // ステージ表示
         this.stage = (GameState.stage > GLOBALS.STAGE_MAX) ? "ALL" : GameState.stage;
 
@@ -25,13 +22,6 @@ export class NameEntryScene extends Phaser.Scene {
         this.name_entry = new name_entry(this, (name, score, stage) => {this.set_ranking(name, score, stage);});
         this.focus_pos = this.ranking.get_name_position(this.rank);
         this.name_entry.set_focus_pos(this.focus_pos);
-
-        // 押下時一回のみ反応さえるため（JustPress化）
-        this.i_up_before = false;
-        this.i_down_before = false;
-        this.i_left_before = false;
-        this.i_right_before = false;
-        this.i_button_before = false;
 
         GameState.sound.bgm_name_entry.play();
       }
@@ -55,19 +45,6 @@ export class NameEntryScene extends Phaser.Scene {
     }
 
     update(){
-        // 入力状態の更新
-        this.my_input.update();
-        // ネームエントリの更新
-        if (GameState.i_up === true && this.i_up_before === false){this.name_entry.cursor_up()};
-        if (GameState.i_down === true && this.i_down_before === false){this.name_entry.cursor_down()};
-        if (GameState.i_left === true && this.i_left_before === false){this.name_entry.cursor_left()};
-        if (GameState.i_right === true && this.i_right_before === false)(this.name_entry.cursor_right());
-        if (GameState.i_button === true && this.i_button_before === false){this.name_entry.touch_keyboard()};
-        this.i_up_before = GameState.i_up;
-        this.i_down_before = GameState.i_down;
-        this.i_left_before = GameState.i_left;
-        this.i_right_before = GameState.i_right;
-        this.i_button_before = GameState.i_button;
         this.name_entry.update();
     }
 
@@ -99,10 +76,13 @@ class name_entry{
         this.visible = true;
         this.org_x = (this.scene.game.canvas.width - 480) / 2;
         this.org_y = 400;
+        // 入力ユーティリティクラス
+        this.my_input = new MyInput(this.scene);
+
         this.focus_pos = new Phaser.Math.Vector2(0.0);
         this.keyboard = this.scene.add.image(this.org_x,this.org_y,'keyboard').setOrigin(0,0)
                 .setInteractive()
-                .on('pointerdown', (pointer, localX, localY) => {this.cursor_move(localX, localY); this.touch_keyboard();})
+                .on('pointerdown', (pointer, localX, localY) => {this.cursor_move(localX, localY);})
                 .on('pointermove', (pointer, localX, localY) => {this.cursor_move(localX, localY);});
         this.cursor_loc = new Phaser.Math.Vector2(0,1);
         this.cursor_sprite = this.scene.add.sprite(this.org_x, this.org_y, "cursor")
@@ -114,6 +94,13 @@ class name_entry{
         this.focus_count_max = 120;
         this.name = "       ";
         this.nameText = this.scene.add.bitmapText(this.focus_pos.x, this.focus_pos.y, 'myFont', this.name, 16);
+
+        // 押下時一回のみ反応させるためのフラグ（JustPress化）
+        this.i_up_before = false;
+        this.i_down_before = false;
+        this.i_left_before = false;
+        this.i_right_before = false;
+        this.i_button_before = false;
     }
 
     touch_keyboard(){
@@ -208,6 +195,19 @@ class name_entry{
 
     update(){  
         this.draw_focus();
+        // 入力状態の更新
+        this.my_input.update();
+        // ネームエントリの更新
+        if (GameState.i_up === true && this.i_up_before === false){this.cursor_up()};
+        if (GameState.i_down === true && this.i_down_before === false){this.cursor_down()};
+        if (GameState.i_left === true && this.i_left_before === false){this.cursor_left()};
+        if (GameState.i_right === true && this.i_right_before === false)(this.cursor_right());
+        if (GameState.i_button === true && this.i_button_before === false){this.touch_keyboard()};
+        this.i_up_before = GameState.i_up;
+        this.i_down_before = GameState.i_down;
+        this.i_left_before = GameState.i_left;
+        this.i_right_before = GameState.i_right;
+        this.i_button_before = GameState.i_button;
     }
 
     destroy(){

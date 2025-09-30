@@ -41,6 +41,9 @@ export class GameScene extends Phaser.Scene {
 
     update(time, delta){
 
+        GameState.ff = delta / GLOBALS.DELTA;
+        // console.log("ff", GameState.ff, delta, GLOBALS.DELTA);
+
         if (GameState.stage_state === GLOBALS.STAGE_STATE.START){
             // ◆開始
             // console.log("STAGE_STATE.START");
@@ -53,10 +56,12 @@ export class GameScene extends Phaser.Scene {
                 GameState.bg.destroy();
             }
             GameState.vanish_point = 240;
-            GameState.scroll_x = 0;
+            // GameState.scroll_x = 0;
             GameState.scroll = true;
             GameState.bg = new Background(this);
             GameState.bg.create();
+            // ワイプイン
+            this.wipe_in();
             // 実行
             this.exec.update(time, delta);
             GameState.player.update();
@@ -82,6 +87,8 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAIL){
             // ◆失敗
             this.exec.update(time, delta);
+            // ワイプアウト
+            this.wipe_out();
             GameState.stage_state = GLOBALS.STAGE_STATE.FAILED;
             this.stage_state_count = 100;
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAILED){
@@ -89,10 +96,17 @@ export class GameScene extends Phaser.Scene {
             this.exec.update(time, delta);
             this.stage_state_count--;
             if (this.stage_state_count < 0){
-                GameState.bgm_stop();
-                GameState.ui.destroy();
-                this.scene.stop('UIScene');
-                this.scene.start('GameOverScene');
+                GameState.lives--;
+                if (GameState.lives < 0){
+                    GameState.bgm_stop();
+                    GameState.ui.destroy();
+                    this.my_input.destroy();
+                    this.scene.stop('UIScene');
+                    this.scene.start('GameOverScene');
+                } else {
+                    GameState.bg.area_reset();
+                    GameState.stage_state = GLOBALS.STAGE_STATE.START;
+                }
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){
             // ◆クリア
@@ -114,6 +128,7 @@ export class GameScene extends Phaser.Scene {
             this.stage_state_count--;
             if (this.stage_state_count < 0){
                 GameState.stage++;
+                GameState.area = 1;
                 GameState.stage_state = GLOBALS.STAGE_STATE.START;
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.ALL_CLEARED){
@@ -124,6 +139,7 @@ export class GameScene extends Phaser.Scene {
             if (this.stage_state_count < 0){
                 GameState.bgm_stop();
                 GameState.ui.destroy();
+                this.my_input.destroy();
                 this.scene.stop('UIScene');
                 this.scene.start('GameClearScene');
             }
@@ -134,11 +150,89 @@ export class GameScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.keyQ)){
             GameState.bgm_stop();
             GameState.ui.destroy();
+            this.my_input.destroy();
             this.scene.stop('UIScene');
             this.scene.start('TitleScene');
         }
 
     } // End of update
+
+    // ワイプイン
+    wipe_in(){
+        // ワイプアウト用のオーバーレイがあれば削除
+        if (this.overlay_out){
+            this.overlay_out.destroy();
+        }
+        // 黒のオーバーレイ
+        this.overlay_in = this.add.rectangle(0, 0, GLOBALS.FIELD.WIDTH, GLOBALS.FIELD.HEIGHT, 0x000000, 1)
+            .setOrigin(0)
+            .setDepth(100);
+        let revealMaskGraphics = this.make.graphics({ x: 0, y: 0, add: false });
+        let mask = revealMaskGraphics.createGeometryMask();
+        mask.invertAlpha = true;
+        this.overlay_in.setMask(mask);
+        let maskData = { radius: 1 };
+        // Tweenで半径を増やす
+        this.tweens.add({
+            targets: maskData,
+            radius: 500,
+            duration: 2000,
+            ease: 'Sine.easeOut',
+            onUpdate: () => {
+                revealMaskGraphics.clear();
+                revealMaskGraphics.fillStyle(0xffffff);
+                revealMaskGraphics.beginPath();
+                revealMaskGraphics.arc(GLOBALS.FIELD.WIDTH / 2, GLOBALS.FIELD.HEIGHT / 2, maskData.radius, 0, Math.PI * 2);
+                revealMaskGraphics.fillPath();
+            },
+            onComplete: () => {
+                if (this.overlay_in){
+                    this.overlay_in.destroy();  // 演出後はマスクと覆いを削除
+                }
+            }
+        });
+    } // End of wipe_in
+
+    // ワイプ・アウト
+    wipe_out(){
+        // 黒のオーバーレイ
+        this.overlay_out = this.add.rectangle(0, 0, GLOBALS.FIELD.WIDTH, GLOBALS.FIELD.HEIGHT, 0x000000, 1)
+            .setOrigin(0)
+            .setDepth(900)
+            .setAlpha(0);
+        let maskGraphics = this.make.graphics({ x: 0, y: 0, add: false });
+        let mask = maskGraphics.createGeometryMask();
+        mask.invertAlpha = true;
+        this.overlay_out.setMask(mask);
+        let maskData = { radius: 500 };
+        // 半径の変更
+        this.tweens.add({
+            targets: maskData,
+            radius: 0,
+            duration: 1000,
+            ease: 'Sine.easeOut',
+            onUpdate: () => {
+                maskGraphics.clear();
+                maskGraphics.fillStyle(0xffffff);
+                maskGraphics.beginPath();
+                maskGraphics.arc(GLOBALS.FIELD.WIDTH / 2, GLOBALS.FIELD.HEIGHT / 2, maskData.radius, 0, Math.PI * 2);
+                maskGraphics.fillPath();
+            }
+        });
+        // 透明度の変更
+        this.tweens.add({
+            targets : this.overlay_out,
+            alpha: 1,          // 0→1
+            duration: 500,
+            ease    : 'Linear'
+        });
+        // 完了時の後処理
+        this.time.delayedCall(2000, () => {
+            if (this.overlay_out){
+                this.overlay_out.destroy();
+            }
+        });
+    }
 
     // ポーズ処理
     toggle_pause(){

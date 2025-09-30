@@ -9,11 +9,14 @@ const FONT_SIZE = 16;
 export class TitleScene extends Phaser.Scene {
     constructor() {
         super({ key: 'TitleScene' });
+        this.stage_data = null;
         this.start_stage = 1;
+        this.start_area = 1;
         this.ranking = null;
     }
 
     create() {
+        this.stage_data = this.cache.json.get('stage_data');
 
         // 座標変数
         this.cx = this.game.canvas.width / 2;
@@ -23,6 +26,8 @@ export class TitleScene extends Phaser.Scene {
         // 隠しキー
         this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         this.keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
+        this.keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
+        this.keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 
         //ランキング取得（インターネット経由）
@@ -40,21 +45,35 @@ export class TitleScene extends Phaser.Scene {
         this.start_stage_txt = this.add.text(this.cx, 210, 'START STAGE: ', { fontSize: '24px', fill: '#eee' }).setOrigin(0.5,0.5).setVisible(false);
 
         this.add.text(this.cx, this.hy - 125, 'PUSH SPACE KEY',{ fontSize: '24px', fill: '#fff' }).setOrigin(0.5,0.5);
-        this.show_text("VERSION 2025.09.28");
+        this.show_text(`VERSION : ${GLOBALS.VERSION}`);
     }
 
     update(time, delta){
         if (Phaser.Input.Keyboard.JustDown(this.keyF)){
             this.start_stage = Math.max(1, this.start_stage - 1);
-            this.start_stage_txt.setText(`START STAGE : ${this.start_stage}`).setVisible(true);
+            this.start_area = 1;
+            this.show_start_stage();
         }
         if (Phaser.Input.Keyboard.JustDown(this.keyG)){
             this.start_stage = Math.min(GLOBALS.STAGE_MAX, this.start_stage + 1);
-            this.start_stage_txt.setText(`START STAGE : ${this.start_stage}`).setVisible(true);
+            this.start_area = 1;
+            this.show_start_stage();
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keyV)){
+            this.start_area = Math.max(1, this.start_area - 1);
+            this.show_start_stage();
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keyB)){
+            const stage_info = this.stage_data.stages.find(s => s.stage === this.start_stage);
+            this.start_area = Math.min(stage_info.areas.length, this.start_area + 1);
+            this.show_start_stage();
         }
         if (Phaser.Input.Keyboard.JustDown(this.keyA)){
             this.scene.start('AttractScene');
         }
+    }
+    show_start_stage(){
+        this.start_stage_txt.setText(`START STAGE : ${this.start_stage} - ${this.start_area}`).setVisible(true);
     }
 
     show_pad(){
@@ -80,11 +99,13 @@ export class TitleScene extends Phaser.Scene {
         this.scene.stop('GameScene');
         this.scene.stop('GameOverScene');
         this.scene.stop('GameClearScene');
+        this.scene.stop('NameEntryScene');
         this.scene.stop('UI');
 
         // GameState.sound.se_tap.play();
-
+        GameState.reset();
         GameState.stage = this.start_stage;
+        GameState.area = this.start_area;
         this.scene.start('GameScene');
     }
 }

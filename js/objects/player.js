@@ -6,7 +6,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Bullet_PL } from '../objects/bullet_pl.js';
 import { Bullet_PM } from '../objects/bullet_pm.js';
 
-const MISSILE_CONTROL = 5;
+const MISSILE_CONTROL = 1.4;
 const COOLDOWN_INTERVAL = 8;
 
 export class Player extends Drawable {
@@ -14,6 +14,7 @@ export class Player extends Drawable {
     constructor(scene){
         super(scene);
         this.speed = 4.8;
+        this.touch_accel = 1.2;
         this.collision = { width : 20, height : 10};
         this.count = COOLDOWN_INTERVAL;
     }
@@ -39,10 +40,14 @@ export class Player extends Drawable {
         if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
             // 移動
             let dx = 0, dy = 0;
-            if (GameState.i_up){dy = -1;}
-            if (GameState.i_down){dy = 1;}
-            if (GameState.i_left){dx = -1;}
-            if (GameState.i_right){dx = 1;}
+            if (GameState.i_up){dy = -1 * GameState.ff * this.speed;}
+            if (GameState.i_down){dy = 1 * GameState.ff * this.speed;}
+            if (GameState.i_left){dx = -1 * GameState.ff * this.speed;}
+            if (GameState.i_right){dx = 1 + GameState.ff * this.speed;}
+            if (GameState.i_touch){
+                dx = GameState.i_dx * GameState.ff * this.touch_accel;
+                dy = GameState.i_dy * GameState.ff * this.touch_accel;
+            }
             this.move(dx,dy);
             // ショット発射
             if (GameState.i_button && this.count === 0){
@@ -50,7 +55,6 @@ export class Player extends Drawable {
                 this.shoot_missile(dx);
                 this.count = COOLDOWN_INTERVAL;
             }
-            // if (!GameState.i_button_before){ this.count = 0;}
             this.count = Math.max(0, this.count - 1);
         }
 
@@ -59,8 +63,8 @@ export class Player extends Drawable {
 
     move(dx,dy){
         const x_min = MyMath.disp_x_to_global_x(0, GLOBALS.LAYER.LAYER3.Z);
-        let new_x = Math.min(GLOBALS.FIELD.WIDTH,  Math.max(x_min, this.pos.x + dx * this.speed));
-        let new_y = Math.min(GLOBALS.FIELD.HEIGHT, Math.max(0, this.pos.y + dy * this.speed));
+        let new_x = Math.min(GLOBALS.FIELD.WIDTH,  Math.max(x_min, this.pos.x + dx));
+        let new_y = Math.min(GLOBALS.FIELD.HEIGHT, Math.max(0, this.pos.y + dy));
 
         // ◆地形から押し戻される処理（X軸方向→Y軸方向と逐次処理する）
         if (GameState.bg.is_terrain(new Phaser.Math.Vector2(new_x, this.pos.y), this.collision)){

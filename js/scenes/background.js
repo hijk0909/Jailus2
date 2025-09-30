@@ -28,6 +28,7 @@ export class Background {
     constructor(scene) {
         this.scene = scene;
         this.stage_data = this.scene.cache.json.get('stage_data');
+        this.areas = [];
         this.spawn_counter = SPAWN_INTERVAL;
         for (let stage in this.stageHandlers) {
             this.stageHandlers[stage].create = this.stageHandlers[stage].create.bind(this);
@@ -39,45 +40,55 @@ export class Background {
 
     create(){
         const stage_info = this.stage_data.stages.find(s => s.stage === GameState.stage);
+        this.areas = stage_info.areas;
+        GameState.scroll_x = this.areas[GameState.area - 1];
+        // console.log("GameState.scroll_x", GameState.scroll_x);
 
         // レイヤー画像の初期化
         const ceiling_y = 0;
         this.ceilingLayer = this.scene.add.tileSprite(0, ceiling_y, GLOBALS.LAYER.CEILING.WIDTH, GLOBALS.LAYER.CEILING.HEIGHT, stage_info.ceiling)
             .setOrigin(0)
             .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.CEILING.Z_BOTTOM));
+
         const floor_y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
         this.floorLayer = this.scene.add.tileSprite(0, floor_y, GLOBALS.LAYER.FLOOR.WIDTH, GLOBALS.LAYER.FLOOR.HEIGHT, stage_info.floor)
             .setOrigin(0)
             .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.FLOOR.Z_TOP));
+
         const layer1_y = MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.LAYER1.Z);
         this.layer1 = this.scene.add.tileSprite(0, layer1_y, GLOBALS.FIELD.WIDTH, GLOBALS.LAYER.LAYER1.HEIGHT, stage_info.layer1)
             .setOrigin(0)
             .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER1.Z));
+        this.layer1.tilePositionX = GameState.scroll_x * (GLOBALS.LAYER.LAYER1.HEIGHT / GLOBALS.FIELD.HEIGHT);
+
         const layer2_y = MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.LAYER2.Z);
         this.layer2 = this.scene.add.tileSprite(0, layer2_y, GLOBALS.FIELD.WIDTH, GLOBALS.LAYER.LAYER2.HEIGHT, stage_info.layer2)
             .setOrigin(0)
             .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER2.Z));
+        this.layer2.tilePositionX = GameState.scroll_x * (GLOBALS.LAYER.LAYER2.HEIGHT / GLOBALS.FIELD.HEIGHT);
 
         const layer3_y = MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.LAYER3.Z);
         const tilemap = this.scene.make.tilemap({key: stage_info.map});
         const tileset = tilemap.addTilesetImage('bg_tileset', 'bg_tileset_key');
         this.layer3 = tilemap.createLayer('layer_1', tileset, 0, layer3_y);
         this.layer3_pending_objects = tilemap.getObjectLayer("object_1").objects;
+        this.layer3.x = - GameState.scroll_x * (GLOBALS.LAYER.LAYER3.HEIGHT / GLOBALS.FIELD.HEIGHT);
 
         this.layer4 = this.scene.add.tileSprite(0, 0, GLOBALS.FIELD.WIDTH, GLOBALS.LAYER.LAYER4.HEIGHT, stage_info.layer4)
             .setOrigin(0)
             .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER4.Z));
+        this.layer4.tilePositionX = GameState.scroll_x;
 
         // ステージ毎に定義するcreate処理
         this.stageHandlers[GameState.stage].create();
-
     }
 
     update(time, delta){
 
         if (GameState.scroll){
-            GameState.scroll_dx = 80 * delta / 1000; //速度(layer4基準)
+            GameState.scroll_dx = 1.5 * GameState.ff; //速度(layer4基準)
             GameState.scroll_x += GameState.scroll_dx;  //位置(layer4基準)
+            this.area_update();
         } else {
             GameState.scroll_dx = 0;
         }
@@ -122,6 +133,22 @@ export class Background {
 
     } // End of Update
 
+    area_reset(){
+        for (let i = this.areas.length - 1; i >= 0; i--){
+            if (this.areas[i] < GameState.scroll_x){
+                GameState.area = i + 1;
+                break;
+            }
+        }
+    }
+
+    area_update(){
+        if (GameState.area < this.areas.length){
+            if (this.areas[GameState.area] < GameState.scroll_x){
+                GameState.area++;
+            }
+        }
+    }
 
     // ◆マップに紐づいた生成処理
     spawn_battery(obj){

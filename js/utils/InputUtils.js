@@ -4,10 +4,13 @@ import { GameState } from '../GameState.js';
 export class MyInput {
     constructor(scene) {
         this.scene = scene;
+        this.graphics = this.scene.add.graphics().setDepth(999);
 
         this.cursors = scene.input.keyboard.createCursorKeys();
         this.keyZ = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.pad = null;
+        this.current_pointer = null;
+        this.last_pointer = null;
 
         // ゲームパッド接続確認
         if (this.scene.input.gamepad.total > 0) {
@@ -33,25 +36,17 @@ export class MyInput {
     onPointerDown(pointer) {
         GameState.i_pointer = pointer;
         GameState.i_touch = true;
+        this.current_pointer = { x: pointer.x, y: pointer.y };
     }
 
     onPointerMove(pointer) {
         GameState.i_pointer = pointer;
+        this.current_pointer = { x: pointer.x, y: pointer.y};
     }
 
     onPointerUp(pointer) {
         GameState.i_touch = false;
-    }
-
-    clear(){
-        this.up1 = this.up2 = this.up3 = false;
-        this.down1 = this.down2 = this.down3 = false;
-        this.left1 = this.left2 = this.left3 = false;
-        this.right1 = this.right2 = this.right3 = false;
-        this.button1 = this.button3 = false;
-
-        GameState.i_up = GameState.i_down = GameState.i_left = GameState.i_right = false;
-        GameState.i_button_before = GameState.i_button = false;
+        this.current_pointer = null;
     }
 
     update() {
@@ -82,13 +77,51 @@ export class MyInput {
             this.right3 = this.pad.buttons[15].pressed;
             this.button3 = this.pad.buttons[0].pressed;
         }
+
+        // ポインタ移動量の計算
+        if (GameState.i_touch && this.current_pointer && this.last_pointer){
+            GameState.i_dx = this.current_pointer.x - this.last_pointer.x;
+            GameState.i_dy = this.current_pointer.y - this.last_pointer.y;
+        } else {
+            GameState.i_dx = GameState.i_dy = 0;
+        }
+        this.last_pointer = this.current_pointer;
+        // タッチ位置の表示
+        this.draw();
+
         // 操作の結合
         GameState.i_up = this.up1 || this.up2 || this.up3;
         GameState.i_down = this.down1 || this.down2 || this.down3;
         GameState.i_left = this.left1 || this.left2 || this.left3;
         GameState.i_right = this.right1 || this.right2 || this.right3;
-        GameState.i_button_before = GameState.i_button;
-        GameState.i_button = this.button1 || this.button3;
+        GameState.i_button = this.button1 || this.button3 || GameState.i_touch;
+    }
+
+    draw(){
+        this.graphics.clear();
+        if (GameState.i_touch && this.current_pointer){
+            this.graphics.fillStyle(0x00ffff, 0.5);
+            this.graphics.fillCircle(this.current_pointer.x, this.current_pointer.y, 10).setDepth(999);
+        }
+    }
+
+    clear(){
+        this.up1 = this.up2 = this.up3 = false;
+        this.down1 = this.down2 = this.down3 = false;
+        this.left1 = this.left2 = this.left3 = false;
+        this.right1 = this.right2 = this.right3 = false;
+        this.button1 = this.button3 = false;
+
+        GameState.i_up = GameState.i_down = GameState.i_left = GameState.i_right = false;
+        GameState.i_touch = GameState.i_button = false;
+        GameState.i_dx = GameState.i_dy = 0;
+    }
+
+    destroy(){
+        if (this.graphics){
+            this.graphics.destroy();
+            this.graphics = null;
+        }
     }
 
     registerPadConnect(callback) {

@@ -14,7 +14,7 @@ export class GameOverScene extends Phaser.Scene {
         this.add.text(this.cx, this.cy, 'GAME OVER', { fontSize: '64px', fill: '#ff0000' , stroke: '#800000', strokeThickness: 2}).setOrigin(0.5,0.5);
     
         this.time.addEvent({
-        delay: 3000,
+        delay: 5000,
         callback: () => {
             this.goto_next();
         },
@@ -34,6 +34,7 @@ export class GameOverScene extends Phaser.Scene {
         if (Ranking.get_new_rank(GameState.ranking.session, GameState.score) === -1){
             this.scene.start('TitleScene');
         } else {
+            this.scene.stop('GameScene');
             this.scene.start('NameEntryScene');
         }
     }

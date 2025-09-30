@@ -5,6 +5,7 @@ export const GameState = {
     // ゲーム全体情報
     ff : 1.0,
     stage : 1,
+    area : 1,
     stage_state : GLOBALS.STAGE_STATE.START,
     vanish_point : GLOBALS.FIELD.HEIGHT / 2,
     scroll_dx : 0,
@@ -16,6 +17,7 @@ export const GameState = {
     high_score : 0,
     extend : GLOBALS.EXTEND_FIRST,
     lives : GLOBALS.INIT_LIVES,
+    difficulty : 0,
     ranking : {
         session : GLOBALS.RANKING_DEFAULT,
         daily : null,
@@ -32,7 +34,8 @@ export const GameState = {
     i_left : false,
     i_right : false,
     i_button : false,
-    i_button_before : false,
+    i_dx : 0,
+    i_dy : 0,
 
     // オブジェクト管理
     player : null,
@@ -44,6 +47,7 @@ export const GameState = {
 
     reset(){
         this.stage = 1;
+        this.area = 1;
         this.score = 0;
         this.lives = GLOBALS.INIT_LIVES;
         this.extend = GLOBALS.EXTEND_FIRST;
