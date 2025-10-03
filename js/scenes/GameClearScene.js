@@ -1,6 +1,7 @@
 // GameClearScene.js
 import { GameState } from '../GameState.js';
 import { GLOBALS } from '../GameConst.js';
+import { Ranking } from './ranking.js';
 
 export class GameClearScene extends Phaser.Scene {
     constructor() {
@@ -10,7 +11,7 @@ export class GameClearScene extends Phaser.Scene {
     create() {
         this.cx = this.game.canvas.width / 2;
         this.cy = this.game.canvas.height / 2;
-        this.add.text(this.cx, this.cy, 'GAME CLEAR', { fontSize: '64px', fill: '#ff0000' , stroke: '#800000', strokeThickness: 2}).setOrigin(0.5,0.5);
+        this.add.text(this.cx, this.cy, 'GAME CLEAR', { fontSize: '64px', fill: '#00ffff' , stroke: '#008080', strokeThickness: 2}).setOrigin(0.5,0.5);
     
         this.time.addEvent({
         delay: 3000,
