@@ -22,6 +22,11 @@ export class GameClearScene extends Phaser.Scene {
     }
 
     goto_next(){
-        this.scene.start('TitleScene');
+        if (Ranking.get_new_rank(GameState.ranking.session, GameState.score) === -1){
+            this.scene.start('TitleScene');
+        } else {
+            this.scene.stop('GameScene');
+            this.scene.start('NameEntryScene');
+        }
     }
 }

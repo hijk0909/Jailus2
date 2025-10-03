@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="92">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="96">
  <editorsettings>
-  <export target="stage_3.json" format="json"/>
+  <export target="stage_5.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="bg_tileset" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../images/bg_tileset.png" trans="000000" width="512" height="512"/>
@@ -27,14 +27,51 @@
 </data>
  </layer>
  <objectgroup id="2" name="object_1">
-  <object id="90" name="enemy" type="enemy" x="8128" y="288" width="32" height="32">
+  <object id="90" name="enemy" type="enemy" x="9984" y="224" width="32" height="32">
    <properties>
+    <property name="spawn_pos" value="right_y"/>
     <property name="subtype" value="enemy_b5"/>
    </properties>
   </object>
-  <object id="91" name="event" type="event" x="8320" y="288" width="32" height="32">
+  <object id="91" name="event" type="event" x="12768" y="0" width="32" height="32">
    <properties>
     <property name="subtype" value="scroll_stop"/>
+   </properties>
+  </object>
+  <object id="92" name="spawner" type="spawner" x="512" y="0" width="32" height="32">
+   <properties>
+    <property name="duration" value="30"/>
+    <property name="interval" value="1"/>
+    <property name="spawn_pos" value="right_middle"/>
+    <property name="subtype" value="enemy_8"/>
+    <property name="z" value="0"/>
+   </properties>
+  </object>
+  <object id="93" name="spawner" type="spawner" x="3808" y="0" width="32" height="32">
+   <properties>
+    <property name="duration" value="30"/>
+    <property name="interval" value="1"/>
+    <property name="spawn_pos" value="right_middle"/>
+    <property name="subtype" value="enemy_8"/>
+    <property name="z" value="0"/>
+   </properties>
+  </object>
+  <object id="94" name="spawner" type="spawner" x="5984" y="0" width="32" height="32">
+   <properties>
+    <property name="duration" value="30"/>
+    <property name="interval" value="1"/>
+    <property name="spawn_pos" value="right_middle"/>
+    <property name="subtype" value="enemy_8"/>
+    <property name="z" value="0"/>
+   </properties>
+  </object>
+  <object id="95" name="spawner" type="spawner" x="8064" y="0" width="32" height="32">
+   <properties>
+    <property name="duration" value="30"/>
+    <property name="interval" value="1"/>
+    <property name="spawn_pos" value="right_middle"/>
+    <property name="subtype" value="enemy_8"/>
+    <property name="z" value="0"/>
    </properties>
   </object>
  </objectgroup>

@@ -57,6 +57,14 @@ export const GLOBALS = {
         }
     },
 
+    SPAWN_POS:{
+        MAP : 1,
+        RIGHT_MIDDLE : 2,
+        RIGHT_RANDOM : 3,
+        RIGHT_Y      : 4,
+        RIGHT_Y_Z    : 5
+    },
+
     RANKING_URL : "https://script.google.com/macros/s/AKfycbzNK_MQVWDv0sx-cvmKJSLi_C77gLK8SlRSTtCYh1ol1VwLmzRlFKLkjbDogeesPJrn/exec",
     RANKING_DEFAULT : [
         {"name": "JAILUS2 ","score":  10000,"stage": 8,"time": "2025-09-04T12:19:22.000Z"},

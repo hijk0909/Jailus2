@@ -142,5 +142,16 @@ export class Exec {
             }
         }
 
+        // ◆生成器の管理
+        for (let i = GameState.spawners.length - 1; i >= 0; i--) {
+            const spawner = GameState.spawners[i];
+            spawner.update(time, delta);
+            if (!spawner.is_alive()) {
+                spawner.destroy();
+                GameState.spawners.splice(i, 1);
+                continue;
+            }
+        }
+
     } // End of update
 }

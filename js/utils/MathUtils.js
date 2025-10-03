@@ -89,10 +89,10 @@ export class MyMath {
     // }
 
     // 判定：視野内に存在しているか（Y方向は天井と床の範囲内、inFieldと同じ）
-    static inView(pos, z){
+    static inView(pos, z, x_margin = 0){
         return (
-            pos.x >= (this.disp_x_to_global_x( 0 - GLOBALS.FIELD.MARGIN, z)) &&
-            pos.x <= (this.disp_x_to_global_x( GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, z)) &&
+            pos.x >= (this.disp_x_to_global_x( 0 - x_margin, z)) &&
+            pos.x <= (this.disp_x_to_global_x( GLOBALS.FIELD.WIDTH + x_margin, z)) &&
             pos.y >= ( 0 - GLOBALS.FIELD.MARGIN) &&
             pos.y <= ( GLOBALS.FIELD.HEIGHT + GLOBALS.FIELD.MARGIN)            
         )

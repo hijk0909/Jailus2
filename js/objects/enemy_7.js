@@ -3,10 +3,9 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
-import { Bullet_EB } from './bullet_eb.js';
 
 const COOLDOWN_INTERVAL = 120;
-const SPEED = 2;
+const SPEED = 2.5;
 
 // Enemy_7：サカナ
 export class Enemy_7 extends Enemy {
@@ -58,7 +57,7 @@ export class Enemy_7 extends Enemy {
     }
 
     update(){
-        this.pos.x -= this.speed;
+        this.pos.x -= GameState.scroll_dx;
         super.update();
         this.count -= 1;
         if (this.count < 0){
@@ -68,7 +67,7 @@ export class Enemy_7 extends Enemy {
         if (this.state === 0){
             // ▼左に直進
             this.state_count--;
-            this.pos.x -= 1;
+            this.pos.x -= this.speed * GameState.ff;
             if (this.state_count <= 0){
                 this.state = 1;
                 this.sprite.play("anims_enemy7_to_right");
@@ -80,7 +79,7 @@ export class Enemy_7 extends Enemy {
         } else if (this.state === 2){
             // ▼右に直進
             this.state_count--;
-            this.pos.x += 1;
+            this.pos.x += this.speed * GameState.ff;
             if (this.state_count <= 0){
                 this.state = 3;
                 this.sprite.play("anims_enemy7_to_left");

@@ -44,6 +44,7 @@ export const GameState = {
     bullets_p : [],
     effects : [],
     items : [],
+    spawners : [],
 
     reset(){
         this.stage = 1;

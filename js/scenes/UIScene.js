@@ -21,7 +21,7 @@ export class UIScene extends Phaser.Scene {
         this.ui_difficulty_val = this.add_text(48,0, 0, 0xffffff);
         this.ui_lives_val = this.add_text(47,35, 0, 0x00ffff);
         this.ui_stage_val = this.add_text(6,35, `1-1`);
-        this.ui_scroll_val = this.add_text(9,35, 0, 0x00ffff);
+        this.ui_scroll_val = this.add_text(10,35, 0, 0xffffff);
     }
 
     update(){

@@ -60,5 +60,13 @@ export class Setup {
             GameState.effects.splice(i,1);
         }
         GameState.effects = [];
+
+        // 生成器
+        for (let i = GameState.spawners.length - 1; i >= 0; i--){
+            GameState.spawners[i].destroy();
+            GameState.spawners.splice(i,1);
+        }
+        GameState.spawners = [];
+        
     } // End of clean_up()
 }

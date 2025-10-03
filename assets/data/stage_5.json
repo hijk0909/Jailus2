@@ -40,6 +40,11 @@
                  "name":"enemy",
                  "properties":[
                         {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_y"
+                        }, 
+                        {
                          "name":"subtype",
                          "type":"string",
                          "value":"enemy_b5"
@@ -48,8 +53,8 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":8128,
-                 "y":288
+                 "x":9984,
+                 "y":224
                 }, 
                 {
                  "height":32,
@@ -65,8 +70,156 @@
                  "type":"event",
                  "visible":true,
                  "width":32,
-                 "x":8320,
-                 "y":288
+                 "x":12768,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":92,
+                 "name":"spawner",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"30"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_middle"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_8"
+                        }, 
+                        {
+                         "name":"z",
+                         "type":"string",
+                         "value":"0"
+                        }],
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":32,
+                 "x":512,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":93,
+                 "name":"spawner",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"30"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_middle"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_8"
+                        }, 
+                        {
+                         "name":"z",
+                         "type":"string",
+                         "value":"0"
+                        }],
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":32,
+                 "x":3808,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":94,
+                 "name":"spawner",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"30"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_middle"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_8"
+                        }, 
+                        {
+                         "name":"z",
+                         "type":"string",
+                         "value":"0"
+                        }],
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":32,
+                 "x":5984,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":95,
+                 "name":"spawner",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"30"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_middle"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_8"
+                        }, 
+                        {
+                         "name":"z",
+                         "type":"string",
+                         "value":"0"
+                        }],
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":32,
+                 "x":8064,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -75,7 +228,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":92,
+ "nextobjectid":96,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

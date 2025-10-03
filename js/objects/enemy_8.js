@@ -8,6 +8,7 @@ const WAIT_PERIOD = 120;
 const GRAVITY = 1;
 const TILE_SIZE = 32 / MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
 const RIGHT_AREA = GLOBALS.FIELD.WIDTH * 0.8;
+const COOLDOWN_INTERVAL = 30;
 
 // Enemy_8：ポップコーン
 export class Enemy_8 extends Enemy {
@@ -20,12 +21,13 @@ export class Enemy_8 extends Enemy {
         this.state_count = 80;
         this.dx = 0;
         this.dy = 0;
+        this.count = 0;
     }
 
     init(pos){
         super.init(pos);
 
-        this.move_to_lower();
+        this.move_to_lowest();
 
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_enemy')
@@ -49,6 +51,7 @@ export class Enemy_8 extends Enemy {
             this.state_count--;
             if (this.state_count <= 0){
                 this.state = 2;
+                this.count = 0;
                 this.dy = -20;
                 if (this.pos.x > RIGHT_AREA){
                     this.dx = -4;
@@ -57,13 +60,20 @@ export class Enemy_8 extends Enemy {
                 }
             }
         } else if (this.state === 2){
+            // 跳躍
             this.dy += GRAVITY;
             this.bounded_move();
+            // 発射
+            this.count -= 1;
+            if (this.count < 0){
+                this.count = COOLDOWN_INTERVAL;
+                this.shoot();
+            }
         }
     }
 
     bounded_move() {
-        // X方向の移動
+        // ◆X方向の移動
         let nextX = this.pos.x + this.dx;
         let checkY1 = this.pos.y - this.collision.height / 2 + 1;
         let checkY2 = this.pos.y + this.collision.height / 2 - 1;
@@ -88,10 +98,10 @@ export class Enemy_8 extends Enemy {
         }
         this.pos.x = nextX;
 
-        // ==== Y方向の移動 ====
+        // ◆Y方向の移動
         let nextY = this.pos.y + this.dy;
         let checkX1 = this.pos.x - this.collision.width / 2 + 1;
-        let checkX2 = this.pos.x + this.collision.width / 2 - 2;
+        let checkX2 = this.pos.x + this.collision.width / 2 - 1;
 
         if (this.dy > 0) {
             // 下移動 → 下辺を確認
@@ -100,8 +110,6 @@ export class Enemy_8 extends Enemy {
                 // 地面に衝突
                 let tileY = Math.floor(checkY / TILE_SIZE);
                 nextY = tileY * TILE_SIZE - this.collision.height / 2;
-                // [TEST]
-                // this.dy *= -1;
                 this.state = 1;
                 this.state_count = WAIT_PERIOD;
             }
@@ -112,8 +120,6 @@ export class Enemy_8 extends Enemy {
                 // 天井に衝突
                 let tileY = Math.floor(checkY / TILE_SIZE);
                 nextY = (tileY + 1) * TILE_SIZE + this.collision.height / 2;
-                // [TEST]
-                // this.dy *= -1;
                 this.dx = 0;
                 this.state = 0;
             }
@@ -121,17 +127,7 @@ export class Enemy_8 extends Enemy {
         this.pos.y = nextY;
     }
 
-    move_to_upper(){
-        for (let y = 0; y < GLOBALS.FIELD.HEIGHT; y += TILE_SIZE){
-            if (!GameState.bg.get_terrain(this.pos.x, y)){
-                this.pos.y = y + this.collision.height / 2;
-                break;
-            }
-        }
-        return;
-    }
-
-    move_to_lower(){
+    move_to_lowest(){
         for (let y = GLOBALS.FIELD.HEIGHT - TILE_SIZE; y > 0; y -= TILE_SIZE){
             if (!GameState.bg.get_terrain(this.pos.x, y)){
                 this.pos.y = y + this.collision.height / 2;

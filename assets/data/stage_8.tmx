@@ -27,8 +27,9 @@
 </data>
  </layer>
  <objectgroup id="2" name="object_1">
-  <object id="90" name="enemy" type="enemy" x="608" y="0" width="32" height="32">
+  <object id="90" name="enemy" type="enemy" x="1216" y="0" width="32" height="32">
    <properties>
+    <property name="spawn_pos" value="right_middle"/>
     <property name="subtype" value="enemy_b8"/>
    </properties>
   </object>

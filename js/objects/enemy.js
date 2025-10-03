@@ -22,7 +22,7 @@ export class Enemy extends Drawable {
     }
 
     update(){
-        if (!MyMath.inView(this.pos, this.z)){
+        if (!MyMath.inView(this.pos, this.z, 200)){
             this.alive = false;
         }
         super.update();

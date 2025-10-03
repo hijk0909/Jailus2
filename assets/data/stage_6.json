@@ -40,6 +40,11 @@
                  "name":"enemy",
                  "properties":[
                         {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_middle"
+                        }, 
+                        {
                          "name":"subtype",
                          "type":"string",
                          "value":"enemy_b6"
@@ -65,7 +70,7 @@
                  "type":"event",
                  "visible":true,
                  "width":32,
-                 "x":2624,
+                 "x":2880,
                  "y":0
                 }],
          "opacity":1,
