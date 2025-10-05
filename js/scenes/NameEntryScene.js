@@ -29,7 +29,7 @@ export class NameEntryScene extends Phaser.Scene {
     set_ranking(name){
         Ranking.update_name(GameState.ranking.session, this.rank, name);
         this.ranking.show_ranking_table(GameState.ranking.session);
-        this.ranking.set_net_ranking(name, GameState.score, this.stage);
+        Ranking.set_net_ranking(name, GameState.score, this.stage);
         this.time.addEvent({
             delay: 3000,
             callback: () => {

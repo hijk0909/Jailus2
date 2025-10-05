@@ -2,7 +2,6 @@
 import { GameState } from '../GameState.js';
 import { GLOBALS } from '../GameConst.js';
 import { MyInput } from '../utils/InputUtils.js';
-import { Ranking } from './ranking.js';
 
 const FONT_SIZE = 16;
 
@@ -12,7 +11,7 @@ export class TitleScene extends Phaser.Scene {
         this.stage_data = null;
         this.start_stage = 1;
         this.start_area = 1;
-        this.ranking = null;
+        this.attract_timer = null;
     }
 
     create() {
@@ -29,12 +28,6 @@ export class TitleScene extends Phaser.Scene {
         this.keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
         this.keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-
-        //ランキング取得（インターネット経由）
-        if (this.ranking === null){
-            this.ranking = new Ranking(this);
-        }
-        this.ranking.get_net_ranking();
 
         this.my_input = new MyInput(this);
         this.my_input.registerPadConnect(() => this.show_pad());
@@ -53,6 +46,24 @@ export class TitleScene extends Phaser.Scene {
         .on('pointerdown', () => {this.start_game();})
         .on('pointerover', () => {btn_play.setTint(0xcccccc);})
         .on('pointerout', () => {btn_play.clearTint();});
+
+        this.reset_attract_timer();
+    }
+
+    reset_attract_timer(){
+        // 既存のイベントを止める
+        if (this.attract_timer) {
+            this.attract_timer.remove(false);
+        }
+
+        // 新しく10秒タイマーを作成
+        this.attract_timer = this.time.addEvent({
+            delay: 10000,
+            callback: () => {
+                this.scene.start('AttractScene');
+            },
+            callbackScope: this
+        });
     }
 
     update(time, delta){

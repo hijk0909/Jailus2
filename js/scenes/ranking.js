@@ -13,7 +13,7 @@ export class Ranking {
     }
 
     // ランキングのサーバへの登録
-    set_net_ranking(name, score, stage){
+    static set_net_ranking(name, score, stage){
         fetch(GLOBALS.RANKING_URL, {
             method: "POST",
             body: JSON.stringify({ name, score, stage })
@@ -27,7 +27,7 @@ export class Ranking {
     }
 
     // ランキングのサーバからの取得
-    get_net_ranking(){
+    static get_net_ranking(){
       fetch(GLOBALS.RANKING_URL)
         .then(res => res.json())
         .then(data => {

@@ -50,6 +50,8 @@ export class AttractScene extends Phaser.Scene {
 
         //ランキングクラス
         this.ranking = new Ranking(this);
+        Ranking.get_net_ranking();
+
         // console.log("ranking", GameState.ranking.alltime);
 
         // 状態の初期化
