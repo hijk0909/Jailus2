@@ -64,7 +64,6 @@ export class GameScene extends Phaser.Scene {
             this.wipe_in();
             // 実行
             this.exec.update(time, delta);
-            GameState.player.erase_barrier();
             GameState.player.update();
             this.stage_state_count = 45;
             GameState.stage_state = GLOBALS.STAGE_STATE.STARTING;

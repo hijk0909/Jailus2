@@ -17,7 +17,6 @@ export class Player extends Drawable {
         this.touch_accel = 1.2;
         this.collision = { width : 20, height : 10};
         this.count = COOLDOWN_INTERVAL;
-        this.barrier = 3;
         this.sprite_barrier = null;
     }
 
@@ -49,6 +48,7 @@ export class Player extends Drawable {
                 frameRate: 24, repeat: -1
             });
         }
+        this.set_barrier();
     }
 
     update(){
@@ -133,24 +133,25 @@ export class Player extends Drawable {
 
     // バリア関連のアクセサ
     set_barrier(){
-        this.barrier = GLOBALS.BARRIER_MAX;
-        this.sprite_barrier.setVisible(true);
-        this.sprite_barrier.play("anims_player_barrier");
+        if (GameState.barrier > 0){
+            this.sprite_barrier.setVisible(true);
+            this.sprite_barrier.play("anims_player_barrier");
+        }
     }
     get_barrier(){
-        return this.barrier;
+        return GameState.barrier;
     }
     dec_barrier(){
-        if (this.barrier > 1){
-            this.barrier -= 1;
+        if (GameState.barrier > 1){
+            GameState.barrier -= 1;
         } else {
-            this.barrier = 0;
+            GameState.barrier = 0;
             this.erase_barrier();
         }
     }
     erase_barrier(){
+        GameState.barrier = 0;
         if (this.sprite_barrier){
-            this.barrier = 0;
             this.sprite_barrier.setVisible(false);
             this.sprite_barrier.stop();
         }

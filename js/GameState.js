@@ -17,6 +17,7 @@ export const GameState = {
     high_score : 0,
     extend : GLOBALS.EXTEND_FIRST,
     lives : GLOBALS.INIT_LIVES,
+    barrier : 0,
     difficulty : 0,
     ranking : {
         session : GLOBALS.RANKING_DEFAULT,
@@ -52,6 +53,7 @@ export const GameState = {
         this.score = 0;
         this.lives = GLOBALS.INIT_LIVES;
         this.extend = GLOBALS.EXTEND_FIRST;
+        this.barrier = 0;
     },
 
     add_score(score){
