@@ -17,15 +17,17 @@ export class Player extends Drawable {
         this.touch_accel = 1.2;
         this.collision = { width : 20, height : 10};
         this.count = COOLDOWN_INTERVAL;
+        this.barrier = 3;
+        this.sprite_barrier = null;
     }
 
     init(pos){
         super.init(pos);
+        // プレイヤー本体
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_player')
         .setOrigin(0.5, 0.5)
         .setFrame(0)
-        .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 1);
-        // アニメーションの設定
+        .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 2);
         if (!this.scene.anims.exists("anims_player")) {
             this.scene.anims.create({key: "anims_player",
                 frames: this.scene.anims.generateFrameNumbers('ss_player',
@@ -34,6 +36,19 @@ export class Player extends Drawable {
             });
         }
         this.sprite.play("anims_player");
+        // バリア
+        this.sprite_barrier = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_player')
+        .setOrigin(0.5, 0.5)
+        .setFrame(8)
+        .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 1)
+        .setVisible(false);
+        if (!this.scene.anims.exists("anims_player_barrier")) {
+            this.scene.anims.create({key: "anims_player_barrier",
+                frames: this.scene.anims.generateFrameNumbers('ss_player',
+                    { start: 8, end: 10}),
+                frameRate: 24, repeat: -1
+            });
+        }
     }
 
     update(){
@@ -59,6 +74,9 @@ export class Player extends Drawable {
         }
 
         super.update();
+        if ( this.sprite_barrier ){
+            this.update_position(this.sprite_barrier);
+        }
     }
 
     move(dx,dy){
@@ -97,6 +115,7 @@ export class Player extends Drawable {
             }
         });
         this.sprite.play('anims_player_fail');
+        this.erase_barrier();
     }
 
     shoot_laser(){
@@ -112,7 +131,36 @@ export class Player extends Drawable {
         GameState.bullets_p.push(bpm);
     }
 
+    // バリア関連のアクセサ
+    set_barrier(){
+        this.barrier = GLOBALS.BARRIER_MAX;
+        this.sprite_barrier.setVisible(true);
+        this.sprite_barrier.play("anims_player_barrier");
+    }
+    get_barrier(){
+        return this.barrier;
+    }
+    dec_barrier(){
+        if (this.barrier > 1){
+            this.barrier -= 1;
+        } else {
+            this.barrier = 0;
+            this.erase_barrier();
+        }
+    }
+    erase_barrier(){
+        if (this.sprite_barrier){
+            this.barrier = 0;
+            this.sprite_barrier.setVisible(false);
+            this.sprite_barrier.stop();
+        }
+    }
+
     destroy(){
+        if (this.sprite_barrier){
+            this.sprite_barrier.destroy();
+            this.sprite_barrier = null;
+        }
         super.destroy();
     }
 }

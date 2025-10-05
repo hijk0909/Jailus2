@@ -138,18 +138,17 @@ export class Enemy_9 extends Enemy {
     } // End of update();
 
     move_to_empty(){
-        let start_y = Math.floor(this.pos.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2;
-        if (start_y < GLOBALS.FIELD.HEIGHT / 2){
-            for (let y = start_y; y < GLOBALS.FIELD.HEIGHT; y += TILE_SIZE){
-                if (!GameState.bg.get_terrain(this.pos.x, y)){
-                    this.pos.y = y;
+        let start_y = this.pos.y;
+        for (let diff = 0; diff < GLOBALS.FIELD.HEIGHT; diff += TILE_SIZE){
+            if (start_y + diff < GLOBALS.FIELD.HEIGHT){
+                if (!GameState.bg.get_terrain(this.pos.x, start_y + diff)){
+                    this.pos.y = start_y + diff;
                     break;
                 }
             }
-        } else {
-            for (let y = start_y; y > 0; y -= TILE_SIZE){
-                if (!GameState.bg.get_terrain(this.pos.x, y)){
-                    this.pos.y = y;
+            if (start_y - diff > 0){
+                if (!GameState.bg.get_terrain(this.pos.x, start_y - diff)){
+                    this.pos.y = start_y - diff;
                     break;
                 }
             }

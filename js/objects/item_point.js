@@ -3,6 +3,7 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Item } from './item.js';
+import { Effect_Text } from './effect_text.js';
 
 export class Item_Point extends Item {
 
@@ -23,6 +24,15 @@ export class Item_Point extends Item {
 
     update(){
         super.update();
+    }
+
+    effect(){
+        const score = (Math.floor(Math.random()*10)+1)*1000;
+        const eff = new Effect_Text(this.scene);
+        eff.init(GameState.player.pos);
+        eff.set_text(score.toString());
+        GameState.effects.push(eff);
+        GameState.add_score(score);
     }
 
     destroy(){

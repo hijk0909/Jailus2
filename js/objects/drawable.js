@@ -22,14 +22,18 @@ export class Drawable {
     }
 
     update(){
-        if ( this.sprite ){
-            const x = MyMath.global_x_to_disp_x(this.pos.x, this.z);
-            const y = MyMath.global_y_to_disp_y(this.pos.y, this.z);
-            this.sprite.setPosition(x, y)
-            .setScale(MyMath.z_to_sprite_scale(this.z) * this.scale)
-            .setDepth(MyMath.z_to_depth(this.z));
-        }
+        this.update_position(this.sprite)
         this.draw();
+    }
+
+    update_position(sprite, offset_x = 0, offset_y = 0, offset_z = 0){
+        if (sprite){
+            const x = MyMath.global_x_to_disp_x(this.pos.x + offset_x, this.z + offset_z);
+            const y = MyMath.global_y_to_disp_y(this.pos.y + offset_y, this.z + offset_z);
+            sprite.setPosition(x, y)
+            .setScale(MyMath.z_to_sprite_scale(this.z + offset_z) * this.scale)
+            .setDepth(MyMath.z_to_depth(this.z + offset_z));
+        }
     }
 
     destroy(){

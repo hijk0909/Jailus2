@@ -103,11 +103,12 @@ export class TitleScene extends Phaser.Scene {
 
     start_game(){
         // 念のため、各シーンを止める
-        this.scene.stop('GameScene');
-        this.scene.stop('GameOverScene');
-        this.scene.stop('GameClearScene');
-        this.scene.stop('NameEntryScene');
-        this.scene.stop('UI');
+        // → 1フレーム内で start/stop すると競合が発生し得るので削除
+        // this.scene.stop('GameScene');
+        // this.scene.stop('GameOverScene');
+        // this.scene.stop('GameClearScene');
+        // this.scene.stop('NameEntryScene');
+        // this.scene.stop('UI');
 
         // GameState.sound.se_tap.play();
         GameState.reset();

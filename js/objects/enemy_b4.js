@@ -4,7 +4,7 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const COOLDOWN_INTERVAL = 40;
+const COOLDOWN_INTERVAL = 55;
 
 // Enemy_B4：ボス（ステージ４）
 export class Enemy_B4 extends Enemy {
@@ -50,6 +50,9 @@ export class Enemy_B4 extends Enemy {
         if (this.count < 0){
             this.count = COOLDOWN_INTERVAL;
             this.shoot();
+            this.shoot(0, -170);
+            this.shoot(0, 170, 50);
+            this.shoot(0, 0, -50);
         }
     }
 

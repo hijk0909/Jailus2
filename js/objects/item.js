@@ -19,6 +19,10 @@ export class Item extends Drawable {
         super.update();
     }
 
+    effect(){
+        //取得時の効果
+    }
+
     destroy(){
         super.destroy();
     }

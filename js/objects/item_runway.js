@@ -3,6 +3,7 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Item } from './item.js';
+import { Effect_Text } from './effect_text.js';
 
 export class Item_Runway extends Item {
 
@@ -45,6 +46,14 @@ export class Item_Runway extends Item {
             this.collision.height * MyMath.get_disp_ratio(this.z)
         )
         super.update();
+    }
+
+    effect(){
+        const eff = new Effect_Text(this.scene);
+        eff.init(GameState.player.pos);
+        eff.set_text("Barrier");
+        GameState.effects.push(eff);
+        GameState.player.set_barrier();
     }
 
     destroy(){

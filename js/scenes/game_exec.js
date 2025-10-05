@@ -4,7 +4,6 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Effect_Exp } from '../objects/effect_exp.js';
 import { Effect_Ext } from '../objects/effect_ext.js';
-import { Effect_Text } from '../objects/effect_text.js';
 
 export class Exec {
     constructor(scene) {
@@ -101,9 +100,18 @@ export class Exec {
             if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                if (MyMath.isRectangleOverlap(b.pos,b.collision,GameState.player.pos,GameState.player.collision)){
                     // console.log("hit enemy bullet");
-                    if (!GameState.debug){
-                        GameState.stage_state = GLOBALS.STAGE_STATE.FAIL;
-                        GameState.player.fail();
+                    if (GameState.player.get_barrier() > 0){
+                        //バリアを消費して敵弾を消去
+                        GameState.player.dec_barrier();
+                        b.set_alive(false);
+                        const eff = new Effect_Ext(this.scene);
+                        eff.init(b.pos);
+                        GameState.effects.push(eff);
+                    } else {
+                        if (!GameState.debug){
+                            GameState.stage_state = GLOBALS.STAGE_STATE.FAIL;
+                            GameState.player.fail();
+                        }
                     }
                 }
             }
@@ -120,13 +128,9 @@ export class Exec {
             }
             if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                if (MyMath.isRectangleOverlap(item.pos,item.collision,GameState.player.pos,GameState.player.collision)){
+                    item.effect();
                     item.destroy();
-                    GameState.items.splice(i,1);
-
-                    const eff = new Effect_Text(this.scene);
-                    eff.init(GameState.player.pos);
-                    eff.set_text("1000");
-                    GameState.effects.push(eff);                    
+                    GameState.items.splice(i,1);                 
                 }
             }
         }

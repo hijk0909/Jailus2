@@ -90,7 +90,7 @@ export class AssetLoader extends Phaser.Scene {
 
         // オブジェクト
         this.load.spritesheet('ss_player', 'assets/images/ss_player.png', {
-            frameWidth: 128,  frameHeight: 128, endFrame : 7 });
+            frameWidth: 128,  frameHeight: 128, endFrame : 11 });
         this.load.spritesheet('ss_enemy', 'assets/images/ss_enemy.png', {
             frameWidth: 64,  frameHeight: 64, endFrame : 39 });
         this.load.spritesheet('ss_bullet', 'assets/images/ss_bullet.png', {
