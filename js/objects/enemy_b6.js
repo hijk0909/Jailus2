@@ -11,7 +11,7 @@ export class Enemy_B6 extends Enemy {
 
     constructor(scene){
         super(scene);
-        this.z = GLOBALS.LAYER.LAYER3.Z;
+        this.z = GLOBALS.LAYER.LAYER3.Z + 10;
         this.collision = { width :200, height : 200};
         this.scale = 1.0;
         this.life = 160;
@@ -27,8 +27,7 @@ export class Enemy_B6 extends Enemy {
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_boss_6')
         .setOrigin(0.5, 0.5)
-        .setFrame(0)
-        .setDepth(MyMath.z_to_depth(this.z));
+        .setFrame(0);
 
         // アニメーションの設定
         if (!this.scene.anims.exists("anims_boss_6")) {
@@ -50,6 +49,13 @@ export class Enemy_B6 extends Enemy {
         if (this.count < 0){
             this.count = COOLDOWN_INTERVAL;
             this.shoot();
+            this.shoot(-45);
+            this.shoot(45);
+            this.shoot(-90);
+            this.shoot(90);
+            this.shoot(135);
+            this.shoot(-135);
+            this.shoot(180);
         }
     }
 

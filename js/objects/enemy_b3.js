@@ -11,7 +11,7 @@ export class Enemy_B3 extends Enemy {
 
     constructor(scene){
         super(scene);
-        this.z = GLOBALS.LAYER.LAYER3.Z;
+        this.z = GLOBALS.LAYER.LAYER3.Z + 10;
         this.collision = { width :320, height : 160};
         this.scale = 1.0;
         this.life = 120;
@@ -27,8 +27,7 @@ export class Enemy_B3 extends Enemy {
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_boss_3')
         .setOrigin(0.5, 0.5)
-        .setFrame(0)
-        .setDepth(MyMath.z_to_depth(this.z));
+        .setFrame(0);
 
         // アニメーションの設定
         if (!this.scene.anims.exists("anims_boss_3")) {

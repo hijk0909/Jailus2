@@ -8,7 +8,7 @@
     "layer1": "stage_1_layer1",
     "layer2": "stage_1_layer2",
     "layer4": "stage_1_layer4",
-    "areas":[0,1000,2000,3000,4000]
+    "areas":[0,2000,4000]
    },
    {
     "stage": 2,
@@ -18,7 +18,7 @@
     "layer1": "stage_2_layer1",
     "layer2": "stage_2_layer2",
     "layer4": "stage_2_layer4",
-    "areas":[0,1000,2000,3000,4000]
+    "areas":[0,2000,4700]
    },
    {
     "stage": 3,
@@ -28,7 +28,7 @@
     "layer1": "stage_3_layer1",
     "layer2": "stage_3_layer2",
     "layer4": "stage_3_layer4",
-    "areas":[0,1000,2000,3000,4000,5000]
+    "areas":[0,3000,5000]
    },
    {
     "stage": 4,
@@ -38,7 +38,7 @@
     "layer1": "stage_4_layer1",
     "layer2": "stage_4_layer2",
     "layer4": "stage_4_layer4",
-    "areas":[0,1000,2000,3000,4000,5000,6000,7000,9500]
+    "areas":[0,2000,3620,7000,9500]
    },
    {
     "stage": 5,
@@ -48,7 +48,7 @@
     "layer1": "stage_5_layer1",
     "layer2": "stage_5_layer2",
     "layer4": "stage_5_layer4",
-    "areas":[0,1000,2000,3000,4000,5000,6000]
+    "areas":[0,4000,6000,9500]
    },
    {
     "stage": 6,
@@ -58,7 +58,7 @@
     "layer1": "stage_6_layer1",
     "layer2": "stage_6_layer2",
     "layer4": "stage_6_layer4",
-    "areas":[0,1000,2000,3000,4000]
+    "areas":[0]
    },
    {
     "stage": 7,

@@ -22,8 +22,7 @@ export class Enemy_1 extends Enemy {
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_enemy')
         .setOrigin(0.5, 0.5)
-        .setFrame(0)
-        .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 1);
+        .setFrame(0);
 
         // アニメーションの設定
         if (!this.scene.anims.exists("anims_enemy1")) {

@@ -5,7 +5,6 @@ import { Background } from './background.js';
 import { Exec } from './game_exec.js';
 import { Setup } from './game_setup.js';
 import { MyInput } from '../utils/InputUtils.js';
-import { Player } from '../objects/player.js';
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -37,6 +36,9 @@ export class GameScene extends Phaser.Scene {
         // ステージの初期化
         GameState.stage_state = GLOBALS.STAGE_STATE.START;
 
+        // プレイヤー登場・退出時の加速
+        this.player_accel = 0;
+
     } // End of create
 
     update(time, delta){
@@ -62,6 +64,7 @@ export class GameScene extends Phaser.Scene {
             GameState.bg.create();
             // ワイプイン
             this.wipe_in();
+            this.player_accel = 8;
             // 実行
             this.exec.update(time, delta);
             GameState.player.update();
@@ -73,7 +76,8 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.STARTING){
             // ◆開始期間
             this.exec.update(time, delta);
-            GameState.player.pos.x += 5;
+            GameState.player.pos.x += this.player_accel;
+            this.player_accel = Math.max(this.player_accel - 0.1, 4);
             GameState.player.update();
             this.stage_state_count--;
             if (this.stage_state_count < 0){
@@ -109,7 +113,7 @@ export class GameScene extends Phaser.Scene {
                 }
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){
-            // ◆クリア
+            // ◆ステージクリア
             this.my_input.clear();
             GameState.player.update();
             this.exec.update(time, delta);
@@ -119,10 +123,12 @@ export class GameScene extends Phaser.Scene {
             } else {
                 GameState.stage_state = GLOBALS.STAGE_STATE.CLEARED;
                 this.stage_state_count = 200;
+                this.player_accel = 2;
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEARED){
             // ◆ステージクリア期間
-            GameState.player.pos.x += 5;
+            this.player_accel = Math.min(this.player_accel + 0.1, 12);
+            GameState.player.pos.x += this.player_accel;
             GameState.player.update();
             this.exec.update(time, delta);
             this.stage_state_count--;
@@ -137,6 +143,7 @@ export class GameScene extends Phaser.Scene {
             this.exec.update(time, delta);
             this.stage_state_count--;
             if (this.stage_state_count < 0){
+                GameState.stage++;
                 GameState.bgm_stop();
                 GameState.ui.destroy();
                 this.my_input.destroy();
