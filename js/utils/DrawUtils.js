@@ -2,7 +2,7 @@
 
 const FONT_SIZE = 16;
 const ROW_HEIGHT = 24;
-const SHOCKWAVE_DURATION = 60;
+const SHOCKWAVE_DURATION = 120;
 
 // ◆オブジェクトを奥に倒してスクロールさせるシェーダー
 export class ScrollPipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeline {
@@ -23,6 +23,73 @@ export class RipplePipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeli
             renderer: game.renderer,
             fragShader: document.getElementById('rippleShader').textContent
         });
+    }
+}
+
+// ◆衝撃波（ポストエフェクトシェーダー）
+export class ShockwavePostFX extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+  constructor(game) {
+    super({
+      game: game,
+      renderer: game.renderer,
+      fragShader: document.getElementById('shockwaveShader').textContent,
+      uniforms: ['time', 'center', 'radius'],
+      renderTarget: true   // PostFX は通常レンダーターゲットを使う
+    });
+
+    // 状態を保持
+    this._time = 0;
+    this._center = { x: 0.5, y: 0.5 };
+    this._radius = 0.0;
+    this._resolution = { width: game.canvas.width, height: game.canvas.height};
+  }
+
+  // 描画直前に uniform をまとめて渡す（安全策）
+  onPreRender() {
+    this.set1f('time', this._time);
+    this.set2f('center', this._center.x, this._center.y);
+    this.set1f('radius', this._radius);
+    this.set2f('resolution', this._resolution.width, this._resolution.height);
+  }
+}
+
+// ◆衝撃波の管理クラス
+export class Shockwave {
+    constructor(scene){
+        this.scene = scene;
+        this.scene.cameras.main.setPostPipeline(ShockwavePostFX);
+        this.shader = this.scene.cameras.main.getPostPipeline(ShockwavePostFX);
+        this.shader._time = 0;
+        this.shader._center = {x:0.5, y:0.5};
+        this.shader._radius = 0.0; 
+        this.count = 0;
+    }
+
+    start(pos){
+        // console.log("shockwave.start");
+        this.count = SHOCKWAVE_DURATION;
+        this.shader._time = 0;
+        this.shader._radius = 0.5;
+        this.shader._center.x = pos.x / this.scene.game.canvas.width;
+        this.shader._center.y = 1 - pos.y / this.scene.game.canvas.height;
+    }
+
+    update(){
+        if (this.count > 0){
+            this.count -= 1;
+            const t = (SHOCKWAVE_DURATION - this.count);
+            if (this.shader) {
+                if (this.count === 0){
+                    this.stop();
+                } else {
+                    this.shader._time = t * 0.01;
+                }
+            }
+        }
+    }
+    stop(){
+        this.shader._time = 0;
+        this.shader._radius = 0;
     }
 }
 

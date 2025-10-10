@@ -76,7 +76,7 @@ export class Enemy_9 extends Enemy {
         if (this.state === 0){
             // 【フリーモード】
             const aheadPos = this.getAheadPos(nextPos, this.dir);
-            if (this.isHittingTile(aheadPos, this.dir)){
+            if (this.isHittingTile(aheadPos)){
                 this.state = 1;
                 this.setCurrentTile(aheadPos);
                 if (nextPos.y < GLOBALS.FIELD.HEIGHT / 2){
@@ -140,13 +140,13 @@ export class Enemy_9 extends Enemy {
         let start_y = this.pos.y;
         for (let diff = 0; diff < GLOBALS.FIELD.HEIGHT; diff += TILE_SIZE){
             if (start_y + diff < GLOBALS.FIELD.HEIGHT){
-                if (!GameState.bg.get_terrain(this.pos.x, start_y + diff)){
+                if (!GameState.bg.is_terrain_at_point(this.pos.x, start_y + diff)){
                     this.pos.y = start_y + diff;
                     break;
                 }
             }
             if (start_y - diff > 0){
-                if (!GameState.bg.get_terrain(this.pos.x, start_y - diff)){
+                if (!GameState.bg.is_terrain_at_point(this.pos.x, start_y - diff)){
                     this.pos.y = start_y - diff;
                     break;
                 }
@@ -155,8 +155,7 @@ export class Enemy_9 extends Enemy {
     }
 
     isHittingTile(pos){
-        const tile = GameState.bg.get_terrain(pos.x, pos.y);
-        return (tile && tile.index !== -1);
+        return GameState.bg.is_terrain_at_point(pos.x, pos.y);
     }
 
     isLeavingCurrentTile(pos, dir){
@@ -175,7 +174,7 @@ export class Enemy_9 extends Enemy {
     }
 
     setCurrentTile(pos){
-        const tile = GameState.bg.get_terrain(pos.x, pos.y);
+        const tile = GameState.bg.get_tile(pos.x, pos.y);
         if (tile && tile.index !== -1){
             const tilePos = MyMath.map_pos_to_global_pos(new Phaser.Math.Vector2(tile.pixelX, tile.pixelY));
             this.current_tile_x = tilePos.x;

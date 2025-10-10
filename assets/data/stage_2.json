@@ -744,6 +744,40 @@
                  "width":32,
                  "x":6016,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":55,
+                 "name":"event",
+                 "properties":[
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"bgm_fadeout"
+                        }],
+                 "rotation":0,
+                 "type":"event",
+                 "visible":true,
+                 "width":32,
+                 "x":6528,
+                 "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":56,
+                 "name":"event",
+                 "properties":[
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"bgm_boss"
+                        }],
+                 "rotation":0,
+                 "type":"event",
+                 "visible":true,
+                 "width":32,
+                 "x":6624,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -752,7 +786,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":55,
+ "nextobjectid":57,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -769,6 +803,16 @@
          "spacing":0,
          "tilecount":256,
          "tileheight":32,
+         "tiles":[
+                {
+                 "id":128,
+                 "properties":[
+                        {
+                         "name":"nonCollidable",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":32,
          "transparentcolor":"#000000"
         }],

@@ -2,9 +2,11 @@
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { Background } from './background.js';
+import { BGM } from './bgm.js';
 import { Exec } from './game_exec.js';
 import { Setup } from './game_setup.js';
 import { MyInput } from '../utils/InputUtils.js';
+import { Shockwave } from '../utils/DrawUtils.js';
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -27,8 +29,14 @@ export class GameScene extends Phaser.Scene {
         this.scene.launch('UIScene');
         GameState.ui = this.scene.get('UIScene');
 
+        // シェーダー（ポストエフェクト）の初期化
+        GameState.shockwave = new Shockwave(this);
+
         // 設定処理の生成
         this.setup = new Setup(this);
+
+        // BGMの初期化
+        GameState.bgm = new BGM(this);
 
         // ゲームメイン処理の生成
         this.exec = new Exec(this);
@@ -62,6 +70,8 @@ export class GameScene extends Phaser.Scene {
             GameState.scroll = true;
             GameState.bg = new Background(this);
             GameState.bg.create();
+            // [SOUND] BGM停止
+            GameState.bgm.stop();
             // ワイプイン
             this.wipe_in();
             this.player_accel = 8;
@@ -70,9 +80,6 @@ export class GameScene extends Phaser.Scene {
             GameState.player.update();
             this.stage_state_count = 45;
             GameState.stage_state = GLOBALS.STAGE_STATE.STARTING;
-            // [SOUND] メインBGM
-            GameState.bgm_set(GameState.sound.bgm_main);
-            GameState.bgm_play();
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.STARTING){
             // ◆開始期間
             this.exec.update(time, delta);
@@ -82,6 +89,9 @@ export class GameScene extends Phaser.Scene {
             this.stage_state_count--;
             if (this.stage_state_count < 0){
                 GameState.stage_state = GLOBALS.STAGE_STATE.PLAYING;
+                // [SOUND] メインBGM
+                GameState.bgm.set_by_stage();
+                GameState.bgm.play();
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
             // ◆プレイ中
@@ -95,6 +105,8 @@ export class GameScene extends Phaser.Scene {
             this.wipe_out();
             GameState.stage_state = GLOBALS.STAGE_STATE.FAILED;
             this.stage_state_count = 100;
+            // BGMフェードアウト
+            GameState.bgm.fadeout();
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAILED){
             // ◆失敗期間
             this.exec.update(time, delta);
@@ -102,7 +114,7 @@ export class GameScene extends Phaser.Scene {
             if (this.stage_state_count < 0){
                 GameState.lives--;
                 if (GameState.lives < 0){
-                    GameState.bgm_stop();
+                    GameState.bgm.stop();
                     GameState.ui.destroy();
                     this.my_input.destroy();
                     this.scene.stop('UIScene');
@@ -115,6 +127,7 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){
             // ◆ステージクリア
             this.my_input.clear();
+            GameState.bgm.fadeout();
             GameState.player.update();
             this.exec.update(time, delta);
             if (GameState.stage === GLOBALS.STAGE_MAX){
@@ -144,7 +157,7 @@ export class GameScene extends Phaser.Scene {
             this.stage_state_count--;
             if (this.stage_state_count < 0){
                 GameState.stage++;
-                GameState.bgm_stop();
+                GameState.bgm.stop();
                 GameState.ui.destroy();
                 this.my_input.destroy();
                 this.scene.stop('UIScene');
@@ -154,8 +167,12 @@ export class GameScene extends Phaser.Scene {
             // ◆一時停止期間
         }
 
+        // 衝撃波エフェクト（ポストエフェクトシェーダー）
+        GameState.shockwave.update();
+
+        // 隠しキー
         if (Phaser.Input.Keyboard.JustDown(this.keyQ)){
-            GameState.bgm_stop();
+            GameState.bgm.stop();
             GameState.ui.destroy();
             this.my_input.destroy();
             this.scene.stop('UIScene');
@@ -245,14 +262,14 @@ export class GameScene extends Phaser.Scene {
     toggle_pause(){
         if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
             GameState.stage_state = GLOBALS.STAGE_STATE.PAUSE;
-            GameState.bgm_pause();
+            GameState.bgm.pause();
             this.children.each(child => {
                 if (child.anims && child.anims.isPlaying) child.anims.pause();
             });
             // GameState.ui.show_pause(true);
         } else if ( GameState.stage_state === GLOBALS.STAGE_STATE.PAUSE){
             GameState.stage_state = GLOBALS.STAGE_STATE.PLAYING;
-            GameState.bgm_resume();
+            GameState.bgm.resume();
             this.children.each(child => {
                 if (child.anims && child.anims.isPaused) child.anims.resume();
             });

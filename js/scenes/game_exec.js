@@ -59,6 +59,7 @@ export class Exec {
                         if (e.life <= 0){
                             GameState.add_score(e.score);
                             if (e.boss){
+                                e.shockwave();
                                 GameState.stage_state = GLOBALS.STAGE_STATE.CLEAR;
                             }
                             e.destroy();

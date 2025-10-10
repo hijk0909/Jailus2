@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="98">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="100">
  <editorsettings>
   <export target="stage_5.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="bg_tileset" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../images/bg_tileset.png" trans="000000" width="512" height="512"/>
+  <tile id="128">
+   <properties>
+    <property name="nonCollidable" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer id="1" name="layer_1" width="400" height="16">
   <data encoding="csv">
@@ -90,6 +95,16 @@
     <property name="spawn_pos" value="right_random"/>
     <property name="subtype" value="enemy_9"/>
     <property name="z" value="0"/>
+   </properties>
+  </object>
+  <object id="98" name="event" type="event" x="8896" y="480" width="32" height="32">
+   <properties>
+    <property name="subtype" value="bgm_fadeout"/>
+   </properties>
+  </object>
+  <object id="99" name="event" type="event" x="8992" y="480" width="32" height="32">
+   <properties>
+    <property name="subtype" value="bgm_boss"/>
    </properties>
   </object>
  </objectgroup>

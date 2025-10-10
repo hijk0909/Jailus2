@@ -173,5 +173,40 @@
         }
     </script>
 
+    <script type="x-shader/x-fragment" id="shockwaveShader">
+        precision mediump float;
+
+        uniform vec2      resolution; //縦横の幅
+        uniform float     time;     // 衝撃波の進行時間
+        uniform vec2      center;   // 爆心地 (0.0〜1.0 の UV座標)
+        uniform float     radius;   // 衝撃波の広がり半径
+        uniform sampler2D uMainSampler;
+        varying vec2      outTexCoord;
+
+        void main() {
+            vec2  uv = outTexCoord;
+            vec2  aspect = vec2(resolution.x / resolution.y, 1.0); // アスペクト比
+            vec2  uvDiff = (uv - center) * aspect; // アスペクト比を考慮した座標差
+            float dist = length(uvDiff);       //中心からの距離
+            float width = 0.15;                //山の幅
+            float wave = time * 0.4;           //衝撃波の先端の進行位置
+            float fadeOut = 1.0 - smoothstep(radius-0.3, radius, wave); //端で波を減衰
+
+            const float PI = 3.14159265359;
+            float diff = wave - dist; //uvと衝撃波の相対距離
+            float ripple = 0.0;
+            if (diff >= 0.0 && diff <= width) {
+                float theta = mix(0.0, 2.0*PI, diff / width);
+                ripple = (1.0 - cos(theta)) * 0.015 * fadeOut;
+            }
+            uv += normalize(uvDiff) * ripple / aspect;
+
+            vec4 color = texture2D(uMainSampler, uv);
+            float brightness = 1.0 + abs(ripple) * 50.0;
+            color.rgb *= brightness;
+            gl_FragColor = color;
+        }
+    </script>
+
 </body>
 </html>

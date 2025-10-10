@@ -1,7 +1,7 @@
 // GameConst.js
 
 export const GLOBALS = {
-    VERSION : "0.0d - 2025.10.06",
+    VERSION : "0.1 - 2025.10.10",
     STAGE_MAX : 8,
     INIT_LIVES : 3,
     EXTEND_FIRST : 20000,
@@ -9,6 +9,8 @@ export const GLOBALS = {
     BARRIER_MAX : 3,
 
     DELTA: 16.6667,
+
+    BGM_VOLUME : 0.6,
 
     STAGE_STATE: {
         START : 1,

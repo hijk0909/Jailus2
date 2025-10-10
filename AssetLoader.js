@@ -1,6 +1,7 @@
 // Jailus2/AssetLoader.js
+import { GLOBALS } from './js/GameConst.js';
 import { GameState } from './js/GameState.js';
-import { ScrollPipeline, RipplePipeline } from './js/utils/DrawUtils.js';
+import { ScrollPipeline, RipplePipeline, ShockwavePostFX } from './js/utils/DrawUtils.js';
 
 export class AssetLoader extends Phaser.Scene {
     constructor() {
@@ -116,7 +117,6 @@ export class AssetLoader extends Phaser.Scene {
         this.load.spritesheet('ss_boss_8', 'assets/images/ss_boss_8.png', {
             frameWidth: 256, frameHeight: 320, endFrame : 1});
 
-
         // UIボタン
         this.load.image('btn_tap', 'assets/images/btn_tap.png');
         // フォント
@@ -142,12 +142,20 @@ export class AssetLoader extends Phaser.Scene {
         this.load.audio('bgm_zero_mind', './assets/audio/bgm/bgm_zero_mind.mp3');
         this.load.audio('bgm_name_entry', './assets/audio/bgm/bgm_name_entry.mp3');
         this.load.audio('bgm_game_clear', './assets/audio/bgm/bgm_game_clear.mp3');
-
+        this.load.audio('bgm_stage_1', './assets/audio/bgm/bgm_stage_1.mp3');
+        this.load.audio('bgm_stage_2', './assets/audio/bgm/bgm_stage_2.mp3');
+        this.load.audio('bgm_stage_3', './assets/audio/bgm/bgm_stage_3.mp3');
+        this.load.audio('bgm_stage_4', './assets/audio/bgm/bgm_stage_4.mp3');
+        this.load.audio('bgm_stage_5', './assets/audio/bgm/bgm_stage_5.mp3');
+        this.load.audio('bgm_stage_6', './assets/audio/bgm/bgm_stage_6.mp3');
+        this.load.audio('bgm_stage_7', './assets/audio/bgm/bgm_stage_7.mp3');
+        this.load.audio('bgm_stage_8', './assets/audio/bgm/bgm_stage_8.mp3');
 
         // シェーダー
         this.renderer.pipelines.add('ScrollCeil', new ScrollPipeline(this.game));
         this.renderer.pipelines.add('ScrollFloor', new ScrollPipeline(this.game));
         this.renderer.pipelines.add('Ripple', new RipplePipeline(this.game));
+        this.renderer.pipelines.addPostPipeline('Shockwave', ShockwavePostFX);
     }
     create() {
 
@@ -161,8 +169,16 @@ export class AssetLoader extends Phaser.Scene {
             se_name_back       : this.sound.add('se_name_back', { volume: 1.0 }),
             se_name_enter      : this.sound.add('se_name_enter', { volume: 1.0 }),
             jingle_game_over   : this.sound.add('jingle_game_over', { volume: 0.7 }),
-            bgm_main           : this.sound.add('bgm_main', { volume: 0.6, loop: true }),
-            bgm_zero_mind      : this.sound.add('bgm_zero_mind', { volume: 0.6, loop: true }),
+            bgm_main           : this.sound.add('bgm_main', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_1        : this.sound.add('bgm_stage_1', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_2        : this.sound.add('bgm_stage_2', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_3        : this.sound.add('bgm_stage_3', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_4        : this.sound.add('bgm_stage_4', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_5        : this.sound.add('bgm_stage_5', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_6        : this.sound.add('bgm_stage_6', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_7        : this.sound.add('bgm_stage_7', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_stage_8        : this.sound.add('bgm_stage_8', { volume: GLOBALS.BGM_VOLUME, loop: true }),
+            bgm_zero_mind      : this.sound.add('bgm_zero_mind', { volume: GLOBALS.BGM_VOLUME, loop: true }),
             bgm_name_entry     : this.sound.add('bgm_name_entry', { volume: 0.6, loop: true }),
             bgm_game_clear     : this.sound.add('bgm_game_clear', { volume: 0.6, loop: true })
         };

@@ -32,8 +32,7 @@ export class Bullet extends Drawable {
         super.update();
         //地形との当たり判定
         if (this.z === GLOBALS.LAYER.LAYER3.Z){
-            const tile = GameState.bg.get_terrain(this.pos.x, this.pos.y);
-            if (tile && tile.index !== -1) {
+            if (GameState.bg.is_terrain_at_point(this.pos.x, this.pos.y)){
                 this._hit_terrain();
             }
         }

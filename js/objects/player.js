@@ -85,10 +85,10 @@ export class Player extends Drawable {
         let new_y = Math.min(GLOBALS.FIELD.HEIGHT, Math.max(0, this.pos.y + dy));
 
         // ◆地形から押し戻される処理（X軸方向→Y軸方向と逐次処理する）
-        if (GameState.bg.is_terrain(new Phaser.Math.Vector2(new_x, this.pos.y), this.collision)){
+        if (GameState.bg.is_terrain_in_area(new Phaser.Math.Vector2(new_x, this.pos.y), this.collision)){
             new_x = this.pos.x - GameState.scroll_dx;
         }
-        if (GameState.bg.is_terrain(new Phaser.Math.Vector2(new_x, new_y), this.collision)){
+        if (GameState.bg.is_terrain_in_area(new Phaser.Math.Vector2(new_x, new_y), this.collision)){
             new_y = this.pos.y;
         }        
         this.pos.x = new_x;
@@ -136,6 +136,7 @@ export class Player extends Drawable {
         if (GameState.barrier > 0){
             this.sprite_barrier.setVisible(true);
             this.sprite_barrier.play("anims_player_barrier");
+            this.sprite_barrier.setTint(0xffffff);
         }
     }
     get_barrier(){
@@ -144,6 +145,11 @@ export class Player extends Drawable {
     dec_barrier(){
         if (GameState.barrier > 1){
             GameState.barrier -= 1;
+            if (GameState.barrier === 2){
+                this.sprite_barrier.setTint(0xffff00);
+            } else if (GameState.barrier === 1){
+                this.sprite_barrier.setTint(0xff0000);                
+            }
         } else {
             GameState.barrier = 0;
             this.erase_barrier();

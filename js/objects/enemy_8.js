@@ -80,7 +80,7 @@ export class Enemy_8 extends Enemy {
         if (this.dx > 0) {
             // 右移動 → 右辺を確認
             let checkX = nextX + this.collision.width / 2;
-            if (GameState.bg.get_terrain(checkX, checkY1) || GameState.bg.get_terrain(checkX, checkY2)) {
+            if (GameState.bg.is_terrain_at_point(checkX, checkY1) || GameState.bg.is_terrain_at_point(checkX, checkY2)) {
                 let tileX = Math.floor(checkX / TILE_SIZE);
                 nextX = tileX * TILE_SIZE - this.collision.width / 2;
                 this.dx *= -1;
@@ -88,7 +88,7 @@ export class Enemy_8 extends Enemy {
         } else if (this.dx < 0) {
             // 左移動 → 左辺を確認
             let checkX = nextX - this.collision.width / 2;
-            if (GameState.bg.get_terrain(checkX, checkY1) || GameState.bg.get_terrain(checkX, checkY2)){
+            if (GameState.bg.is_terrain_at_point(checkX, checkY1) || GameState.bg.is_terrain_at_point(checkX, checkY2)){
                 let tileX = Math.floor(checkX / TILE_SIZE);
                 nextX = (tileX + 1) * TILE_SIZE + this.collision.width / 2;
                 this.dx *= -1;
@@ -104,7 +104,7 @@ export class Enemy_8 extends Enemy {
         if (this.dy > 0) {
             // 下移動 → 下辺を確認
             let checkY = nextY + this.collision.height / 2;
-            if (GameState.bg.get_terrain(checkX1, checkY) || GameState.bg.get_terrain(checkX2, checkY)){
+            if (GameState.bg.is_terrain_at_point(checkX1, checkY) || GameState.bg.is_terrain_at_point(checkX2, checkY)){
                 // 地面に衝突
                 let tileY = Math.floor(checkY / TILE_SIZE);
                 nextY = tileY * TILE_SIZE - this.collision.height / 2;
@@ -114,7 +114,7 @@ export class Enemy_8 extends Enemy {
         } else if (this.dy < 0) {
             // 上移動 → 上辺を確認
             let checkY = nextY - this.collision.height / 2;
-            if (GameState.bg.get_terrain(checkX1, checkY) || GameState.bg.get_terrain(checkX2, checkY)){
+            if (GameState.bg.is_terrain_at_point(checkX1, checkY) || GameState.bg.is_terrain_at_point(checkX2, checkY)){
                 // 天井に衝突
                 let tileY = Math.floor(checkY / TILE_SIZE);
                 nextY = (tileY + 1) * TILE_SIZE + this.collision.height / 2;
@@ -127,7 +127,7 @@ export class Enemy_8 extends Enemy {
 
     move_to_lowest(){
         for (let y = GLOBALS.FIELD.HEIGHT - TILE_SIZE; y > 0; y -= TILE_SIZE){
-            if (!GameState.bg.get_terrain(this.pos.x, y)){
+            if (!GameState.bg.is_terrain_at_point(this.pos.x, y)){
                 this.pos.y = y + this.collision.height / 2;
                 break;
             }

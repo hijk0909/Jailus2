@@ -139,6 +139,12 @@ export class Background {
         }
         if (subtype_val === "scroll_stop"){
             GameState.scroll = false;
+        } else if (subtype_val === "bgm_fadeout"){
+            GameState.bgm.fadeout();
+        } else if (subtype_val === "bgm_boss"){
+            GameState.bgm.stop();
+            GameState.bgm.set_boss();
+            GameState.bgm.play();
         }
     }
 
@@ -342,10 +348,12 @@ export class Background {
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
                 this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
+                this.scrollCeil.set1f('uOffsetY', (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 2);
                 this.scrollCeil.set1f('uSqueeze', (MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.CEILING.Z_BOTTOM) / GLOBALS.LAYER.CEILING.HEIGHT));
 
                 this.floorLayer.y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
                 this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
+                this.scrollFloor.set1f('uOffsetY', - (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 2);
                 this.scrollFloor.set1f('uSqueeze', ((GLOBALS.FIELD.HEIGHT - this.floorLayer.y) / GLOBALS.LAYER.FLOOR.HEIGHT));
             }
         },
@@ -370,6 +378,10 @@ export class Background {
 
             },
             update(time, delta) {
+
+                // レイヤーの透明度の変更
+                this.layer4.setAlpha(Math.sin(GameState.scroll_x * 0.02));
+
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
                 this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
@@ -414,21 +426,26 @@ export class Background {
     }
 
     // ◆表示座標から地形のタイル情報を取得
-    get_terrain(x,y){
+    get_tile(x,y){
         const disp_x = MyMath.global_x_to_disp_x(x,GLOBALS.LAYER.LAYER3.Z);
         const disp_y = MyMath.global_y_to_disp_y(y,GLOBALS.LAYER.LAYER3.Z);
-        // console.log("get_terrain",Math.floor(x), Math.floor(y), Math.floor(disp_x), Math.floor(disp_y));
         return this.layer3.getTileAtWorldXY(disp_x, disp_y);
     }
 
-    // ◆表示座標基準の矩形領域内の地形の有無を判定
-    is_terrain(pos, col){
+    // ◆【判定】座標（表示座標基準）から地形の当たり判定
+    is_terrain_at_point(x,y){
+        const tile = this.get_tile(x,y);
+        return (tile && tile.index !== -1 && !("nonCollidable" in tile.properties));
+    }
+
+    // ◆【判定】領域（表示座標基準）から地形の当たり判定
+    is_terrain_in_area(pos, col){
         const rectX = MyMath.global_x_to_disp_x(pos.x - col.width / 2,  GLOBALS.LAYER.LAYER3.Z);
         const rectY = MyMath.global_y_to_disp_y(pos.y - col.height / 2, GLOBALS.LAYER.LAYER3.Z);
         const rectW = col.width * MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
         const rectH = col.height * MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
         const tiles = this.layer3.getTilesWithinWorldXY(rectX, rectY, rectW, rectH);
-        return tiles.some(tile => tile.index !== -1);
+        return tiles.some(tile => tile.index !== -1 && !("nonCollidable" in tile.properties));
     }
 
     destroy(){

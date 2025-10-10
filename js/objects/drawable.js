@@ -1,5 +1,6 @@
 // drawable.js
 import { GLOBALS } from '../GameConst.js';
+import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 
 export class Drawable {
@@ -34,6 +35,12 @@ export class Drawable {
             .setScale(MyMath.z_to_sprite_scale(this.z + offset_z) * this.scale)
             .setDepth(MyMath.z_to_depth(this.z + offset_z));
         }
+    }
+
+    shockwave(){
+        const x = MyMath.global_x_to_disp_x(this.pos.x, this.z);
+        const y = MyMath.global_y_to_disp_y(this.pos.y, this.z);
+        GameState.shockwave.start(new Phaser.Math.Vector2(x,y));
     }
 
     destroy(){
