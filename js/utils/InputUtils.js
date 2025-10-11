@@ -14,10 +14,10 @@ export class MyInput {
 
         // ゲームパッド接続確認
         if (this.scene.input.gamepad.total > 0) {
-            this.pad = this.scene.input.gamepad.getPad(0);
+            this.pad = this.findCompatiblePad();
         } else {
             this.scene.input.gamepad.once('connected', (pad) => {
-            this.pad = pad;
+            this.pad = this.findCompatiblePad();
             });
         }
 
@@ -71,11 +71,23 @@ export class MyInput {
                 this.down2 = y > 0.5;
             }
             // ボタン入力
-            this.up3 = this.pad.buttons[12].pressed;
-            this.down3 = this.pad.buttons[13].pressed;
-            this.left3 = this.pad.buttons[14].pressed;
-            this.right3 = this.pad.buttons[15].pressed;
-            this.button3 = this.pad.buttons[0].pressed;
+            if (this.pad && this.pad.buttons){
+                if (this.pad.buttons[12]){
+                    this.up3 = this.pad.buttons[12].pressed;
+                }
+                if (this.pad.buttons[13]){
+                    this.down3 = this.pad.buttons[13].pressed;
+                }
+                if (this.pad.buttons[14]){
+                    this.left3 = this.pad.buttons[14].pressed;
+                }
+                if (this.pad.buttons[15]){
+                    this.right3 = this.pad.buttons[15].pressed;
+                }
+                if (this.pad.buttons[0]){
+                    this.button3 = this.pad.buttons[0].pressed;
+                }
+            }
         }
 
         // ポインタ移動量の計算
@@ -142,5 +154,30 @@ export class MyInput {
             this.pad = pad;
             if (button.index === 9) callback(); // STARTボタン
         });
+    }
+
+    findCompatiblePad() {
+        const gamepads = this.scene.input.gamepad.gamepads;
+        for (let i = 0; i < gamepads.length; i++) {
+            const pad = gamepads[i];
+            if (!pad) continue;
+
+            // ボタン配列が存在するか、対応するボタンがあるかを確認
+            const buttons = pad.buttons || [];
+            const hasMainButtons = buttons[0] !== undefined;
+            const hasDPad =
+                buttons[12] !== undefined &&
+                buttons[13] !== undefined &&
+                buttons[14] !== undefined &&
+                buttons[15] !== undefined;
+
+            if (hasMainButtons && hasDPad) {
+                // console.log(`Selected Gamepad: ${pad.id}`);
+                return pad; // 最初に条件を満たしたpadを返す
+            }
+        }
+
+        // console.warn("No compatible Gamepad found.");
+        return null;
     }
 }
