@@ -96,7 +96,7 @@
     <property name="subtype" value="scroll_stop"/>
    </properties>
   </object>
-  <object id="92" name="spawner" type="spawner" x="256" y="0" width="32" height="32">
+  <object id="92" name="spawner" type="spawner" x="832" y="0" width="32" height="32">
    <properties>
     <property name="duration" value="30"/>
     <property name="interval" value="2"/>
