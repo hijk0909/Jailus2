@@ -555,12 +555,12 @@
                         {
                          "name":"duration",
                          "type":"string",
-                         "value":"30"
+                         "value":"29"
                         }, 
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"3"
+                         "value":"2"
                         }, 
                         {
                          "name":"spawn_pos",
@@ -654,6 +654,43 @@
                  "width":32,
                  "x":4352,
                  "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":64,
+                 "name":"spawner",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"right_random"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_1"
+                        }, 
+                        {
+                         "name":"z",
+                         "type":"string",
+                         "value":"0"
+                        }],
+                 "rotation":0,
+                 "type":"spawner",
+                 "visible":true,
+                 "width":32,
+                 "x":2690.66666666667,
+                 "y":2.66666666666666
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -662,7 +699,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":64,
+ "nextobjectid":65,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

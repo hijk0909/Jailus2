@@ -6,7 +6,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Bullet_PL } from '../objects/bullet_pl.js';
 import { Bullet_PM } from '../objects/bullet_pm.js';
 
-const MISSILE_CONTROL = 1.4;
+const MISSILE_CONTROL = 5.8;
 const COOLDOWN_INTERVAL = 8;
 
 export class Player extends Drawable {
@@ -127,8 +127,9 @@ export class Player extends Drawable {
     shoot_missile(dx){
         const bpm = new Bullet_PM(this.scene);
         bpm.init(this.pos);
-        bpm.set_velocity(new Phaser.Math.Vector2(Math.sign(dx * MISSILE_CONTROL),0));
+        bpm.set_velocity(new Phaser.Math.Vector2(Math.sign(dx)* MISSILE_CONTROL,0));
         GameState.bullets_p.push(bpm);
+        // console.log("shoot_missile",dx, Math.sign(dx), bpm.velocity);
     }
 
     // バリア関連のアクセサ
