@@ -48,6 +48,8 @@ const SpawnPosList = {
     'right_y_z':    GLOBALS.SPAWN_POS.RIGHT_Y_Z
 }
 
+const RUNWAY_HEIGHT = 24;
+
 export class Spawn {
 
     static battery(scene, obj){
@@ -75,7 +77,7 @@ export class Spawn {
             const pos2 = MyMath.map_pos_to_global_pos(new Phaser.Math.Vector2(obj.x + obj.width / 2, obj.y + obj.height - 2));
             const item = new Item_Runway(scene);
             item.init(pos2);
-            item.set_collision(obj.width, 4);
+            item.set_collision(obj.width, RUNWAY_HEIGHT);
             GameState.items.push(item);
         }
     }

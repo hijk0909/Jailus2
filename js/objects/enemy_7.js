@@ -5,15 +5,16 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = 120;
-const SPEED = 2.5;
+const FISH_SPEED = 2.5;
+const FISH_BOUND = 100;
 
 // Enemy_7：サカナ
 export class Enemy_7 extends Enemy {
 
     constructor(scene){
         super(scene);
-        this.speed = SPEED;
-        this.count = COOLDOWN_INTERVAL;
+        this.speed = FISH_SPEED;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.collision = { width :12, height : 24};
         this.state = 0;
@@ -58,38 +59,50 @@ export class Enemy_7 extends Enemy {
     update(){
         this.pos.x -= GameState.scroll_dx;
         super.update();
-        this.count -= 1;
-        if (this.count < 0){
-            this.count = COOLDOWN_INTERVAL;
+
+        this.shot_count -= GameState.ff;
+        if (this.shot_count <= 0){
+            this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
         }
+
         if (this.state === 0){
-            // ▼左に直進
-            this.state_count--;
+            // ▼[0] 左に直進
             this.pos.x -= this.speed * GameState.ff;
+            this.state_count -= GameState.ff;
             if (this.state_count <= 0){
                 this.state = 1;
                 this.sprite.play("anims_enemy7_to_right");
-                this.dy = Math.random() < 0.5 ? -1 : 1;
+                this.set_dy();
             }
         } else if (this.state === 1){
-            // ▼右へ反転
-            this.pos.y += this.dy;
+            // ▼[1] 右へ反転
+            this.pos.y += this.dy * GameState.ff;
         } else if (this.state === 2){
-            // ▼右に直進
-            this.state_count--;
+            // ▼[2] 右に直進
             this.pos.x += this.speed * GameState.ff;
+            this.state_count -= GameState.ff;
             if (this.state_count <= 0){
                 this.state = 3;
                 this.sprite.play("anims_enemy7_to_left");
+                this.set_dy();
             }
         } else if (this.state === 3){
-            // ▼左へ反転
-            this.pos.y += this.dy;
+            // ▼[3] 左へ反転
+            this.pos.y += this.dy * GameState.ff;
         }
-
     }
-    
+
+    set_dy(){
+        if (this.pos.y > GLOBALS.FIELD.HEIGHT - FISH_BOUND){
+            this.dy = -1;
+        } else if (this.pos.y < FISH_BOUND){
+            this.dy = 1;
+        } else {
+            this.dy = Math.random() < 0.5 ? -1 : 1;
+        }
+    }
+
     destroy(){
         super.destroy();
     }

@@ -9,7 +9,7 @@ export class Item_Runway extends Item {
 
     constructor(scene){
         super(scene);
-        this.collision = { width : 32, height : 4};
+        this.collision = { width : 32, height : 24};
         this.grahpics_r = null;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.color_counter = 0;
@@ -17,11 +17,6 @@ export class Item_Runway extends Item {
 
     init(pos){
         super.init(pos);
-        // スプライトの設定
-        // this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_item')
-        // .setOrigin(0.5, 0.5)
-        // .setFrame(0)
-        // .setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) - 1);
         // Runway描画用
         this.graphics_r = this.scene.add.graphics().setDepth(MyMath.z_to_depth(this.z));
         // this.graphics = this.scene.add.graphics().setDepth(3);
@@ -33,12 +28,12 @@ export class Item_Runway extends Item {
     }
 
     update(){
-        this.color_counter = (this.color_counter + 13) % 360;
+        this.color_counter = (this.color_counter + 13 * GameState.ff) % 360;
         const phaserColorInstance = Phaser.Display.Color.HSLToColor(this.color_counter / 360, 1, 0.5);
         const color = phaserColorInstance.color32;
 
         this.graphics_r.clear();
-        this.graphics_r.lineStyle(3, color);
+        this.graphics_r.lineStyle(8, color);
         this.graphics_r.strokeRect(
             MyMath.global_x_to_disp_x(this.pos.x - this.collision.width / 2, this.z),
             MyMath.global_y_to_disp_y(this.pos.y - this.collision.height / 2, this.z),

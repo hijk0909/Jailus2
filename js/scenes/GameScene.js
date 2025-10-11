@@ -74,7 +74,7 @@ export class GameScene extends Phaser.Scene {
             GameState.bgm.stop();
             // ワイプイン
             this.wipe_in();
-            this.player_accel = 8;
+            this.player_velocity = 8;
             // 実行
             this.exec.update(time, delta);
             GameState.player.update();
@@ -83,10 +83,10 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.STARTING){
             // ◆開始期間
             this.exec.update(time, delta);
-            GameState.player.pos.x += this.player_accel;
-            this.player_accel = Math.max(this.player_accel - 0.1, 4);
+            this.player_velocity = Math.max(this.player_velocity - 0.1 * GameState.ff, 4);
+            GameState.player.pos.x += this.player_velocity * GameState.ff;
             GameState.player.update();
-            this.stage_state_count--;
+            this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
                 GameState.stage_state = GLOBALS.STAGE_STATE.PLAYING;
                 // [SOUND] メインBGM
@@ -100,6 +100,8 @@ export class GameScene extends Phaser.Scene {
             this.exec.update(time, delta);
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAIL){
             // ◆失敗
+            this.my_input.clear();
+            this.my_input.erase();
             this.exec.update(time, delta);
             // ワイプアウト
             this.wipe_out();
@@ -110,7 +112,7 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAILED){
             // ◆失敗期間
             this.exec.update(time, delta);
-            this.stage_state_count--;
+            this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
                 GameState.lives--;
                 if (GameState.lives < 0){
@@ -127,8 +129,10 @@ export class GameScene extends Phaser.Scene {
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){
             // ◆ステージクリア
             this.my_input.clear();
+            this.my_input.erase();
             GameState.bgm.fadeout();
             GameState.player.update();
+            this.exec.destroy_all_enemies();
             this.exec.update(time, delta);
             if (GameState.stage === GLOBALS.STAGE_MAX){
                 GameState.stage_state = GLOBALS.STAGE_STATE.ALL_CLEARED;
@@ -140,11 +144,11 @@ export class GameScene extends Phaser.Scene {
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEARED){
             // ◆ステージクリア期間
-            this.player_accel = Math.min(this.player_accel + 0.1, 12);
-            GameState.player.pos.x += this.player_accel;
+            this.player_accel = Math.min(this.player_accel + 0.1 * GameState.ff, 12);
+            GameState.player.pos.x += this.player_accel * GameState.ff;
             GameState.player.update();
             this.exec.update(time, delta);
-            this.stage_state_count--;
+            this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
                 GameState.stage++;
                 GameState.area = 1;
@@ -154,9 +158,9 @@ export class GameScene extends Phaser.Scene {
             // ◆全面クリア期間
             GameState.player.update();
             this.exec.update(time, delta);
-            this.stage_state_count--;
+            this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
-                GameState.stage++;
+                GameState.stage++; // [ALL]
                 GameState.bgm.stop();
                 GameState.ui.destroy();
                 this.my_input.destroy();

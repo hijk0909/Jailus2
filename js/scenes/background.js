@@ -13,6 +13,7 @@ export class Background {
             this.stageHandlers[stage].create = this.stageHandlers[stage].create.bind(this);
             this.stageHandlers[stage].update = this.stageHandlers[stage].update.bind(this);
         }
+        this.time = 0;
     }
 
     create(){
@@ -62,10 +63,13 @@ export class Background {
         // ステージ毎に定義するcreate処理
         this.stageHandlers[GameState.stage].create();
 
+        // メインタイマーのリセット
+        this.time = 0;
     }
 
     update(time, delta){
 
+        this.time += GameState.ff;
         if (GameState.scroll){
             GameState.scroll_dx = 1.5 * GameState.ff; //速度(layer4基準)
             GameState.scroll_x += GameState.scroll_dx;  //位置(layer4基準)
@@ -142,9 +146,11 @@ export class Background {
         } else if (subtype_val === "bgm_fadeout"){
             GameState.bgm.fadeout();
         } else if (subtype_val === "bgm_boss"){
-            GameState.bgm.stop();
-            GameState.bgm.set_boss();
-            GameState.bgm.play();
+            if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
+                GameState.bgm.stop();
+                GameState.bgm.set_boss();
+                GameState.bgm.play();
+            }
         }
     }
 
@@ -210,13 +216,13 @@ export class Background {
 
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
-                this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
-                this.scrollCeil.set1f('uOffsetY', (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 4);
+                this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x  || 0) / GLOBALS.FIELD.WIDTH);
+                this.scrollCeil.set1f('uOffsetY', (this.time || 0) / GLOBALS.FIELD.HEIGHT * 4);
                 this.scrollCeil.set1f('uSqueeze', (MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.CEILING.Z_BOTTOM) / GLOBALS.LAYER.CEILING.HEIGHT));
 
                 this.floorLayer.y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
-                this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
-                this.scrollFloor.set1f('uOffsetY', (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 4);
+                this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x  || 0) / GLOBALS.FIELD.WIDTH);
+                this.scrollFloor.set1f('uOffsetY', (this.time || 0) / GLOBALS.FIELD.HEIGHT * 4);
                 this.scrollFloor.set1f('uSqueeze', ((GLOBALS.FIELD.HEIGHT - this.floorLayer.y) / GLOBALS.LAYER.FLOOR.HEIGHT));
             }
         },
@@ -348,12 +354,12 @@ export class Background {
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
                 this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
-                this.scrollCeil.set1f('uOffsetY', (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 2);
+                this.scrollCeil.set1f('uOffsetY', (this.time || 0) / GLOBALS.FIELD.HEIGHT * 2);
                 this.scrollCeil.set1f('uSqueeze', (MyMath.global_y_to_disp_y(0, GLOBALS.LAYER.CEILING.Z_BOTTOM) / GLOBALS.LAYER.CEILING.HEIGHT));
 
                 this.floorLayer.y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
                 this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
-                this.scrollFloor.set1f('uOffsetY', - (GameState.scroll_x || 0) / GLOBALS.FIELD.HEIGHT * 2);
+                this.scrollFloor.set1f('uOffsetY', - (this.time || 0) / GLOBALS.FIELD.HEIGHT * 2);
                 this.scrollFloor.set1f('uSqueeze', ((GLOBALS.FIELD.HEIGHT - this.floorLayer.y) / GLOBALS.LAYER.FLOOR.HEIGHT));
             }
         },
@@ -380,7 +386,7 @@ export class Background {
             update(time, delta) {
 
                 // レイヤーの透明度の変更
-                this.layer4.setAlpha(Math.sin(GameState.scroll_x * 0.02));
+                this.layer4.setAlpha(Math.max(Math.sin(this.time * 0.02),0));
 
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;

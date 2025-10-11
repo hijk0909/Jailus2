@@ -159,4 +159,30 @@ export class Exec {
         }
 
     } // End of update
+
+    destroy_all_enemies(){
+        // 全ての敵の削除
+        for (let i = GameState.enemies.length - 1; i >= 0; i--) {
+            const e = GameState.enemies[i];
+            e.set_alive(false);
+            e.destroy();
+            GameState.enemies.splice(i, 1);
+
+            const eff = new Effect_Exp(this.scene);
+            eff.init(e.pos);
+            GameState.effects.push(eff);
+        }
+        // 全ての弾の消去
+        for (let i = GameState.bullets_e.length - 1; i >= 0; i--) {
+            const b = GameState.bullets_e[i];
+            b.set_alive(false);
+            b.destroy();
+            GameState.bullets_e.splice(i, 1);
+
+            const eff = new Effect_Ext(this.scene);
+            eff.init(b.pos);
+            GameState.effects.push(eff);
+        }
+    }
+
 }

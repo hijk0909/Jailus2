@@ -12,7 +12,7 @@ export class Enemy_1 extends Enemy {
     constructor(scene){
         super(scene);
         this.velocity = new Phaser.Math.Vector2(0,0);
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.speed = 3.5;
     }
 
@@ -36,12 +36,12 @@ export class Enemy_1 extends Enemy {
     }
 
     update(){
-        this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed);
+        this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
         super.update();
-        this.count -= 1;
-        if (this.count < 0){
-            this.count = COOLDOWN_INTERVAL;
+        this.shot_count -= GameState.ff;
+        if (this.shot_count < 0){
+            this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
         }
     }

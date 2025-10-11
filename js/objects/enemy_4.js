@@ -37,7 +37,7 @@ export class Enemy_4 extends Enemy {
     }
 
     update(){
-        this.pos.x -= this.speed;
+        this.pos.x -= this.speed * GameState.ff;
         super.update();
     }
 

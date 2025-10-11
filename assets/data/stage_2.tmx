@@ -78,7 +78,7 @@
     <property name="subtype" value="enemy_b2"/>
    </properties>
   </object>
-  <object id="41" name="event" type="event" x="8800" y="0" width="32" height="32">
+  <object id="41" name="event" type="event" x="10912" y="0" width="32" height="32">
    <properties>
     <property name="subtype" value="scroll_stop"/>
    </properties>

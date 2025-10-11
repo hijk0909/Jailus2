@@ -162,7 +162,7 @@ export class AssetLoader extends Phaser.Scene {
         GameState.sound = {
             se_tap             : this.sound.add('se_tap', { volume: 1.0 }),
             se_extend          : this.sound.add('se_extend', { volume: 1.0 }),
-            se_explosion       : this.sound.add('se_explosion', { volume: 1.0 }),
+            se_explosion       : this.sound.add('se_explosion', { volume: 0.4 }),
             se_bonus           : this.sound.add('se_bonus', { volume: 1.0 }),
             se_powerup         : this.sound.add('se_powerup', { volume: 1.0 }),
             se_name_type       : this.sound.add('se_name_type', { volume: 1.0 }),

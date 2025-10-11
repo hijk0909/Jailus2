@@ -13,6 +13,7 @@ export class Bullet_PM extends Bullet {
     constructor(scene){
         super(scene);
         this.velocity = new Phaser.Math.Vector2(0,0);
+        this.temp_velocity = new Phaser.Math.Vector2(0,0);
         this.collision = { width : 32, height : 16};
     }
 
@@ -32,8 +33,10 @@ export class Bullet_PM extends Bullet {
 
     update(){
         // this.pos.x -= GameState.scroll_dx;
-        this.pos.add(this.velocity);        
-        this.velocity.y += GRAVITY;
+        // this.pos.add(this.velocity * GameState.ff);
+        this.temp_velocity.copy(this.velocity).scale(GameState.ff);
+        this.pos.add(this.temp_velocity);
+        this.velocity.y += GRAVITY * GameState.ff;
         if (!MyMath.inView(this.pos, this.z)){
             this.alive = false;
         }

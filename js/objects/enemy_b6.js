@@ -16,7 +16,7 @@ export class Enemy_B6 extends Enemy {
         this.scale = 1.0;
         this.life = 160;
         this.speed = 0.3;
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.score = 3000;
     }
 
@@ -42,12 +42,12 @@ export class Enemy_B6 extends Enemy {
 
     update(){
         super.update();
-        this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed);
+        this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
         super.update();
-        this.count -= 1;
-        if (this.count < 0){
-            this.count = COOLDOWN_INTERVAL;
+        this.shot_count -= 1;
+        if (this.shot_count < 0){
+            this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
             this.shoot(-45);
             this.shoot(45);

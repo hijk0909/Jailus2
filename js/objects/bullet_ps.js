@@ -45,7 +45,7 @@ export class Bullet_PS extends Bullet {
     update(){
         this.pos.x -= GameState.scroll_dx;
 
-        this.anim_count -= 1;
+        this.anim_count -= GameState.ff;
         if (this.anim_count <= 0){
             this.anim_step += 1;
             if (this.anim_step > ANIM_STEP_MAX){

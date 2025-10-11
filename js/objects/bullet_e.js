@@ -1,5 +1,6 @@
 // bullet_e.js
 import { GLOBALS } from '../GameConst.js';
+import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
 
@@ -8,6 +9,7 @@ export class Bullet_E extends Bullet {
     constructor(scene){
         super(scene);
         this.velocity = new Phaser.Math.Vector2(0,0);
+        this.temp_velocity = new Phaser.Math.Vector2(0,0);
         this.speed = 5;
         this.collision = { width : 16, height : 16};
     }
@@ -32,7 +34,10 @@ export class Bullet_E extends Bullet {
     }
 
     update(){
-        this.pos.add(this.velocity);
+        // console.log("GameState.ff", GameState.ff);
+        // this.pos.add(this.velocity.scale(GameState.ff));
+        this.temp_velocity.copy(this.velocity).scale(GameState.ff);
+        this.pos.add(this.temp_velocity);
         if (!MyMath.inView(this.pos, this.z)){
             this.alive = false;
         }

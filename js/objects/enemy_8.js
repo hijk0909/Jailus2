@@ -5,10 +5,12 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const WAIT_PERIOD = 120;
-const GRAVITY = 1;
+const GRAVITY = 0.8;
+const MAX_DY = 10;
 const TILE_SIZE = 32 / MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
 const RIGHT_AREA = GLOBALS.FIELD.WIDTH * 0.8;
 const COOLDOWN_INTERVAL = 30;
+const HORIZONTAL_SPEED = 4;
 
 // Enemy_8：ポップコーン
 export class Enemy_8 extends Enemy {
@@ -21,7 +23,7 @@ export class Enemy_8 extends Enemy {
         this.state_count = 80;
         this.dx = 0;
         this.dy = 0;
-        this.count = 0;
+        this.shot_count = 0;
     }
 
     init(pos){
@@ -46,25 +48,25 @@ export class Enemy_8 extends Enemy {
         } else if (this.state === 1){
             // 待機
             this.pos.x -= GameState.scroll_dx;
-            this.state_count--;
+            this.state_count -= GameState.ff;
             if (this.state_count <= 0){
                 this.state = 2;
-                this.count = 0;
+                this.shot_count = 0;
                 this.dy = -20;
                 if (this.pos.x > RIGHT_AREA){
-                    this.dx = -4;
+                    this.dx = - HORIZONTAL_SPEED;
                 } else {
-                    this.dx = Math.random() < 0.5 ? -4 : +4;
+                    this.dx = Math.random() < 0.5 ? -HORIZONTAL_SPEED : +HORIZONTAL_SPEED;
                 }
             }
         } else if (this.state === 2){
             // 跳躍
-            this.dy += GRAVITY;
+            this.dy = Math.min(MAX_DY, this.dy + GRAVITY * GameState.ff);
             this.bounded_move();
             // 発射
-            this.count -= 1;
-            if (this.count < 0){
-                this.count = COOLDOWN_INTERVAL;
+            this.shot_count -= GameState.ff;
+            if (this.shot_count < 0){
+                this.shot_count = COOLDOWN_INTERVAL;
                 this.shoot();
             }
         }
@@ -72,7 +74,7 @@ export class Enemy_8 extends Enemy {
 
     bounded_move() {
         // ◆X方向の移動
-        let nextX = this.pos.x + this.dx;
+        let nextX = this.pos.x + this.dx * GameState.ff;
         let checkY1 = this.pos.y - this.collision.height / 2 + 1;
         let checkY2 = this.pos.y + this.collision.height / 2 - 1;
 
@@ -97,7 +99,7 @@ export class Enemy_8 extends Enemy {
         this.pos.x = nextX;
 
         // ◆Y方向の移動
-        let nextY = this.pos.y + this.dy;
+        let nextY = this.pos.y + this.dy * GameState.ff;
         let checkX1 = this.pos.x - this.collision.width / 2 + 1;
         let checkX2 = this.pos.x + this.collision.width / 2 - 1;
 

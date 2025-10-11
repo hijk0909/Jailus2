@@ -12,7 +12,7 @@ export class Enemy_3 extends Enemy {
 
     constructor(scene){
         super(scene);
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.life = 2;
     }
 
@@ -27,9 +27,9 @@ export class Enemy_3 extends Enemy {
 
     update(){
         this.pos.x -= GameState.scroll_dx;
-        this.count -= 1;
-        if (this.count < 0){
-            this.count = COOLDOWN_INTERVAL;
+        this.shot_count -= 1;
+        if (this.shot_count < 0){
+            this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
         }
         super.update();

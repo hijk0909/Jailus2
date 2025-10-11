@@ -16,7 +16,7 @@ export class Player extends Drawable {
         this.speed = 4.8;
         this.touch_accel = 1.2;
         this.collision = { width : 20, height : 10};
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.sprite_barrier = null;
     }
 
@@ -31,7 +31,7 @@ export class Player extends Drawable {
             this.scene.anims.create({key: "anims_player",
                 frames: this.scene.anims.generateFrameNumbers('ss_player',
                     { start: 0, end: 1}),
-                frameRate: 32, repeat: -1
+                frameRate: 46, repeat: -1
             });
         }
         this.sprite.play("anims_player");
@@ -45,7 +45,7 @@ export class Player extends Drawable {
             this.scene.anims.create({key: "anims_player_barrier",
                 frames: this.scene.anims.generateFrameNumbers('ss_player',
                     { start: 8, end: 10}),
-                frameRate: 24, repeat: -1
+                frameRate: 25, repeat: -1
             });
         }
         this.set_barrier();
@@ -60,17 +60,17 @@ export class Player extends Drawable {
             if (GameState.i_left){dx = -1 * GameState.ff * this.speed;}
             if (GameState.i_right){dx = 1 + GameState.ff * this.speed;}
             if (GameState.i_touch){
-                dx = GameState.i_dx * GameState.ff * this.touch_accel;
-                dy = GameState.i_dy * GameState.ff * this.touch_accel;
+                dx = GameState.i_dx * this.touch_accel;
+                dy = GameState.i_dy * this.touch_accel;
             }
             this.move(dx,dy);
             // ショット発射
-            if (GameState.i_button && this.count === 0){
+            if (GameState.i_button && this.shot_count <= 0){
                 this.shoot_laser();
                 this.shoot_missile(dx);
-                this.count = COOLDOWN_INTERVAL;
+                this.shot_count = COOLDOWN_INTERVAL;
             }
-            this.count = Math.max(0, this.count - 1);
+            this.shot_count = Math.max(0, this.shot_count - GameState.ff);
         }
 
         super.update();
@@ -127,7 +127,7 @@ export class Player extends Drawable {
     shoot_missile(dx){
         const bpm = new Bullet_PM(this.scene);
         bpm.init(this.pos);
-        bpm.set_velocity(new Phaser.Math.Vector2(dx * MISSILE_CONTROL,0));
+        bpm.set_velocity(new Phaser.Math.Vector2(Math.sign(dx * MISSILE_CONTROL),0));
         GameState.bullets_p.push(bpm);
     }
 

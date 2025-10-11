@@ -14,7 +14,7 @@ export class Enemy_6 extends Enemy {
     constructor(scene){
         super(scene);
         this.speed = SPEED;
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.z = GLOBALS.LAYER.LAYER2.Z;
         this.scale = 2.0;
         this.collision = { width : 0, height : 0};
@@ -30,11 +30,11 @@ export class Enemy_6 extends Enemy {
     }
 
     update(){
-        this.pos.x -= this.speed;
+        this.pos.x -= this.speed * GameState.ff;
         super.update();
-        this.count -= 1;
-        if (this.count < 0){
-            this.count = COOLDOWN_INTERVAL;
+        this.shot_count -= 1;
+        if (this.shot_count < 0){
+            this.shot_count = COOLDOWN_INTERVAL;
             this.shoot_ballistic();
         }
     }

@@ -1,5 +1,6 @@
 // bullet_p.js
 import { GLOBALS } from '../GameConst.js';
+import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
 
@@ -27,7 +28,7 @@ export class Bullet_PL extends Bullet {
     }
 
     update(){
-        this.pos.x += this.speed;
+        this.pos.x += this.speed * GameState.ff;
         if (this.pos.x > GLOBALS.FIELD.WIDTH + X_MARGIN){
             this.alive = false;
         }

@@ -4,7 +4,7 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const ACCEL = 1.01;
+const ACCEL = 0.01;
 const MAX_SPEED = 10;
 
 // Enemy_5：ニコニコ
@@ -26,8 +26,8 @@ export class Enemy_5 extends Enemy {
     }
 
     update(){
-        this.pos.x -= this.speed;
-        this.speed = Math.min(MAX_SPEED, this.speed * ACCEL);
+        this.pos.x -= this.speed * GameState.ff;
+        this.speed = Math.min(MAX_SPEED, this.speed + ACCEL * GameState.ff);
         super.update();
     }
 

@@ -1,4 +1,5 @@
 // DrawUtils.js
+import { GameState } from '../GameState.js';
 
 const FONT_SIZE = 16;
 const ROW_HEIGHT = 24;
@@ -76,10 +77,10 @@ export class Shockwave {
 
     update(){
         if (this.count > 0){
-            this.count -= 1;
+            this.count -= GameState.ff;
             const t = (SHOCKWAVE_DURATION - this.count);
             if (this.shader) {
-                if (this.count === 0){
+                if (this.count <= 0){
                     this.stop();
                 } else {
                     this.shader._time = t * 0.01;

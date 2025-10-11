@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = 240;
+const FIRST_SHOT = 60;
 const SPEED = 2.5;
 const TILE_SIZE = 32 / MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
 
@@ -28,7 +29,7 @@ export class Enemy_9 extends Enemy {
     constructor(scene){
         super(scene);
         this.speed = SPEED;
-        this.count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.collision = { width :24, height : 24};
         this.state = 0;
@@ -78,6 +79,7 @@ export class Enemy_9 extends Enemy {
             const aheadPos = this.getAheadPos(nextPos, this.dir);
             if (this.isHittingTile(aheadPos)){
                 this.state = 1;
+                this.shot_count = FIRST_SHOT;
                 this.setCurrentTile(aheadPos);
                 if (nextPos.y < GLOBALS.FIELD.HEIGHT / 2){
                     this.sprite.play("anims_enemy9_clockwise");
@@ -92,9 +94,9 @@ export class Enemy_9 extends Enemy {
         } else if (this.state === 1){
             // 【吸着モード】
 
-            this.count -= 1;
-            if (this.count < 0){
-                this.count = COOLDOWN_INTERVAL;
+            this.shot_count -= GameState.ff;
+            if (this.shot_count < 0){
+                this.shot_count = COOLDOWN_INTERVAL;
                 this.shoot();
             }
 

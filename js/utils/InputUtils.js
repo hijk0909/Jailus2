@@ -105,6 +105,10 @@ export class MyInput {
         }
     }
 
+    erase(){
+        this.graphics.clear();
+    }
+
     clear(){
         this.up1 = this.up2 = this.up3 = false;
         this.down1 = this.down2 = this.down3 = false;
