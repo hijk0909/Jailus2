@@ -5,14 +5,17 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
 import { Enemy } from './enemy.js';
 
-const COOLDOWN_INTERVAL = 60;
+const COOLDOWN_INTERVAL = {
+    EASY : 180,
+    HARD : 30
+}
 
 // Enemy_3：固定砲台
 export class Enemy_3 extends Enemy {
 
     constructor(scene){
         super(scene);
-        this.shot_count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.life = 2;
     }
 
@@ -29,7 +32,7 @@ export class Enemy_3 extends Enemy {
         this.pos.x -= GameState.scroll_dx;
         this.shot_count -= 1;
         if (this.shot_count < 0){
-            this.shot_count = COOLDOWN_INTERVAL;
+            this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
             this.shoot();
         }
         super.update();

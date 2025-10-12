@@ -43,13 +43,14 @@ export class Item_Runway extends Item {
         super.update();
     }
 
-    effect(){
+    activate(){
         const eff = new Effect_Text(this.scene);
         eff.init(GameState.player.pos);
         eff.set_text("Barrier");
         GameState.effects.push(eff);
         GameState.barrier = GLOBALS.BARRIER_MAX;
         GameState.player.set_barrier();
+        GameState.sound.se_barrier.play();
     }
 
     destroy(){

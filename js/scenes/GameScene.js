@@ -20,6 +20,8 @@ export class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        this.keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
 
         // 入力ユーティリティの生成
         this.my_input = new MyInput(this);
@@ -53,6 +55,7 @@ export class GameScene extends Phaser.Scene {
 
         GameState.ff = delta / GLOBALS.DELTA;
         // console.log("ff", GameState.ff, delta, GLOBALS.DELTA);
+        GameState.difficulty = Math.min(GameState.difficulty + GLOBALS.DIFFICULTY.UP_PAR_TIME * GameState.ff, GLOBALS.DIFFICULTY.MAX);
 
         if (GameState.stage_state === GLOBALS.STAGE_STATE.START){
             // ◆開始
@@ -124,6 +127,7 @@ export class GameScene extends Phaser.Scene {
                 } else {
                     GameState.bg.area_reset();
                     GameState.stage_state = GLOBALS.STAGE_STATE.START;
+                    GameState.difficulty = Math.max(GameState.difficulty - GLOBALS.DIFFICULTY.DOWN_PAR_LIFE, GLOBALS.DIFFICULTY.MIN);
                 }
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){
@@ -181,6 +185,13 @@ export class GameScene extends Phaser.Scene {
             this.my_input.destroy();
             this.scene.stop('UIScene');
             this.scene.start('TitleScene');
+        }
+        // DIFFICULTYのリアルタイム調整
+        if (this.keyR.isDown){
+            GameState.difficulty = Math.max(GameState.difficulty - 50, GLOBALS.DIFFICULTY.MIN);
+        }
+        if (this.keyT.isDown){
+            GameState.difficulty = Math.min(GameState.difficulty + 50, GLOBALS.DIFFICULTY.MAX);
         }
 
     } // End of update

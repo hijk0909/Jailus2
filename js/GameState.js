@@ -55,17 +55,18 @@ export const GameState = {
         this.lives = GLOBALS.INIT_LIVES;
         this.extend = GLOBALS.EXTEND_FIRST;
         this.barrier = 0;
+        this.difficulty = GLOBALS.DIFFICULTY.MIN;
     },
 
     add_score(score){
-        this.score += score;
+        this.score += score * Math.floor(GameState.difficulty / 100);
         if (this.score > this.high_score){
             this.high_score = this.score;
         }
         if (this.score >= this.extend){
             this.lives += 1;
             // this.ui.show_lives();
-            // this.sound.se_extend.play();
+            this.sound.se_extend.play();
             this.extend += GLOBALS.EXTEND_EVERY;
         }
     },

@@ -93,7 +93,7 @@ export class AssetLoader extends Phaser.Scene {
         this.load.spritesheet('ss_player', 'assets/images/ss_player.png', {
             frameWidth: 128,  frameHeight: 128, endFrame : 11 });
         this.load.spritesheet('ss_enemy', 'assets/images/ss_enemy.png', {
-            frameWidth: 64,  frameHeight: 64, endFrame : 39 });
+            frameWidth: 64,  frameHeight: 64, endFrame : 79 });
         this.load.spritesheet('ss_bullet', 'assets/images/ss_bullet.png', {
             frameWidth: 64,  frameHeight: 64, endFrame : 19 });
         this.load.spritesheet('ss_effect', 'assets/images/ss_effect.png', {
@@ -131,7 +131,8 @@ export class AssetLoader extends Phaser.Scene {
         this.load.audio('se_extend', './assets/audio/se/se_extend.mp3');
         this.load.audio('se_explosion', './assets/audio/se/se_explosion.mp3');
         this.load.audio('se_bonus', './assets/audio/se/se_bonus.mp3');
-        this.load.audio('se_powerup', './assets/audio/se/se_powerup.mp3');
+        this.load.audio('se_barrier', './assets/audio/se/se_barrier.mp3');
+        this.load.audio('se_failed', './assets/audio/se/se_failed.mp3');
         this.load.audio('se_name_type', './assets/audio/se/se_name_type.mp3');
         this.load.audio('se_name_back', './assets/audio/se/se_name_back.mp3');
         this.load.audio('se_name_enter', './assets/audio/se/se_name_enter.mp3');
@@ -164,7 +165,8 @@ export class AssetLoader extends Phaser.Scene {
             se_extend          : this.sound.add('se_extend', { volume: 1.0 }),
             se_explosion       : this.sound.add('se_explosion', { volume: 0.4 }),
             se_bonus           : this.sound.add('se_bonus', { volume: 1.0 }),
-            se_powerup         : this.sound.add('se_powerup', { volume: 1.0 }),
+            se_barrier         : this.sound.add('se_barrier', { volume: 1.0 }),
+            se_failed          : this.sound.add('se_failed', { volume: 1.0 }),
             se_name_type       : this.sound.add('se_name_type', { volume: 1.0 }),
             se_name_back       : this.sound.add('se_name_back', { volume: 1.0 }),
             se_name_enter      : this.sound.add('se_name_enter', { volume: 1.0 }),

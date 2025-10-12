@@ -112,6 +112,7 @@ export class Enemy_8 extends Enemy {
                 nextY = tileY * TILE_SIZE - this.collision.height / 2;
                 this.state = 1;
                 this.state_count = WAIT_PERIOD;
+                this.sprite.setFrame(27);
             }
         } else if (this.dy < 0) {
             // 上移動 → 上辺を確認
@@ -122,6 +123,7 @@ export class Enemy_8 extends Enemy {
                 nextY = (tileY + 1) * TILE_SIZE + this.collision.height / 2;
                 this.dx = 0;
                 this.state = 0;
+                this.sprite.setFrame(28);
             }
         }
         this.pos.y = nextY;

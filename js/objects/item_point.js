@@ -26,7 +26,7 @@ export class Item_Point extends Item {
         super.update();
     }
 
-    effect(){
+    activate(){
         const score = (Math.floor(Math.random()*10)+1)*1000;
         const eff = new Effect_Text(this.scene);
         eff.init(GameState.player.pos);

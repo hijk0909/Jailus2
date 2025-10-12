@@ -4,7 +4,11 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const COOLDOWN_INTERVAL = 240;
+const COOLDOWN_INTERVAL = {
+    EASY : 240,
+    HARD : 60
+}
+
 const FIRST_SHOT = 60;
 const SPEED = 2.5;
 const TILE_SIZE = 32 / MyMath.get_disp_ratio(GLOBALS.LAYER.LAYER3.Z);
@@ -29,7 +33,7 @@ export class Enemy_9 extends Enemy {
     constructor(scene){
         super(scene);
         this.speed = SPEED;
-        this.shot_count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.collision = { width :24, height : 24};
         this.state = 0;
@@ -96,7 +100,7 @@ export class Enemy_9 extends Enemy {
 
             this.shot_count -= GameState.ff;
             if (this.shot_count < 0){
-                this.shot_count = COOLDOWN_INTERVAL;
+                this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
                 this.shoot();
             }
 
@@ -263,7 +267,8 @@ export class Enemy_9 extends Enemy {
 
     destroy(){
         if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING &&
-            this.state === 0){
+            this.state === 0 &&
+            GameState.difficulty >= GLOBALS.DIFFICULTY.COUNTER_BULLET){
             // 打ち返し弾
             this.shoot();
         }

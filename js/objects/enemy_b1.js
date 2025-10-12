@@ -51,8 +51,10 @@ export class Enemy_B1 extends Enemy {
             this.shoot();
             this.shoot(-15);
             this.shoot(+15);
-            this.shoot(-30);
-            this.shoot(+30);
+            if (GameState.difficulty >= 200){
+                this.shoot(-30);
+                this.shoot(+30);
+            }
         }
     }
 

@@ -105,4 +105,8 @@ export class MyMath {
             new Phaser.Geom.Rectangle(pos2.x - col2.width / 2, pos2.y - col2.height / 2, col2.width, col2.height));
     }
 
+    static lerp_by_difficulty(p,q){
+        const t = (GameState.difficulty - GLOBALS.DIFFICULTY.MIN) / (GLOBALS.DIFFICULTY.MAX - GLOBALS.DIFFICULTY.MIN); // 0〜1に正規化
+        return p + t * (q - p);     // P〜Qに補間
+    }
 }

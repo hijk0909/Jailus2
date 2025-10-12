@@ -26,6 +26,7 @@ export class Exec {
             if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                 if (MyMath.isRectangleOverlap(e.pos,e.collision,GameState.player.pos,GameState.player.collision)){
                     // console.log("hit enemy");
+                    GameState.sound.se_failed.play();
                     if (!GameState.debug){
                         GameState.stage_state = GLOBALS.STAGE_STATE.FAIL;
                         GameState.player.fail();
@@ -101,6 +102,7 @@ export class Exec {
             if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                if (MyMath.isRectangleOverlap(b.pos,b.collision,GameState.player.pos,GameState.player.collision)){
                     // console.log("hit enemy bullet");
+                    GameState.sound.se_failed.play();
                     if (GameState.player.get_barrier() > 0){
                         //バリアを消費して敵弾を消去
                         GameState.player.dec_barrier();
@@ -129,7 +131,7 @@ export class Exec {
             }
             if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                if (MyMath.isRectangleOverlap(item.pos,item.collision,GameState.player.pos,GameState.player.collision)){
-                    item.effect();
+                    item.activate();
                     item.destroy();
                     GameState.items.splice(i,1);                 
                 }
