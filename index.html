@@ -208,5 +208,87 @@
         }
     </script>
 
+    <script type="x-shader/x-fragment" id="glitchShader">
+        precision mediump float;
+
+        uniform sampler2D uMainSampler;
+        uniform float time;
+        // 効果のパラメータ
+        uniform float uDisplace;   // 横方向ノイズ
+        uniform float uHueShift;   // 色相ずれ
+        uniform float uDesaturate; // 彩度減衰
+        // 効果をかける範囲の設定
+        uniform int frame;
+        uniform float frameOffsetX;
+        uniform float frameOffsetY;
+        uniform float frameWidth;
+        uniform float frameHeight;
+
+        varying vec2 outTexCoord;
+
+        // 疑似乱数生成
+        float rand(vec2 co) {
+            return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+        }
+
+        // RGB→HSV 変換
+        vec3 rgb2hsv(vec3 c) {
+            vec4 K = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);
+            vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+            vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+            float d = q.x - min(q.w, q.y);
+            float e = 1.0e-10;
+            return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+        }
+
+        // HSV→RGB 変換
+        vec3 hsv2rgb(vec3 c) {
+            vec3 p = abs(fract(c.xxx + vec3(0.0, 1.0/3.0, 2.0/3.0)) * 6.0 - 3.0);
+            return c.z * mix(vec3(1.0), clamp(p - 1.0, 0.0, 1.0), c.y);
+        }
+
+        void main(void) {
+            vec2 uv = outTexCoord;
+
+            // UVがフレーム範囲外なら破棄
+            if (frame == 1){
+                if (uv.x < frameOffsetX || uv.x > frameOffsetX + frameWidth ||
+                    uv.y < frameOffsetY || uv.y > frameOffsetY + frameHeight){
+                        discard;
+                }
+            }
+
+            // 横方向ランダムUVずれ
+            float t = fract(time * 0.2);
+            float r = rand(vec2(uv.x * 800.0, uv.y * 600.0 + t * 100.0));
+            float offset = (r - 0.5) * 2.0 * uDisplace * 0.08;
+            uv.x += offset;
+
+            // UVがフレーム範囲外なら破棄
+            if (frame == 1){
+                if (uv.x < frameOffsetX || uv.x > frameOffsetX + frameWidth) {
+                    discard;
+                }
+            }
+
+            // 元の色取得
+            vec4 texColor = texture2D(uMainSampler, uv);
+
+            // 色相ランダム変化
+            vec3 hsv = rgb2hsv(texColor.rgb);
+            float hueRand = rand(vec2(uv.x * 160.0 + t * 30.0, uv.y * 90.0)) * 2.0 - 1.0;
+            hsv.x += hueRand * uHueShift * 0.5;
+            hsv.x = fract(hsv.x);
+            hsv.x = 1.0 - hsv.x;
+
+            // 彩度減衰
+            hsv.y *= 1.0 - uDesaturate;
+
+            texColor.rgb = hsv2rgb(hsv);
+            gl_FragColor = texColor;
+        }
+    </script>   
+
 </body>
 </html>

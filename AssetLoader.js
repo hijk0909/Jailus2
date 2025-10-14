@@ -1,7 +1,7 @@
 // Jailus2/AssetLoader.js
 import { GLOBALS } from './js/GameConst.js';
 import { GameState } from './js/GameState.js';
-import { ScrollPipeline, RipplePipeline, ShockwavePostFX } from './js/utils/DrawUtils.js';
+import { ScrollPipeline, RipplePipeline, ShockwavePostFX, GlitchPipeline } from './js/utils/DrawUtils.js';
 
 export class AssetLoader extends Phaser.Scene {
     constructor() {
@@ -157,7 +157,10 @@ export class AssetLoader extends Phaser.Scene {
         this.renderer.pipelines.add('ScrollFloor', new ScrollPipeline(this.game));
         this.renderer.pipelines.add('Ripple', new RipplePipeline(this.game));
         this.renderer.pipelines.addPostPipeline('Shockwave', ShockwavePostFX);
+        this.renderer.pipelines.add('Glitch', new GlitchPipeline(this.game));
+        this.renderer.pipelines.add('Glitch2', new GlitchPipeline(this.game));
     }
+
     create() {
 
         GameState.sound = {

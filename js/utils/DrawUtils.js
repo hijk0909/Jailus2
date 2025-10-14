@@ -94,6 +94,17 @@ export class Shockwave {
     }
 }
 
+// ◆オブジェクトをノイズ化するシェーダー
+export class GlitchPipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeline {
+    constructor(game) {
+        super({
+            game,
+            renderer: game.renderer,
+            fragShader: document.getElementById('glitchShader').textContent
+        });
+    }
+}
+
 // ◆ビットマップフォントで文章を表示する
 export class Sentences {
     constructor(scene, sentences, options = {}) {

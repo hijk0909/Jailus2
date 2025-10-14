@@ -38,9 +38,42 @@ export class Enemy_B8 extends Enemy {
             });
         }
         this.sprite.play("anims_boss_8");
+
+        // シェーダーの設定
+        this.sprite.setPipeline('Glitch');
+        this.glitch = this.scene.renderer.pipelines.get('Glitch');
+        this.glitch.set1f('time', 0);
+        this.glitch.set1f('uDisplace', 1.0);
+        this.glitch.set1f('uHueShift', 0.5);
+        this.glitch.set1f('uDesaturate', 0.0);
+
+        this.sprite.frameOffset = {x:0, y:0};
+        this.sprite.frameScale  = {x:1, y:1};
+
+        // アニメーション更新時の処理
+        this.sprite.on('animationupdate', (animation, frame, sprite) => {
+            // Atlas全体の大きさ
+            const atlasWidth  = sprite.texture.getSourceImage().width;
+            const atlasHeight = sprite.texture.getSourceImage().height;
+
+            // Atlas内での現在フレームの位置と大きさ
+            const frameX = frame.frame.cutX;
+            const frameY = frame.frame.cutY;
+            const frameWidth  = frame.frame.width;
+            const frameHeight = frame.frame.height;
+
+            // シェーダーに処理範囲を設定
+            if(this.glitch) {
+                this.glitch.set1i('frame', 1);
+                this.glitch.set1f('frameOffsetX', frameX / atlasWidth);
+                this.glitch.set1f('frameOffsetY', frameY / atlasHeight);
+                this.glitch.set1f('frameWidth', frameWidth / atlasWidth);
+                this.glitch.set1f('frameHeight', frameHeight / atlasHeight);
+            }
+        });
     }
 
-    update(){
+    update(time, delta){
         super.update();
         this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
@@ -50,6 +83,12 @@ export class Enemy_B8 extends Enemy {
             this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
         }
+        // console.log("time",time);
+        this.glitch.set1f('time', time);
+        const p = (Math.sin(time / 5000) + 1) / 2;
+        this.glitch.set1f('uDisplace', p);
+        this.glitch.set1f('uHueShift', p);
+        this.glitch.set1f('uDesaturate', p);
     }
 
     destroy(){

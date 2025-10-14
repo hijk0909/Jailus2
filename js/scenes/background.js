@@ -2,6 +2,7 @@
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
+import { GlitchPipeline } from '../utils/DrawUtils.js';
 import { Spawn } from './spawn.js';
 
 export class Background {
@@ -417,6 +418,19 @@ export class Background {
                 this.scrollFloor.set1f('uScaleTop', scale);
                 this.scrollFloor.set1f('uScaleBottom', 1.0);
 
+                // レイヤー2 に ノイズシェーダーを適用
+ 
+                this.glitch = this.scene.renderer.pipelines.get('Glitch2');
+                this.glitch.set1f('time', 0);
+                this.glitch.set1f('uDisplace', 1.0);
+                this.glitch.set1f('uHueShift', 0.5);
+                this.glitch.set1f('uDesaturate', 0.0);
+                this.glitch.set1i('frame', 0);
+                this.glitch.set1f('frameOffsetX', 0.0);
+                this.glitch.set1f('frameOffsetY', 0.0);
+                this.glitch.set1f('frameWidth', 1.0);
+                this.glitch.set1f('frameHeight', 1.0);
+                this.layer4.setPipeline('Glitch2');
             },
             update(time, delta) {
                 // スクロールシェーダのパラメータ更新
@@ -427,6 +441,13 @@ export class Background {
                 this.floorLayer.y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
                 this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
                 this.scrollFloor.set1f('uSqueeze', ((GLOBALS.FIELD.HEIGHT - this.floorLayer.y) / GLOBALS.LAYER.FLOOR.HEIGHT));
+
+                // ノイズシェーダのパラメータ更新
+                this.glitch.set1f('time', time);
+                const p = (Math.sin(time / 500) + 1) / 2;
+                this.glitch.set1f('uDisplace', p);
+                this.glitch.set1f('uHueShift', p);
+                this.glitch.set1f('uDesaturate', p);
             }
         }
     }
