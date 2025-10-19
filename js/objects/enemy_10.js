@@ -1,13 +1,7 @@
 // enemy_10.js
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
-import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
-
-const COOLDOWN_INTERVAL = {
-    EASY : 240,
-    HARD : 60
-}
 
 const SPEED_MAX = 24;
 const ACCEL = 0.4;
@@ -45,7 +39,6 @@ export class Enemy_10 extends Enemy {
         super(scene);
         this.speed = 0;
         this.accel = this.accel;
-        this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.collision = { width :24, height : 24};
         this.state = 0;

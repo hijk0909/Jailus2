@@ -117,8 +117,11 @@ export class AssetLoader extends Phaser.Scene {
         this.load.spritesheet('ss_boss_8', 'assets/images/ss_boss_8.png', {
             frameWidth: 256, frameHeight: 320, endFrame : 1});
 
-        // UIボタン
+        // UI
         this.load.image('btn_tap', 'assets/images/btn_tap.png');
+        this.load.image('op_1', 'assets/images/op_1.png');
+        this.load.image('op_2', 'assets/images/op_2.png');
+        this.load.image('op_3', 'assets/images/op_3.png');
         // フォント
         this.load.bitmapFont('myFont', 'assets/images/atari.png', 'assets/images/atari.fnt');
 

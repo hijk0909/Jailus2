@@ -61,7 +61,10 @@ export class Exec {
                             GameState.add_score(e.score);
                             if (e.boss){
                                 e.shockwave();
-                                GameState.stage_state = GLOBALS.STAGE_STATE.CLEAR;
+                                if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
+                                    // FAILED等の状態ではボスを倒してもクリア扱いしない
+                                    GameState.stage_state = GLOBALS.STAGE_STATE.CLEAR;
+                                }
                             }
                             e.destroy();
                             GameState.enemies.splice(j,1);

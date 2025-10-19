@@ -127,7 +127,7 @@ export class GameScene extends Phaser.Scene {
                 } else {
                     GameState.bg.area_reset();
                     GameState.stage_state = GLOBALS.STAGE_STATE.START;
-                    GameState.difficulty = Math.max(GameState.difficulty - GLOBALS.DIFFICULTY.DOWN_PAR_LIFE, GLOBALS.DIFFICULTY.MIN);
+                    GameState.difficulty = Math.max(GameState.difficulty - GLOBALS.DIFFICULTY.DOWN_PAR_FAIL, GLOBALS.DIFFICULTY.MIN);
                 }
             }
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.CLEAR){

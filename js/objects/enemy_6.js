@@ -6,7 +6,7 @@ import { Enemy } from './enemy.js';
 import { Bullet_EB } from './bullet_eb.js';
 
 const COOLDOWN_INTERVAL = 45;
-const SPEED = 2;
+const SPEED = 2.5;
 
 // Enemy_6：移動砲台
 export class Enemy_6 extends Enemy {

@@ -53,7 +53,7 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":2112,
+                 "x":2560,
                  "y":224
                 }, 
                 {
@@ -146,6 +146,40 @@
                  "width":32,
                  "x":4896,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":94,
+                 "name":"event",
+                 "properties":[
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"bgm_fadeout"
+                        }],
+                 "rotation":0,
+                 "type":"event",
+                 "visible":true,
+                 "width":32,
+                 "x":2016,
+                 "y":480
+                }, 
+                {
+                 "height":32,
+                 "id":95,
+                 "name":"event",
+                 "properties":[
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"bgm_boss"
+                        }],
+                 "rotation":0,
+                 "type":"event",
+                 "visible":true,
+                 "width":32,
+                 "x":2560,
+                 "y":480
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -154,7 +188,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":94,
+ "nextobjectid":96,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

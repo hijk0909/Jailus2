@@ -82,10 +82,18 @@ export class Enemy_B8 extends Enemy {
         if (this.shot_count < 0){
             this.shot_count = COOLDOWN_INTERVAL;
             this.shoot();
+            if (GameState.difficulty >= 150){
+            this.shoot(-15);
+            this.shoot(+15);
+            }
+            if (GameState.difficulty >= 200){
+                this.shoot(-30);
+                this.shoot(+30);
+            }
         }
         // console.log("time",time);
         this.glitch.set1f('time', time);
-        const p = (Math.sin(time / 5000) + 1) / 2;
+        const p = (Math.sin(time / 200) + 1) / 2;
         this.glitch.set1f('uDisplace', p);
         this.glitch.set1f('uHueShift', p);
         this.glitch.set1f('uDesaturate', p);
