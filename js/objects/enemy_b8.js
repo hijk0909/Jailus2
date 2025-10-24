@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = 20;
+const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 
 // Enemy_B8：ボス（ステージ８）
 export class Enemy_B8 extends Enemy {
@@ -77,18 +78,19 @@ export class Enemy_B8 extends Enemy {
         super.update();
         this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
+        this.pos.x = Math.max(MIN_X, this.pos.x);
         super.update();
         this.shot_count -= 1;
         if (this.shot_count < 0){
             this.shot_count = COOLDOWN_INTERVAL;
-            this.shoot();
+            this.shoot_aim();
             if (GameState.difficulty >= 150){
-            this.shoot(-15);
-            this.shoot(+15);
+            this.shoot_aim(-15);
+            this.shoot_aim(+15);
             }
             if (GameState.difficulty >= 200){
-                this.shoot(-30);
-                this.shoot(+30);
+                this.shoot_aim(-30);
+                this.shoot_aim(+30);
             }
         }
         // console.log("time",time);

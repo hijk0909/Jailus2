@@ -4,7 +4,11 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const COOLDOWN_INTERVAL = 120;
+const COOLDOWN_INTERVAL = {
+    EASY : 90,
+    HARD : 45
+}
+
 const FISH_SPEED = 2.5;
 const FISH_BOUND = 100;
 
@@ -14,7 +18,7 @@ export class Enemy_7 extends Enemy {
     constructor(scene){
         super(scene);
         this.speed = FISH_SPEED;
-        this.shot_count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.z = GLOBALS.LAYER.LAYER3.Z;
         this.collision = { width :12, height : 24};
         this.state = 0;
@@ -61,9 +65,9 @@ export class Enemy_7 extends Enemy {
         super.update();
 
         this.shot_count -= GameState.ff;
-        if (this.shot_count <= 0){
-            this.shot_count = COOLDOWN_INTERVAL;
-            this.shoot();
+        if (this.shot_count < 0){
+            this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
+            this.shoot_aim();
         }
 
         if (this.state === 0){

@@ -1,11 +1,11 @@
 // GameConst.js
 
 export const GLOBALS = {
-    VERSION : "0.3 - 2025.10.19",
+    VERSION : "0.3a - 2025.10.24",
     STAGE_MAX : 8,
     INIT_LIVES : 3,
-    EXTEND_FIRST : 20000,
-    EXTEND_EVERY : 50000,
+    EXTEND_FIRST : 50000,
+    EXTEND_EVERY : 100000,
     BARRIER_MAX : 3,
     DIFFICULTY: {
         MIN : 100,

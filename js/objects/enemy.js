@@ -28,12 +28,21 @@ export class Enemy extends Drawable {
         super.update();
     }
 
-    shoot(angle = 0, offset_x = 0, offset_y = 0){
-        // 敵弾の射出
+    shoot_aim(angle = 0, offset_x = 0, offset_y = 0){
+        // 敵弾の射出（プレイヤー方向）
         const be = new Bullet_E(this.scene);
         const pos = new Phaser.Math.Vector2(this.pos.x + offset_x, this.pos.y + offset_y);
         be.init(pos);
-        be.set_velocity(pos, GameState.player.pos, angle);
+        be.set_velocity_aim(pos, GameState.player.pos, angle);
+        GameState.bullets_e.push(be);
+    }
+
+    shoot_fix(angle = 0, offset_x = 0, offset_y = 0){
+        // 敵弾の射出（固定方向）
+        const be = new Bullet_E(this.scene);
+        const pos = new Phaser.Math.Vector2(this.pos.x + offset_x, this.pos.y + offset_y);
+        be.init(pos);
+        be.set_velocity_fix(angle);
         GameState.bullets_e.push(be);
     }
 

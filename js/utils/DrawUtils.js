@@ -105,6 +105,23 @@ export class GlitchPipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeli
     }
 }
 
+// ◆オブジェクトの一部の色を変更するシェーダー
+export class PalettePipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeline {
+    constructor(game) {
+        super({
+            game,
+            renderer: game.renderer,
+            fragShader: document.getElementById('paletteShader').textContent,
+            uniforms: [
+                'uMainSampler',
+                'uFromColors[8]',
+                'uToColors[8]',
+                'uColorCount'
+            ]
+        });
+    }
+}
+
 // ◆ビットマップフォントで文章を表示する
 export class Sentences {
     constructor(scene, sentences, options = {}) {

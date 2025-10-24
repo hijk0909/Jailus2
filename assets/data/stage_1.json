@@ -565,12 +565,12 @@
                         {
                          "name":"spawn_pos",
                          "type":"string",
-                         "value":"right_middle"
+                         "value":"right_random"
                         }, 
                         {
                          "name":"subtype",
                          "type":"string",
-                         "value":"enemy_1"
+                         "value":"enemy_12"
                         }, 
                         {
                          "name":"z",
@@ -607,7 +607,7 @@
                         {
                          "name":"subtype",
                          "type":"string",
-                         "value":"enemy_1"
+                         "value":"enemy_12"
                         }, 
                         {
                          "name":"z",
@@ -678,7 +678,7 @@
                         {
                          "name":"subtype",
                          "type":"string",
-                         "value":"enemy_1"
+                         "value":"enemy_12"
                         }, 
                         {
                          "name":"z",
@@ -689,8 +689,8 @@
                  "type":"spawner",
                  "visible":true,
                  "width":32,
-                 "x":2690.67,
-                 "y":2.66667
+                 "x":3232,
+                 "y":0
                 }, 
                 {
                  "height":32,
@@ -715,7 +715,7 @@
                         {
                          "name":"subtype",
                          "type":"string",
-                         "value":"enemy_10"
+                         "value":"enemy_12"
                         }, 
                         {
                          "name":"z",

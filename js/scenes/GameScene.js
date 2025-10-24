@@ -278,6 +278,7 @@ export class GameScene extends Phaser.Scene {
         if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
             GameState.stage_state = GLOBALS.STAGE_STATE.PAUSE;
             GameState.bgm.pause();
+            GameState.ui.show_pause(true);
             this.children.each(child => {
                 if (child.anims && child.anims.isPlaying) child.anims.pause();
             });
@@ -285,6 +286,7 @@ export class GameScene extends Phaser.Scene {
         } else if ( GameState.stage_state === GLOBALS.STAGE_STATE.PAUSE){
             GameState.stage_state = GLOBALS.STAGE_STATE.PLAYING;
             GameState.bgm.resume();
+            GameState.ui.show_pause(false);
             this.children.each(child => {
                 if (child.anims && child.anims.isPaused) child.anims.resume();
             });

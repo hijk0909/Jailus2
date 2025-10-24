@@ -48,9 +48,13 @@ export class AttractScene extends Phaser.Scene {
         // 隠しキー操作
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
-        //ランキングクラス
-        this.ranking = new Ranking(this);
-        Ranking.get_net_ranking();
+        //ランキングの取得
+        if (GameState.get_ranking){
+            this.ranking = new Ranking(this);
+            Ranking.get_net_ranking();
+            // 一度取得したら（自分がランキングを更新するまで）再取得しない
+            GameState.get_ranking = false;
+        }
 
         // console.log("ranking", GameState.ranking.alltime);
 

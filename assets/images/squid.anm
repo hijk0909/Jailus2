@@ -1,0 +1,127 @@
+;EDGE用アニメーションデータ
+ANIME_VERSION=1
+
+
+;--------------------------
+PATTERN_NAME=noname000
+
+	FRAME_NUMBER=1
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=0
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=180
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=2
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=64
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=60
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=3
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=128
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=60
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=4
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=192
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=180
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=5
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=256
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=60
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=6
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=320
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=60
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=7
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=384
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=30
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+
+	FRAME_NUMBER=8
+		FILENAME=D:\hijk\Jailus2\assets\images\ss_enemy.png
+		WIN_TITLE=ss_enemy.png
+		SRC_X=448
+		SRC_Y=512
+		LAYER_NUM=0
+		WIDTH=64
+		HEIGHT=64
+		DEST_X=0
+		DEST_Y=0
+		DELAY=60
+		LAYER_ADD=0
+		CKEY_ENABLE=0
+		CKEY_NUM=0
+

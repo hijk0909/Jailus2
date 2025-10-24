@@ -22,6 +22,7 @@ export class UIScene extends Phaser.Scene {
         this.ui_lives_val = this.add_text(6,2, 0, 0x00ffff);
         this.ui_stage_val = this.add_text(6,35, `1-1`);
         this.ui_scroll_val = this.add_text(10,35, 0, 0xffffff);
+        this.ui_pause_txt = this.add_text(24, 18, 'PAUSE', 0x00ffff).setVisible(false);
     }
 
     update(){
@@ -50,6 +51,11 @@ export class UIScene extends Phaser.Scene {
         const t = this.add.bitmapText(row * FONT_SIZE + MARGIN, col * FONT_SIZE + MARGIN, 'myFont', text, FONT_SIZE).setTint(color);
         t.setName('bitmapText');
         return t;
+    }
+
+    // 一時停止文字表示
+    show_pause(visible){
+        this.ui_pause_txt.setVisible(visible);
     }
 
     destroy(){

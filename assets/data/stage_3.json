@@ -669,7 +669,7 @@
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"2"
+                         "value":"1"
                         }, 
                         {
                          "name":"spawn_pos",
@@ -679,7 +679,7 @@
                         {
                          "name":"subtype",
                          "type":"string",
-                         "value":"enemy_7"
+                         "value":"enemy_13"
                         }, 
                         {
                          "name":"z",

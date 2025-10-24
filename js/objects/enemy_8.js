@@ -67,7 +67,7 @@ export class Enemy_8 extends Enemy {
             this.shot_count -= GameState.ff;
             if (this.shot_count < 0){
                 this.shot_count = COOLDOWN_INTERVAL;
-                this.shoot();
+                this.shoot_aim();
             }
         }
     }

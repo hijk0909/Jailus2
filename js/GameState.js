@@ -25,6 +25,7 @@ export const GameState = {
         monthly : null,
         alltime :null
     },
+    get_ranking : true, 
     shockwave : null,
     debug : false,
 

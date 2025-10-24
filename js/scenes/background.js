@@ -250,7 +250,7 @@ export class Background {
                 this.ripple = this.scene.renderer.pipelines.get('Ripple');
                 this.ripple.set1f('time', 0);
                 this.ripple.set1f('frequency', 30.0);
-                this.ripple.set1f('amplitude', 0.020);
+                this.ripple.set1f('amplitude', 0.010);
                 this.ripple.set1f('alpha', 0.8);
             },
             update(time, delta) {
@@ -275,6 +275,8 @@ export class Background {
                 this.layer2.setAlpha(0.8);
                 this.layer4.setAlpha(0.8);
 
+                // this.scene.textures.get('stage_4_layer2').setFilter(Phaser.Textures.FilterMode.NEAREST);
+
                 // スクロールシェーダの初期化とレイヤーへの設定
                 const scale = MyMath.z_to_scale(GLOBALS.LAYER.LAYER1.Z);
 
@@ -288,7 +290,14 @@ export class Background {
                 this.scrollFloor.set1f('uScaleTop', scale);
                 this.scrollFloor.set1f('uScaleBottom', 1.0);
 
-            },
+                // 背景：パレットシェーダの初期化とレイヤーへの設定
+                this.layer2.setPipeline('Palette');
+                this.palette = this.scene.renderer.pipelines.get('Palette');
+                const fromColors = new Float32Array([
+                    1.0, 0.0, 0.0,
+                    0.0, 1.0, 0.0 ]);
+                this.palette.set3fv('uFromColors', fromColors);
+                },
             update(time, delta) {
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
@@ -298,6 +307,15 @@ export class Background {
                 this.floorLayer.y = MyMath.global_y_to_disp_y(GLOBALS.FIELD.HEIGHT, GLOBALS.LAYER.FLOOR.Z_TOP);
                 this.scrollFloor.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
                 this.scrollFloor.set1f('uSqueeze', ((GLOBALS.FIELD.HEIGHT - this.floorLayer.y) / GLOBALS.LAYER.FLOOR.HEIGHT));
+
+                // 背景：パレットシェーダの設定
+                const red = Math.sin(time / 500) * 0.5 + 0.5;
+                const green = -Math.sin(time / 500) * 0.5 + 0.5;
+                const toColors = new Float32Array([
+                    red, 0.0, 0.0,
+                    0.0, green, 0.0 ]);
+                this.palette.set3fv('uToColors', toColors);
+                this.palette.set1i('uColorCount', 2);
             }
         },
         5: {
@@ -334,7 +352,6 @@ export class Background {
         6: {
             create() {
                 // レイヤーの設定
-                this.layer2.setAlpha(0.8);
                 this.layer4.setAlpha(0.8);
 
                 // スクロールシェーダの初期化とレイヤーへの設定

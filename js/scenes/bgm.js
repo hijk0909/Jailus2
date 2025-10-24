@@ -24,10 +24,12 @@ export class BGM {
             GameState.sound.bgm_stage_8
         ];
         this.bgm = BGM_LIST[GameState.stage - 1];
+        this.bgm.volume = GLOBALS.BGM_VOLUME;
     }
 
     set_boss(){
         this.bgm = GameState.sound.bgm_zero_mind;
+        this.bgm.volume = GLOBALS.BGM_VOLUME;
     }
 
     stop(){

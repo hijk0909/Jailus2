@@ -103,10 +103,10 @@ export class Enemy_10 extends Enemy {
                 if (this.stay > 4){
                     this.state = 4;
                     this.state_count = STOP_INTERVAL;
-                    this.shoot(-45);
-                    this.shoot(-135);
-                    this.shoot(45);
-                    this.shoot(135);
+                    this.shoot_fix(-45);
+                    this.shoot_fix(-135);
+                    this.shoot_fix(45);
+                    this.shoot_fix(135);
                 }
             }
             this.sprite.setFrame(FRAME_STAY[this.stay]);

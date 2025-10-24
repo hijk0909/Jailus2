@@ -101,7 +101,7 @@ export class Enemy_9 extends Enemy {
             this.shot_count -= GameState.ff;
             if (this.shot_count < 0){
                 this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-                this.shoot();
+                this.shoot_aim();
             }
 
             const aheadPos = this.getAheadPos(nextPos, this.dir);
@@ -270,7 +270,7 @@ export class Enemy_9 extends Enemy {
             this.state === 0 &&
             GameState.difficulty >= GLOBALS.DIFFICULTY.COUNTER_BULLET){
             // 打ち返し弾
-            this.shoot();
+            this.shoot_aim();
         }
         super.destroy();
     }

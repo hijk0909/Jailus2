@@ -63,7 +63,7 @@
                     height: GAME_HEIGHT,
                     parent: 'game-container',
                 },
-                fps: {limit:60},
+                fps: {limit:120},
                 fx: { glow: { distance: 32, quality: 0.1 } },
                 input: { gamepad: true , keyboard: true },
                 backgroundColor: '#203050',
@@ -288,7 +288,29 @@
             texColor.rgb = hsv2rgb(hsv);
             gl_FragColor = texColor;
         }
-    </script>   
+    </script>
+
+    <script type="x-shader/x-fragment" id="paletteShader">
+    precision mediump float;
+    uniform sampler2D uMainSampler;
+    uniform vec3 uFromColors[8];
+    uniform vec3 uToColors[8];
+    uniform int uColorCount;
+    varying vec2 outTexCoord;
+
+    void main(void) {
+        vec4 color = texture2D(uMainSampler, outTexCoord);
+
+        for (int i = 0; i < 8; i++) {
+            if (i >= uColorCount) break;
+            // RGBが一致したら置換
+            if (distance(color.rgb, uFromColors[i]) < 0.5) {
+                  color.rgb = uToColors[i];
+            }
+        }
+        gl_FragColor = color;
+    }
+    </script>
 
 </body>
 </html>

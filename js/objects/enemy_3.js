@@ -33,7 +33,7 @@ export class Enemy_3 extends Enemy {
         this.shot_count -= 1;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-            this.shoot();
+            this.shoot_aim();
         }
         super.update();
     }

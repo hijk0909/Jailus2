@@ -38,10 +38,6 @@ export class Bullet_PS extends Bullet {
         this.set_anim();
     }
 
-    set_velocity(vel){
-        this.velocity = vel;
-    }
-
     update(){
         this.pos.x -= GameState.scroll_dx;
 

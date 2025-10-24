@@ -48,8 +48,8 @@ export class Enemy_B2 extends Enemy {
         this.shot_count -= 1;
         if (this.shot_count < 0){
             this.shot_count = COOLDOWN_INTERVAL;
-            this.shoot(-10);
-            this.shoot(10);
+            this.shoot_aim(-10);
+            this.shoot_aim(10);
         }
     }
 

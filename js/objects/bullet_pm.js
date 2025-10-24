@@ -27,10 +27,6 @@ export class Bullet_PM extends Bullet {
         .setVisible(false);
     }
 
-    set_velocity(vel){
-        this.velocity = vel;
-    }
-
     update(){
         this.temp_velocity.copy(this.velocity).scale(GameState.ff);
         this.pos.add(this.temp_velocity);

@@ -122,8 +122,8 @@
    <properties>
     <property name="duration" value="29"/>
     <property name="interval" value="2"/>
-    <property name="spawn_pos" value="right_middle"/>
-    <property name="subtype" value="enemy_1"/>
+    <property name="spawn_pos" value="right_random"/>
+    <property name="subtype" value="enemy_12"/>
     <property name="z" value="0"/>
    </properties>
   </object>
@@ -132,7 +132,7 @@
     <property name="duration" value="20"/>
     <property name="interval" value="3"/>
     <property name="spawn_pos" value="right_middle"/>
-    <property name="subtype" value="enemy_1"/>
+    <property name="subtype" value="enemy_12"/>
     <property name="z" value="0"/>
    </properties>
   </object>
@@ -146,12 +146,12 @@
     <property name="subtype" value="bgm_boss"/>
    </properties>
   </object>
-  <object id="64" name="spawner" type="spawner" x="2690.67" y="2.66667" width="32" height="32">
+  <object id="64" name="spawner" type="spawner" x="3232" y="0" width="32" height="32">
    <properties>
     <property name="duration" value="20"/>
     <property name="interval" value="1"/>
     <property name="spawn_pos" value="right_random"/>
-    <property name="subtype" value="enemy_1"/>
+    <property name="subtype" value="enemy_12"/>
     <property name="z" value="0"/>
    </properties>
   </object>
@@ -160,7 +160,7 @@
     <property name="duration" value="30"/>
     <property name="interval" value="1.0"/>
     <property name="spawn_pos" value="right_random"/>
-    <property name="subtype" value="enemy_10"/>
+    <property name="subtype" value="enemy_12"/>
     <property name="z" value="0"/>
    </properties>
   </object>

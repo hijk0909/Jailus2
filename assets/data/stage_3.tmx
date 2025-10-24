@@ -99,9 +99,9 @@
   <object id="92" name="spawner" type="spawner" x="832" y="0" width="32" height="32">
    <properties>
     <property name="duration" value="30"/>
-    <property name="interval" value="2"/>
+    <property name="interval" value="1"/>
     <property name="spawn_pos" value="right_random"/>
-    <property name="subtype" value="enemy_7"/>
+    <property name="subtype" value="enemy_13"/>
     <property name="z" value="0"/>
    </properties>
   </object>

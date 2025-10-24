@@ -30,6 +30,7 @@ export class NameEntryScene extends Phaser.Scene {
         Ranking.update_name(GameState.ranking.session, this.rank, name);
         this.ranking.show_ranking_table(GameState.ranking.session);
         Ranking.set_net_ranking(name, GameState.score, this.stage);
+        GameState.get_ranking = true; //Attarck画面でのランキング再取得を許可
         this.time.addEvent({
             delay: 3000,
             callback: () => {

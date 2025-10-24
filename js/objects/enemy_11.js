@@ -11,7 +11,7 @@ const COOLDOWN_INTERVAL = {
     HARD : 60
 }
 
-// Enemy_11：うねうね
+// Enemy_11：ぐねぐね（最終面雑魚）
 export class Enemy_11 extends Enemy {
 
     constructor(scene){
@@ -84,7 +84,7 @@ export class Enemy_11 extends Enemy {
             this.shot_count -= GameState.ff;
             if (this.shot_count < 0){
                 this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-                this.shoot();
+                this.shoot_aim();
             }
         } else if (this.state === 2){
             // 狙い撃ち円周運動
