@@ -324,7 +324,6 @@ export class Background {
             create() {
                 // レイヤーの設定
                 this.layer2.setAlpha(0.8);
-                this.layer4.setAlpha(0.8);
 
                 // スクロールシェーダの初期化とレイヤーへの設定
                 const scale = MyMath.z_to_scale(GLOBALS.LAYER.LAYER1.Z);
@@ -339,8 +338,18 @@ export class Background {
                 this.scrollFloor.set1f('uScaleTop', scale);
                 this.scrollFloor.set1f('uScaleBottom', 1.0);
 
+                // 背景：波状シェーダの初期化とレイヤーへの設定
+                this.layer4.setPipeline('Ripple');
+                this.ripple = this.scene.renderer.pipelines.get('Ripple');
+                this.ripple.set1f('time', 0);
+                this.ripple.set1f('frequency', 20.0);
+                this.ripple.set1f('amplitude', 0.010);
+                this.ripple.set1f('alpha', 0.4);
             },
             update(time, delta) {
+                // 波状シェーダーのパラメータ更新
+                this.ripple.set1f('time', time * 0.001);
+
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;
                 this.scrollCeil.set1f('uOffsetX', (GameState.scroll_x || 0) / GLOBALS.FIELD.WIDTH);
