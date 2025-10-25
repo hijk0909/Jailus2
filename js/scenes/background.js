@@ -100,7 +100,9 @@ export class Background {
             battery : (obj) => Spawn.battery(this.scene, obj),
             item    : (obj) => Spawn.item(this.scene, obj),
             enemy   : (obj) => Spawn.enemy(this.scene, obj),
+            effect  : (obj) => Spawn.effect(this.scene, obj),
             spawner : (obj) => Spawn.spawner(this.scene, obj),
+            emitter : (obj) => Spawn.emitter(this.scene, obj),
             event   : (obj) => this.trigger_event(obj)
         };
 

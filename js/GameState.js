@@ -48,6 +48,7 @@ export const GameState = {
     effects : [],
     items : [],
     spawners : [],
+    emitters : [],
 
     reset(){
         this.stage = 1;

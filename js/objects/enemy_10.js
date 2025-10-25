@@ -61,6 +61,8 @@ export class Enemy_10 extends Enemy {
 
     update(time, delta){
 
+        this.pos.x -= GameState.scroll_dx;
+
         if (this.state === 0){
             // 0.加速
             this.sprite.setFrame(FRAME_MOVE[this.dir][0]);

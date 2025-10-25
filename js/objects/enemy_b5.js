@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = 30;
+const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 
 // Enemy_B5：ボス（ステージ５）
 export class Enemy_B5 extends Enemy {
@@ -44,6 +45,7 @@ export class Enemy_B5 extends Enemy {
         super.update();
         this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
+        this.pos.x = Math.max(MIN_X, this.pos.x);
         super.update();
         this.shot_count -= 1;
         if (this.shot_count < 0){

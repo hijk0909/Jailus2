@@ -152,13 +152,24 @@ export class Exec {
             }
         }
 
-        // ◆生成器の管理
+        // ◆生成器（敵）の管理
         for (let i = GameState.spawners.length - 1; i >= 0; i--) {
             const spawner = GameState.spawners[i];
             spawner.update(time, delta);
             if (!spawner.is_alive()) {
                 spawner.destroy();
                 GameState.spawners.splice(i, 1);
+                continue;
+            }
+        }
+
+        // ◆放出器（画面効果）の管理
+        for (let i = GameState.emitters.length - 1; i >= 0; i--) {
+            const emitter = GameState.emitters[i];
+            emitter.update(time, delta);
+            if (!emitter.is_alive()) {
+                emitter.destroy();
+                GameState.emitters.splice(i, 1);
                 continue;
             }
         }

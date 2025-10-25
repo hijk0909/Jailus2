@@ -105,8 +105,31 @@ export class MyMath {
             new Phaser.Geom.Rectangle(pos2.x - col2.width / 2, pos2.y - col2.height / 2, col2.width, col2.height));
     }
 
+    // 計算：難易度に応じた値を線形補完で返す
     static lerp_by_difficulty(p,q){
         const t = (GameState.difficulty - GLOBALS.DIFFICULTY.MIN) / (GLOBALS.DIFFICULTY.MAX - GLOBALS.DIFFICULTY.MIN); // 0〜1に正規化
         return p + t * (q - p);     // P〜Qに補間
     }
+
+    // 計算：現在速度(dx,dy)を最大 max_angle_deg の範囲で回転させる
+    static rotate_towards_target(src, target, dx, dy, max_angle_deg){
+        const target_angle = Math.atan2(target.y - src.y, target.x - src.x);
+        const current_angle = Math.atan2(dy, dx);
+        let angle_diff = (target_angle - current_angle + Math.PI) % (2 * Math.PI) - Math.PI;
+        const max_rotation = this.radians(max_angle_deg);
+        if (Math.abs(angle_diff) > max_rotation){
+            angle_diff = this.copysign(max_rotation, angle_diff);
+        }
+        const new_angle = current_angle + angle_diff;
+        const new_dx = Math.cos(new_angle);
+        const new_dy = Math.sin(new_angle);
+        return {dx : new_dx, dy : new_dy};
+    }
+
+    // 経緯さん：src から target への角度を返す（angle_diff で角度差を指定可能）
+    static target_angle(src, target, angle_diff = 0){
+        const target_angle = Math.atan2(target.y - src.y, target.x - src.x);
+        return (target_angle + angle_diff + Math.PI) % ( 2 * Math.PI) - Math.PI;
+    }
+
 }

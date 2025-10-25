@@ -14,6 +14,7 @@ import { Enemy_10 } from '../objects/enemy_10.js';
 import { Enemy_11 } from '../objects/enemy_11.js';
 import { Enemy_12 } from '../objects/enemy_12.js';
 import { Enemy_13 } from '../objects/enemy_13.js';
+import { Enemy_14 } from '../objects/enemy_14.js';
 import { Enemy_B1 } from '../objects/enemy_b1.js';
 import { Enemy_B2 } from '../objects/enemy_b2.js';
 import { Enemy_B3 } from '../objects/enemy_b3.js';
@@ -24,6 +25,7 @@ import { Enemy_B7 } from '../objects/enemy_b7.js';
 import { Enemy_B8 } from '../objects/enemy_b8.js';
 import { Item_Point } from '../objects/item_point.js';
 import { Item_Runway } from '../objects/item_runway.js';
+import { Effect_Pillar } from '../objects/effect_pillar.js';
 
 const EnemyClassList = {
     'enemy_1' : Enemy_1,
@@ -38,6 +40,7 @@ const EnemyClassList = {
     'enemy_11': Enemy_11,
     'enemy_12': Enemy_12,
     'enemy_13': Enemy_13,
+    'enemy_14': Enemy_14,
     'enemy_b1': Enemy_B1,
     'enemy_b2': Enemy_B2,
     'enemy_b3': Enemy_B3,
@@ -54,6 +57,10 @@ const SpawnPosList = {
     'right_random': GLOBALS.SPAWN_POS.RIGHT_RANDOM,
     'right_y':      GLOBALS.SPAWN_POS.RIGHT_Y,
     'right_y_z':    GLOBALS.SPAWN_POS.RIGHT_Y_Z
+}
+
+const EffectClassList = {
+    'effect_pillar' : Effect_Pillar
 }
 
 const RUNWAY_HEIGHT = 24;
@@ -94,7 +101,7 @@ export class Spawn {
         // 座標の計算
         const map_pos = MyMath.map_pos_to_global_pos(new Phaser.Math.Vector2(obj.x + obj.width / 2 ,obj.y + obj.height / 2));
         // パラメータの取り出し
-        let val_subtype = "enemy_1";
+        let val_subtype = "enemy_1"; // default
         let val_z = GLOBALS.LAYER.LAYER3.Z;
         let val_spawn_pos = GLOBALS.SPAWN_POS.RIGHT_MIDDLE;
         if (obj.properties) {
@@ -125,7 +132,30 @@ export class Spawn {
                 map_pos.y));
             enemy.set_z(val_z);
         }
+
+        // 敵の生成
         GameState.enemies.push(enemy);
+        return;
+    }
+
+    static effect(scene, obj){
+
+        // パラメータの取り出し
+        let val_subtype = "effect_pillar"; //default
+        if (obj.properties) {
+            const prop_subtype = obj.properties.find(p => p.name === "subtype");
+            if ( prop_subtype) { val_subtype = prop_subtype.value; }
+        }
+
+        // 画面効果の生成
+        const EffectClass = EffectClassList[val_subtype];
+        const effect = new EffectClass(scene);
+        // 画面効果の初期位置
+        const pos = new Phaser.Math.Vector2(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, GLOBALS.FIELD.HEIGHT / 2);
+        effect.init(pos);
+
+        // 画面効果の生成
+        GameState.effects.push(effect);
         return;
     }
 
@@ -133,6 +163,12 @@ export class Spawn {
         const spawner = new Spawner(scene);
         spawner.init(obj);
         GameState.spawners.push(spawner);
+    }
+
+    static emitter(scene, obj){
+        const emitter = new Emitter(scene);
+        emitter.init(obj);
+        GameState.emitters.push(emitter);
     }
 
 } // End of Spawn
@@ -165,7 +201,57 @@ class Spawner {
     }
 
     update(time, delta){
-        // console.log("spawn update", this.duration_cnt, this.interval_cnt);
+        if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
+            // console.log("spawn update", this.duration_cnt, this.interval_cnt);
+            this.duration_cnt -= delta / 1000;
+            if (this.duration_cnt <= 0){
+                this.alive = false;
+            }
+            this.interval_cnt -= delta / 1000;
+            if (this.interval_cnt <= 0){
+                this.interval_cnt = this.interval;
+                Spawn.enemy(this.scene, this.obj);
+            }
+        }
+    }
+
+    is_alive() {
+        return this.alive;
+    }
+
+    destroy(){
+    }
+} // End of Spawner
+
+class Emitter {
+    constructor(scene) {
+        this.scene = scene;
+        this.alive = true;
+        this.obj = null;
+        this.duration = 0;  //[sec]
+        this.duration_cnt = 0;
+        this.interval = 1; //[sec]
+        this.interval_cnt = 0;
+        this.type = null;
+    }
+
+    init(obj){
+        this.obj = obj;
+        // パラメータの取り出し
+        let duration_val = 10;
+        let interval_val = 1;
+        if (obj.properties) {
+            const prop_duration = obj.properties.find(p => p.name === "duration");
+            if ( prop_duration) { duration_val = parseInt(prop_duration.value, 10);}
+            const prop_interval = obj.properties.find(p => p.name === "interval");
+            if ( prop_interval ) { interval_val = parseFloat(prop_interval.value, 10); }
+        }
+        this.duration = this.duration_cnt = duration_val;
+        this.interval = interval_val;
+    }
+
+    update(time, delta){
+        // console.log("emitter update", this.duration_cnt, this.interval_cnt);
         this.duration_cnt -= delta / 1000;
         if (this.duration_cnt <= 0){
             this.alive = false;
@@ -173,7 +259,7 @@ class Spawner {
         this.interval_cnt -= delta / 1000;
         if (this.interval_cnt <= 0){
             this.interval_cnt = this.interval;
-            Spawn.enemy(this.scene, this.obj);
+            Spawn.effect(this.scene, this.obj);
         }
     }
 
@@ -184,4 +270,5 @@ class Spawner {
     destroy(){
     }
 
-} // End of Spawner
+
+} // End of Emitter

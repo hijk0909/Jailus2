@@ -61,12 +61,19 @@ export class Setup {
         }
         GameState.effects = [];
 
-        // 生成器
+        // 生成器（敵）
         for (let i = GameState.spawners.length - 1; i >= 0; i--){
             GameState.spawners[i].destroy();
             GameState.spawners.splice(i,1);
         }
         GameState.spawners = [];
-        
+
+        // 放出器（画面効果）
+        for (let i = GameState.emitters.length - 1; i >= 0; i--){
+            GameState.emitters[i].destroy();
+            GameState.emitters.splice(i,1);
+        }
+        GameState.emitters = [];
+
     } // End of clean_up()
 }

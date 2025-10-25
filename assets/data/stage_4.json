@@ -409,6 +409,33 @@
                  "width":32,
                  "x":9248,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":107,
+                 "name":"emitter",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"effect_pillar"
+                        }],
+                 "rotation":0,
+                 "type":"emitter",
+                 "visible":true,
+                 "width":32,
+                 "x":704,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -417,7 +444,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":107,
+ "nextobjectid":108,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
