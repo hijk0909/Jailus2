@@ -701,12 +701,12 @@
                         {
                          "name":"duration",
                          "type":"string",
-                         "value":"30"
+                         "value":"45"
                         }, 
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"1"
+                         "value":"2"
                         }, 
                         {
                          "name":"spawn_pos",

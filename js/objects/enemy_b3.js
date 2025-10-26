@@ -4,7 +4,11 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const COOLDOWN_INTERVAL = 40;
+const COOLDOWN_INTERVAL = {
+    EASY : 80,
+    HARD : 40
+}
+
 const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 
 // Enemy_B3：ボス（ステージ３）
@@ -17,7 +21,7 @@ export class Enemy_B3 extends Enemy {
         this.scale = 1.0;
         this.life = 120;
         this.speed = 0.3;
-        this.shot_count = COOLDOWN_INTERVAL;
+        this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.score = 3000;
     }
 
@@ -47,9 +51,10 @@ export class Enemy_B3 extends Enemy {
         this.pos.add(this.velocity);
         this.pos.x = Math.max(MIN_X, this.pos.x);
         super.update();
-        this.shot_count -= 1;
+
+        this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
-            this.shot_count = COOLDOWN_INTERVAL;
+            this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
             this.shoot_aim();
         }
     }

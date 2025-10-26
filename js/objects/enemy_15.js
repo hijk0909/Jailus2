@@ -29,12 +29,13 @@ export class Enemy_15 extends Enemy {
         }
         if (this.child) {
             this.child.parent = null;
+            this.child.energy = 0;
 
-            let child = this.child;
-            while (child) {
-                child.energy = 0;
-                child = child.child;
-            }
+            // let child = this.child;
+            // while (child) {
+            //     child.energy = 0;
+            //     child = child.child;
+            // }
         }
         super.destroy();
     }

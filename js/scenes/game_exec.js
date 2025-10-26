@@ -60,6 +60,7 @@ export class Exec {
                         if (e.life <= 0){
                             GameState.add_score(e.score);
                             if (e.boss){
+                                // ボスを破壊
                                 e.shockwave();
                                 if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING){
                                     // FAILED等の状態ではボスを倒してもクリア扱いしない

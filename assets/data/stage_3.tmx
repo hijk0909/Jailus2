@@ -107,8 +107,8 @@
   </object>
   <object id="93" name="spawner" type="spawner" x="5536" y="224" width="32" height="32">
    <properties>
-    <property name="duration" value="30"/>
-    <property name="interval" value="1"/>
+    <property name="duration" value="45"/>
+    <property name="interval" value="2"/>
     <property name="spawn_pos" value="right_random"/>
     <property name="subtype" value="enemy_7"/>
     <property name="z" value="0"/>

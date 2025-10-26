@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
 import { Enemy_15 } from './enemy_15.js';
 import { spawn_vine, get_vine_pos } from './enemy_15b_spawner.js';
+import { Effect_Ext } from './effect_ext.js';
 
 const COOLDOWN_INTERVAL = {
     EASY : 120,
@@ -65,7 +66,10 @@ export class Enemy_15b extends Enemy_15 {
         }
 
         if (this.energy === 0){
-            this.pos.x -= EXIT_SPEED * GameState.ff;
+            this.alive = false;
+            const eff = new Effect_Ext(this.scene);
+            eff.init(this.pos);
+            GameState.effects.push(eff);            
         } else {
             this.pos = get_vine_pos(this.parent);
             this.update_angle();
