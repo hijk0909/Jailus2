@@ -26,7 +26,7 @@ export class Enemy_15b extends Enemy_15 {
         this.spawn_count = SPAWN_INTERVAL_1;
         this.life = 1;
         this.angle = 0;
-        this.length = 20;
+        this.length = 16;
         this.score = 10;
     }
 
