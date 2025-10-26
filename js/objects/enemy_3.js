@@ -1,4 +1,4 @@
-// enemy.js
+// enemy_3.js
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
@@ -30,7 +30,7 @@ export class Enemy_3 extends Enemy {
 
     update(){
         this.pos.x -= GameState.scroll_dx;
-        this.shot_count -= 1;
+        this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
             this.shoot_aim();

@@ -14,7 +14,7 @@ export class Enemy_B2 extends Enemy {
         this.z = GLOBALS.LAYER.LAYER3.Z + 10;
         this.collision = { width :100, height : 300};
         this.scale = 1.0;
-        this.life = 100;
+        this.life = 145;
         this.speed = 0.3;
         this.shot_count = COOLDOWN_INTERVAL;
         this.score = 3000;

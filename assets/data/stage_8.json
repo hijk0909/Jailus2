@@ -120,7 +120,7 @@
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"0.3"
+                         "value":"0.5"
                         }, 
                         {
                          "name":"spawn_pos",

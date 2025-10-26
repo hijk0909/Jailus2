@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = 50;
+const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 
 // Enemy_B1：ボス（ステージ１）
 export class Enemy_B1 extends Enemy {
@@ -14,7 +15,7 @@ export class Enemy_B1 extends Enemy {
         this.z = GLOBALS.LAYER.LAYER3.Z + 10;
         this.collision = { width :100, height : 300};
         this.scale = 1.0;
-        this.life = 80;
+        this.life = 160;
         this.speed = 0.3;
         this.shot_count = COOLDOWN_INTERVAL;
         this.score = 3000;
@@ -44,16 +45,17 @@ export class Enemy_B1 extends Enemy {
         super.update();
         this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
+        this.pos.x = Math.max(MIN_X, this.pos.x);
+
         super.update();
-        this.shot_count -= 1;
+
+        this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = COOLDOWN_INTERVAL;
             this.shoot_aim();
-            this.shoot_aim(-15);
-            this.shoot_aim(+15);
-            if (GameState.difficulty >= 200){
-                this.shoot_aim(-30);
-                this.shoot_aim(+30);
+            if (GameState.difficulty >= 250){
+                this.shoot_aim(-20);
+                this.shoot_aim(+20);
             }
         }
     }

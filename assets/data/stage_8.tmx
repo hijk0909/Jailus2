@@ -56,7 +56,7 @@
   <object id="94" name="spawner" type="spawner" x="960" y="0" width="32" height="32">
    <properties>
     <property name="duration" value="60"/>
-    <property name="interval" value="0.3"/>
+    <property name="interval" value="0.5"/>
     <property name="spawn_pos" value="right_random"/>
     <property name="subtype" value="enemy_11"/>
     <property name="z" value="0"/>

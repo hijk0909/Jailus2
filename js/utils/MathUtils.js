@@ -111,22 +111,17 @@ export class MyMath {
         return p + t * (q - p);     // P〜Qに補間
     }
 
-    // 計算：現在速度(dx,dy)を最大 max_angle_deg の範囲で回転させる
-    static rotate_towards_target(src, target, dx, dy, max_angle_deg){
-        const target_angle = Math.atan2(target.y - src.y, target.x - src.x);
-        const current_angle = Math.atan2(dy, dx);
-        let angle_diff = (target_angle - current_angle + Math.PI) % (2 * Math.PI) - Math.PI;
-        const max_rotation = this.radians(max_angle_deg);
-        if (Math.abs(angle_diff) > max_rotation){
-            angle_diff = this.copysign(max_rotation, angle_diff);
-        }
-        const new_angle = current_angle + angle_diff;
-        const new_dx = Math.cos(new_angle);
-        const new_dy = Math.sin(new_angle);
-        return {dx : new_dx, dy : new_dy};
+    // 計算：現在速度
+    static rotate_towards_target(src, target, angle, rotate_step){
+        const currentRad = Phaser.Math.DegToRad(angle);
+        const targetRad = Math.atan2(target.y - src.y, target.x - src.x);
+        const stepRad = Phaser.Math.DegToRad(rotate_step);
+
+        const newRad = Phaser.Math.Angle.RotateTo(currentRad, targetRad, stepRad);
+        return Phaser.Math.RadToDeg(newRad);
     }
 
-    // 経緯さん：src から target への角度を返す（angle_diff で角度差を指定可能）
+    // 計算：src から target への角度を返す（angle_diff で角度差を指定可能）
     static target_angle(src, target, angle_diff = 0){
         const target_angle = Math.atan2(target.y - src.y, target.x - src.x);
         return (target_angle + angle_diff + Math.PI) % ( 2 * Math.PI) - Math.PI;
