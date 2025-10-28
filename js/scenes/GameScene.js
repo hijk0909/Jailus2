@@ -8,10 +8,13 @@ import { Setup } from './game_setup.js';
 import { MyInput } from '../utils/InputUtils.js';
 import { Shockwave } from '../utils/DrawUtils.js';
 
+const LIFE_BONUS_COUNT = 10;
+
 export class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene' });
         this.stage_state_count = 100;
+        this.life_bonus_count = LIFE_BONUS_COUNT;
     }
 
     create() {
@@ -162,6 +165,16 @@ export class GameScene extends Phaser.Scene {
             // ◆全面クリア期間
             GameState.player.update();
             this.exec.update(time, delta);
+            // 残機ボーナス
+            this.life_bonus_count -= GameState.ff;
+            if (this.life_bonus_count < 0){
+                console.log("life_bonus_count", GameState.lives);
+                if (GameState.lives > 0){
+                    this.life_bonus_count = LIFE_BONUS_COUNT;
+                    GameState.lives--;
+                    GameState.add_score_without_extend(GLOBALS.BONUS_PER_LIFE);
+                }
+            }
             this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
                 GameState.stage++; // [ALL]

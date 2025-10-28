@@ -4,7 +4,7 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
-const MAX_VY = 0.3;
+const MAX_VY = 0.3; //上下方向の速度のランダム幅
 
 // Enemy_18： 隕石
 export class Enemy_18 extends Enemy {
