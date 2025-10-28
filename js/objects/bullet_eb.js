@@ -119,7 +119,7 @@ export class Bullet_EB extends Bullet {
         } else {
             this.collision = { width : 0, height : 0};
             if (this.projectile_data){
-                const tintColor = MyMath.get_interpolate_color("0x404040", "0xffffff", (this.projectile_data.flightRatio));
+                const tintColor = MyMath.get_interpolate_color(0x404040, 0xffffff, (this.projectile_data.flightRatio));
                 this.sprite.setTint(tintColor);
             }
         }

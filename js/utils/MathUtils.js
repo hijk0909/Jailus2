@@ -56,16 +56,16 @@ export class MyMath {
     // 変換：色の線形補完
     static get_interpolate_color(color1, color2, t) {
         // 16進数文字列から'#'または'0x'を取り除き、整数に変換
-        const c1 = parseInt(color1.replace('#', '0x'), 16);
-        const c2 = parseInt(color2.replace('#', '0x'), 16);
+        // const c1 = parseInt(color1.replace('#', '0x'), 16);
+        // const c2 = parseInt(color2.replace('#', '0x'), 16);
         // RGBの各成分を抽出
-        const r1 = (c1 >> 16) & 0xFF;
-        const g1 = (c1 >> 8) & 0xFF;
-        const b1 = c1 & 0xFF;
+        const r1 = (color1 >> 16) & 0xFF;
+        const g1 = (color1 >> 8) & 0xFF;
+        const b1 = color1 & 0xFF;
 
-        const r2 = (c2 >> 16) & 0xFF;
-        const g2 = (c2 >> 8) & 0xFF;
-        const b2 = c2 & 0xFF;
+        const r2 = (color2 >> 16) & 0xFF;
+        const g2 = (color2 >> 8) & 0xFF;
+        const b2 = color2 & 0xFF;
 
         // 各成分を線形補間
         t = Math.min(1, Math.max(0,t));

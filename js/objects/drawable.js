@@ -44,6 +44,7 @@ export class Drawable {
     }
 
     destroy(){
+        this.alive = false;
         if ( this.sprite ){
             this.sprite.destroy();
             this.sprite = null;

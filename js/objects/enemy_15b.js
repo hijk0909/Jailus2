@@ -15,7 +15,6 @@ const COOLDOWN_INTERVAL = {
 const SPAWN_INTERVAL_1 = 10;
 const SPAWN_INTERVAL_2 = 60;
 
-const EXIT_SPEED = 1.5;
 const STEP_ANGLE = 10;
 
 // Enemy_15b：植物砲台（蔓）
