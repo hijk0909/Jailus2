@@ -19,6 +19,7 @@ import { Enemy_15a } from '../objects/enemy_15a.js';
 import { Enemy_16 } from '../objects/enemy_16.js';
 import { Enemy_17 } from '../objects/enemy_17.js';
 import { Enemy_18 } from '../objects/enemy_18.js';
+import { Enemy_19a } from '../objects/enemy_19a.js';
 import { Enemy_B1 } from '../objects/enemy_b1.js';
 import { Enemy_B2 } from '../objects/enemy_b2.js';
 import { Enemy_B3 } from '../objects/enemy_b3.js';
@@ -30,6 +31,7 @@ import { Enemy_B8 } from '../objects/enemy_b8.js';
 import { Item_Point } from '../objects/item_point.js';
 import { Item_Runway } from '../objects/item_runway.js';
 import { Effect_Pillar } from '../objects/effect_pillar.js';
+import { Effect_Bubble } from '../objects/effect_bubble.js';
 
 const EnemyClassList = {
     'enemy_1' : Enemy_1,
@@ -49,6 +51,7 @@ const EnemyClassList = {
     'enemy_16': Enemy_16,
     'enemy_17': Enemy_17,
     'enemy_18': Enemy_18,
+    'enemy_19a': Enemy_19a,
     'enemy_b1': Enemy_B1,
     'enemy_b2': Enemy_B2,
     'enemy_b3': Enemy_B3,
@@ -68,7 +71,8 @@ const SpawnPosList = {
 }
 
 const EffectClassList = {
-    'effect_pillar' : Effect_Pillar
+    'effect_pillar' : Effect_Pillar,
+    'effect_bubble' : Effect_Bubble
 }
 
 const RUNWAY_HEIGHT = 24;

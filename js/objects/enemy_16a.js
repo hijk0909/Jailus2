@@ -11,7 +11,7 @@ const COOLDOWN_INTERVAL = {
 }
 
 
-// Enemy_15b：アトミック（原子）
+// Enemy_16a：アトミック（原子）
 export class Enemy_16a extends Enemy {
 
     constructor(scene){

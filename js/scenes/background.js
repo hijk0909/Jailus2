@@ -50,6 +50,7 @@ export class Background {
         const tilemap = this.scene.make.tilemap({key: stage_info.map});
         const tileset = tilemap.addTilesetImage('bg_tileset', 'bg_tileset_key');
         this.layer3 = tilemap.createLayer('layer_1', tileset, 0, layer3_y);
+        this.layer3.setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) + 2);
         this.layer3_pending_objects = tilemap.getObjectLayer("object_1").objects;
         this.layer3_pending_objects = this.layer3_pending_objects.filter(
               obj => obj.x >= MyMath.global_x_to_disp_x(GameState.scroll_x + GLOBALS.FIELD.WIDTH / 2, GLOBALS.LAYER.LAYER3.Z)
@@ -209,13 +210,13 @@ export class Background {
                 this.layer4.setPipeline('Ripple');
                 this.ripple = this.scene.renderer.pipelines.get('Ripple');
                 this.ripple.set1f('time', 0);
-                this.ripple.set1f('frequency', 20.0);
+                this.ripple.set1f('frequency', 24.0);
                 this.ripple.set1f('amplitude', 0.060);
                 this.ripple.set1f('alpha', 0.6);
             },
             update(time, delta) {
                 // 波状シェーダーのパラメータ更新
-                this.ripple.set1f('time', time * 0.003);
+                this.ripple.set1f('time', time * 0.001);
 
                 // スクロールシェーダのパラメータ更新
                 this.ceilingLayer.y = 0;

@@ -18,7 +18,7 @@
     "layer1": "stage_2_layer1",
     "layer2": "stage_2_layer2",
     "layer4": "stage_2_layer4",
-    "areas":[0,2000,4700]
+    "areas":[0,2000,4700,9600]
    },
    {
     "stage": 3,

@@ -800,6 +800,33 @@
                  "width":32,
                  "x":5504,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":97,
+                 "name":"emitter",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"20"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"0.1"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"effect_bubble"
+                        }],
+                 "rotation":0,
+                 "type":"emitter",
+                 "visible":true,
+                 "width":32,
+                 "x":928,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -808,7 +835,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":97,
+ "nextobjectid":98,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

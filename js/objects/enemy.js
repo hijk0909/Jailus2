@@ -5,6 +5,8 @@ import { Drawable } from './drawable.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet_E } from './bullet_e.js';
 
+const ENEMY_CLIP_MARGIN = 400;
+
 export class Enemy extends Drawable {
 
     constructor(scene){
@@ -22,7 +24,7 @@ export class Enemy extends Drawable {
     }
 
     update(){
-        if (!MyMath.inView(this.pos, this.z, 200)){
+        if (!MyMath.inView(this.pos, this.z, ENEMY_CLIP_MARGIN)){
             this.alive = false;
         }
         super.update();
@@ -44,6 +46,10 @@ export class Enemy extends Drawable {
         be.init(pos);
         be.set_velocity_fix(angle);
         GameState.bullets_e.push(be);
+    }
+
+    hit(amount){
+        this.life -= amount;
     }
 
     destroy(){

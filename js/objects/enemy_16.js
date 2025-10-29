@@ -20,7 +20,7 @@ const TINTS = [
     0x4080ff
 ];
 
-// Enemy_16：アトミック（管理クラス）
+// Enemy_16：アトミック（全体管理クラス）
 export class Enemy_16 extends Enemy {
 
     constructor(scene){

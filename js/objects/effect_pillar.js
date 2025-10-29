@@ -5,6 +5,8 @@ import { Drawable } from './drawable.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Effect } from './effect.js';
 
+const PERIOD = 250;
+
 export class Effect_Pillar extends Effect {
 
     constructor(scene){
@@ -14,7 +16,7 @@ export class Effect_Pillar extends Effect {
     init(pos){
         super.init(pos);
 
-        this.z = Math.random()*(GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z) + GLOBALS.LAYER.LAYER3.Z;
+        this.z = ((GameState.scroll_x % PERIOD)/PERIOD) *(GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z) + GLOBALS.LAYER.LAYER3.Z;
         this.pos = new Phaser.Math.Vector2(MyMath.disp_x_to_global_x(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, this.z),
             GLOBALS.FIELD.HEIGHT / 2);
 
@@ -46,7 +48,7 @@ export class Effect_Pillar extends Effect {
     }
 
     get_tint_from_z(z){
-        const t = (1 - Phaser.Math.Clamp((z - GLOBALS.LAYER.LAYER3.Z) / (GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z), 0, 1)) * (1.0 - 0.2) + 0.2;
+        const t = (1 - Phaser.Math.Clamp((z - GLOBALS.LAYER.LAYER3.Z) / (GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z), 0, 1)) * (0.8 - 0.2) + 0.2;
         const gray = Math.round(t * 255);
         return (gray << 16) | (gray << 8) | gray;
     }

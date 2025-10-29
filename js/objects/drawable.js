@@ -27,13 +27,13 @@ export class Drawable {
         this.draw();
     }
 
-    update_position(sprite, offset_x = 0, offset_y = 0, offset_z = 0){
+    update_position(sprite){
         if (sprite){
-            const x = MyMath.global_x_to_disp_x(this.pos.x + offset_x, this.z + offset_z);
-            const y = MyMath.global_y_to_disp_y(this.pos.y + offset_y, this.z + offset_z);
+            const x = MyMath.global_x_to_disp_x(this.pos.x, this.z);
+            const y = MyMath.global_y_to_disp_y(this.pos.y, this.z);
             sprite.setPosition(x, y)
-            .setScale(MyMath.z_to_sprite_scale(this.z + offset_z) * this.scale)
-            .setDepth(MyMath.z_to_depth(this.z + offset_z));
+            .setScale(MyMath.z_to_sprite_scale(this.z) * this.scale)
+            .setDepth(MyMath.z_to_depth(this.z));
         }
     }
 

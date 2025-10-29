@@ -51,12 +51,13 @@ export class Exec {
 
                     if (e.life === -1){
                         // 破壊不可能な敵
+                        e.hit(0);
                         const eff = new Effect_Ext(this.scene);
                         eff.init(pb.pos);
                         GameState.effects.push(eff);
                         GameState.add_score(e.score);
                     } else {
-                        e.life -= 1;
+                        e.hit(1);
                         if (e.life <= 0){
                             GameState.add_score(e.score);
                             if (e.boss){
