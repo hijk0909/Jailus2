@@ -78,7 +78,7 @@
     "layer1": "stage_8_layer1",
     "layer2": "stage_8_layer2",
     "layer4": "stage_8_layer4",
-    "areas":[0]
+    "areas":[0, 4400, 9800]
   }
   ]
 }

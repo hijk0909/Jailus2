@@ -11,14 +11,14 @@ export class UIScene extends Phaser.Scene {
     }
 
     create() {
-        this.add_text(0,0,"1UP", 0xffff00);
-        this.add_text(18,0,"HIGH SCORE", 0xff00ff);
-        this.add_text(33,0,"DIFFICULTY:", 0xffffff);
-        this.add_text(0,2,"LIVES:", 0x00ffff);
-        this.add_text(0,35,"STAGE:", 0xffffff);
+        this.add_text( 0, 0,"1UP", 0xffff00);
+        this.add_text(17, 0,"HIGH SCORE", 0xff00ff);
+        this.add_text(33, 0,"DIFFICULTY:", 0xffffff);
+        this.add_text( 0, 2,"LIVES:", 0x00ffff);
+        this.add_text( 0,35,"STAGE:", 0xffffff);
         this.ui_score_val = this.add_text(0,1,0, 0xffffff);
-        this.ui_high_score_val = this.add_text(18,1,0, 0xffffff);
-        this.ui_difficulty_val = this.add_text(44,0, 0, 0xffffff);
+        this.ui_high_score_val = this.add_text(17, 1, 0, 0xffffff);
+        this.ui_difficulty_val = this.add_text(44, 0, 0, 0xffffff);
         this.ui_lives_val = this.add_text(6,2, 0, 0x00ffff);
         this.ui_stage_val = this.add_text(6,35, `1-1`);
         this.ui_scroll_val = this.add_text(10,35, 0, 0xffffff);

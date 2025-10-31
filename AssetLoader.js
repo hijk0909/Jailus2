@@ -1,7 +1,7 @@
 // Jailus2/AssetLoader.js
 import { GLOBALS } from './js/GameConst.js';
 import { GameState } from './js/GameState.js';
-import { ScrollPipeline, RipplePipeline, ShockwavePostFX, GlitchPipeline, PalettePipeline } from './js/utils/DrawUtils.js';
+import { ScrollPipeline, RipplePipeline, ShockwavePostFX, GlitchPipeline, PalettePipeline, TrochoidPipeline } from './js/utils/DrawUtils.js';
 
 export class AssetLoader extends Phaser.Scene {
     constructor() {
@@ -93,9 +93,10 @@ export class AssetLoader extends Phaser.Scene {
         this.load.spritesheet('ss_player', 'assets/images/ss_player.png', {
             frameWidth: 128,  frameHeight: 128, endFrame : 11 });
         this.load.spritesheet('ss_enemy', 'assets/images/ss_enemy.png', {
-            frameWidth: 64,  frameHeight: 64, endFrame : 79 });
+            frameWidth: 64,  frameHeight: 64, endFrame : 87 });
         this.load.spritesheet('ss_enemy_17', 'assets/images/ss_enemy_17.png', {
             frameWidth: 400,  frameHeight: 200, endFrame : 1 });
+        this.load.image('enemy_20_canvas', 'assets/images/enemy_20_canvas.png');
         this.load.spritesheet('ss_bullet', 'assets/images/ss_bullet.png', {
             frameWidth: 64,  frameHeight: 64, endFrame : 19 });
         this.load.spritesheet('ss_effect', 'assets/images/ss_effect.png', {
@@ -167,6 +168,7 @@ export class AssetLoader extends Phaser.Scene {
         this.renderer.pipelines.add('Glitch', new GlitchPipeline(this.game));
         this.renderer.pipelines.add('Glitch2', new GlitchPipeline(this.game));
         this.renderer.pipelines.add('Palette', new PalettePipeline(this.game));
+        this.renderer.pipelines.add('Trochoid', new TrochoidPipeline(this.game));
     }
 
     create() {

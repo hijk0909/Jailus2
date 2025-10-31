@@ -20,6 +20,9 @@ import { Enemy_16 } from '../objects/enemy_16.js';
 import { Enemy_17 } from '../objects/enemy_17.js';
 import { Enemy_18 } from '../objects/enemy_18.js';
 import { Enemy_19a } from '../objects/enemy_19a.js';
+import { Enemy_20 } from '../objects/enemy_20.js';
+import { Enemy_21 } from '../objects/enemy_21.js';
+import { Enemy_22 } from '../objects/enemy_22.js';
 import { Enemy_B1 } from '../objects/enemy_b1.js';
 import { Enemy_B2 } from '../objects/enemy_b2.js';
 import { Enemy_B3 } from '../objects/enemy_b3.js';
@@ -52,6 +55,9 @@ const EnemyClassList = {
     'enemy_17': Enemy_17,
     'enemy_18': Enemy_18,
     'enemy_19a': Enemy_19a,
+    'enemy_20': Enemy_20,
+    'enemy_21': Enemy_21,
+    'enemy_22': Enemy_22,
     'enemy_b1': Enemy_B1,
     'enemy_b2': Enemy_B2,
     'enemy_b3': Enemy_B3,

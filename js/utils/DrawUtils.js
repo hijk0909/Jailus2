@@ -122,6 +122,27 @@ export class PalettePipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipel
     }
 }
 
+// ◆トロコイド曲線を描くシェーダー
+export class TrochoidPipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeline {
+
+    constructor(game) {
+        super({
+            game,
+            renderer: game.renderer,
+            fragShader: document.getElementById('trochoidShader').textContent
+        });
+    }
+
+    batchSprite(sprite, camera, parentMatrix) {
+        this.flush();
+        this.set3f('color', sprite.trochoid_color.r, sprite.trochoid_color.g, sprite.trochoid_color.b);
+        this.set1f('r', sprite.trochoid_r);
+        this.set1f('d', sprite.trochoid_d);
+        this.set1f('k', sprite.trochoid_k);
+        super.batchSprite(sprite, camera, parentMatrix);
+    }
+}
+
 // ◆ビットマップフォントで文章を表示する
 export class Sentences {
     constructor(scene, sentences, options = {}) {

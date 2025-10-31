@@ -168,9 +168,9 @@ export class GameScene extends Phaser.Scene {
             // 残機ボーナス
             this.life_bonus_count -= GameState.ff;
             if (this.life_bonus_count < 0){
-                console.log("life_bonus_count", GameState.lives);
+                this.life_bonus_count = LIFE_BONUS_COUNT;
+                // console.log("life_bonus_count", GameState.lives);
                 if (GameState.lives > 0){
-                    this.life_bonus_count = LIFE_BONUS_COUNT;
                     GameState.lives--;
                     GameState.add_score_without_extend(GLOBALS.BONUS_PER_LIFE);
                 }
