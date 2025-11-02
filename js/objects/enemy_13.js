@@ -5,8 +5,8 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = {
-    EASY : 60,
-    HARD : 45
+    EASY : 120,
+    HARD : 60
 }
 
 const ACCEL = 0.3;

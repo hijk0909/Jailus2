@@ -5,6 +5,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
 
 export class Bullet_E extends Bullet {
+// 敵・通常弾
 
     constructor(scene){
         super(scene);

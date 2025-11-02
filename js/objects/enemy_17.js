@@ -17,7 +17,7 @@ export class Enemy_17 extends Enemy {
         this.speed = 5;
         this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.score = 1000;
-        this.life = 24;
+        this.life = 18;
         this.collision = { width : 350, height : 150};
     }
 

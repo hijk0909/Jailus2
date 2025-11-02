@@ -317,9 +317,10 @@
 
     uniform vec2 resolution;
     uniform vec3 color;
-    uniform float k;
+    uniform float R;
     uniform float r;
     uniform float d;
+    uniform float k;
     varying vec2 outTexCoord;
 
     vec2 trochoid(float theta, float R, float r, float d) {
@@ -327,6 +328,9 @@
         float phi = k * theta;
         float x = (R - r) * cos(theta) + d * cos(ratio * theta + phi);
         float y = (R - r) * sin(theta) - d * sin(ratio * theta + phi);
+        // 最大半径で正規化して画面内に収め、センタリング
+        x = x / (R - r + d) * 0.45;
+        y = y / (R - r + d) * 0.45;
         return vec2(x + 0.5, y + 0.5);
     }
 
@@ -336,18 +340,17 @@
         vec2 aspect = vec2(2.0, 1.0);
 
         float dist = 1e8;
+        const float THETA_MAX = 2.0 * 3.1415;
         const float STEPS = 120.0;
-        const float THETA_MAX = 20.0 * 3.14159;
-        
+
         for (float i = 0.0; i < STEPS; i++) {
             float theta = i / (STEPS - 1.0) * THETA_MAX;
-            vec2 pos = trochoid(theta, 0.43, r, d);
+            vec2 pos = trochoid(theta, R, r, d);
             vec2 diff = (uv - pos) * aspect;
             dist = min(dist, length(diff));
         }
         
         float thickness = 0.08;
-        // vec3 color = vec3(0.92, 0.8, 0.5);
         float curve = 1.0 - smoothstep(0.0, thickness, dist);
         gl_FragColor = vec4(color * curve, curve);
     }

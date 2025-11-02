@@ -111,13 +111,30 @@ export class MyMath {
         return p + t * (q - p);     // P〜Qに補間
     }
 
-    // 計算：現在速度
-    static rotate_towards_target(src, target, angle, rotate_step){
-        const currentRad = Phaser.Math.DegToRad(angle);
-        const targetRad = Math.atan2(target.y - src.y, target.x - src.x);
-        const stepRad = Phaser.Math.DegToRad(rotate_step);
+    // 計算：角度制限付きの回転
+    static rotate_towards_target(current_angle, current_pos, target_pos, rotate_step, parent_angle = 0, rotate_max = 0) {
 
-        const newRad = Phaser.Math.Angle.RotateTo(currentRad, targetRad, stepRad);
+        const currentRad = Phaser.Math.DegToRad(current_angle);
+        const targetRad = Math.atan2(target_pos.y - current_pos.y, target_pos.x - current_pos.x);
+        const stepRad = Phaser.Math.DegToRad(rotate_step);
+        const parentRad = Phaser.Math.DegToRad(parent_angle);
+        const maxRad = Phaser.Math.DegToRad(rotate_max);
+
+        // step分の通常回転
+        let newRad = Phaser.Math.Angle.RotateTo(currentRad, targetRad, stepRad);
+
+        if (rotate_max != 0){
+            // 親との角度差を計算（-π〜πに正規化）
+            const deltaToParent = Phaser.Math.Angle.Wrap(newRad - parentRad);
+
+            // 許容範囲を超えていたら補正
+            if (Math.abs(deltaToParent) > maxRad) {
+                // 制限された範囲の端にスナップ
+                const clampedDelta = Phaser.Math.Clamp(deltaToParent, -maxRad, maxRad);
+                newRad = Phaser.Math.Angle.Wrap(parentRad + clampedDelta);
+            }
+        }
+
         return Phaser.Math.RadToDeg(newRad);
     }
 

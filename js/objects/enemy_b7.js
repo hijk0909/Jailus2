@@ -8,6 +8,7 @@ const COOLDOWN_INTERVAL = {
     EASY : 60,
     HARD : 20
 }
+const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 
 // Enemy_B7：ボス（ステージ７）
 export class Enemy_B7 extends Enemy {
@@ -37,7 +38,7 @@ export class Enemy_B7 extends Enemy {
             this.scene.anims.create({key: "anims_boss_7",
                 frames: this.scene.anims.generateFrameNumbers('ss_boss_7',
                     { start: 0, end: 1}),
-                frameRate: 12, repeat: -1
+                frameRate: 6, repeat: -1
             });
         }
         this.sprite.play("anims_boss_7");
@@ -47,11 +48,15 @@ export class Enemy_B7 extends Enemy {
         super.update();
         this.velocity = GameState.player.pos.clone().subtract(this.pos).normalize().scale(this.speed * GameState.ff);
         this.pos.add(this.velocity);
+        this.pos.x = Math.max(MIN_X, this.pos.x);
         super.update();
+
         this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
             this.shoot_aim();
+            this.shoot_homing_fix(45,0,-80);
+            this.shoot_homing_fix(135,0,100);
         }
     }
 

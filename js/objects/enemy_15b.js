@@ -3,7 +3,7 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
-import { Enemy_15 } from './enemy_15.js';
+import { Enemy_15_ } from './enemy_15_.js';
 import { spawn_vine, get_vine_pos } from './enemy_15b_spawner.js';
 import { Effect_Ext } from './effect_ext.js';
 
@@ -15,10 +15,11 @@ const COOLDOWN_INTERVAL = {
 const SPAWN_INTERVAL_1 = 10;
 const SPAWN_INTERVAL_2 = 60;
 
-const STEP_ANGLE = 10;
+const STEP_ANGLE = 0.5;
+const MAX_ANGLE = 12.5;
 
 // Enemy_15b：植物砲台（蔓）
-export class Enemy_15b extends Enemy_15 {
+export class Enemy_15b extends Enemy_15_ {
 
     constructor(scene){
         super(scene);
@@ -51,7 +52,7 @@ export class Enemy_15b extends Enemy_15 {
                 this.shot_count -= GameState.ff;
                 if (this.shot_count < 0){
                     this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-                    this.shoot_aim();
+                    this.shoot_fix(this.angle + 90);
                 }
             }
             if (this.energy > 1){
@@ -78,7 +79,7 @@ export class Enemy_15b extends Enemy_15 {
     }
 
     update_angle(){
-        this.angle = MyMath.rotate_towards_target(this.pos, GameState.player.pos, this.parent.angle, STEP_ANGLE);
+        this.angle = MyMath.rotate_towards_target(this.angle, this.pos, GameState.player.pos, STEP_ANGLE, this.parent.angle, MAX_ANGLE);
         this.sprite.angle = this.angle + 90;
     }
 

@@ -17,7 +17,7 @@ export class Enemy_16a extends Enemy {
     constructor(scene){
         super(scene);
         this.shot_count = COOLDOWN_INTERVAL.EASY;
-        this.life = 2;
+        this.life = 1;
     }
 
     init(pos){

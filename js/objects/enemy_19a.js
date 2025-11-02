@@ -21,7 +21,7 @@ const PARTS_CLASS_LIST = [
 const PARTS_FRAME_LIST = [76,77,78,77,77,77,78,77,79];
 const INITIAL_LENGTH = 3;
 
-// Enemy_19：火炎竜（全体管理クラス）
+// Enemy_19a：火炎竜（全体管理クラス）
 export class Enemy_19a extends Enemy {
 
     constructor(scene){

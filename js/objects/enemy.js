@@ -4,6 +4,7 @@ import { GameState } from '../GameState.js';
 import { Drawable } from './drawable.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet_E } from './bullet_e.js';
+import { Bullet_EH } from './bullet_eh.js';
 
 const ENEMY_CLIP_MARGIN = 400;
 
@@ -46,6 +47,15 @@ export class Enemy extends Drawable {
         be.init(pos);
         be.set_velocity_fix(angle);
         GameState.bullets_e.push(be);
+    }
+
+    shoot_homing_fix(angle = 0, offset_x = 0, offset_y = 0){
+        // 敵追尾弾（ホーミング弾）の射出（固定方向）
+        const beh = new Bullet_EH(this.scene);
+        const pos = new Phaser.Math.Vector2(this.pos.x + offset_x, this.pos.y + offset_y);
+        beh.init(pos);
+        beh.set_velocity_fix(angle);
+        GameState.bullets_e.push(beh);
     }
 
     hit(amount){

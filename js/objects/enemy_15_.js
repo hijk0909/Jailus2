@@ -3,8 +3,8 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { Enemy } from './enemy.js';
 
-// Enemy_15：植物砲台（親クラス）
-export class Enemy_15 extends Enemy {
+// Enemy_15_：植物砲台（親クラス：抽象クラス）
+export class Enemy_15_ extends Enemy {
 
     constructor(scene){
         super(scene);

@@ -9,7 +9,7 @@ const GRAVITY = 90;
 const TIME_SCALE = 2.0;
 
 export class Bullet_EB extends Bullet {
-// Ballistic Missile
+// 敵・弾道弾（Ballistic Missile）
 
     constructor(scene){
         super(scene);

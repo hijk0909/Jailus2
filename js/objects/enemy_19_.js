@@ -4,8 +4,8 @@ import { GameState } from '../GameState.js';
 import { Enemy } from './enemy.js';
 
 
-// Enemy_19：火炎竜（親クラス）
-export class Enemy_19 extends Enemy {
+// Enemy_19_：火炎竜（親クラス：抽象クラス）
+export class Enemy_19_ extends Enemy {
 
     constructor(scene){
         super(scene);

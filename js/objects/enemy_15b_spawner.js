@@ -3,12 +3,15 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { Enemy_15b } from './enemy_15b.js';
 
+// Enemy_15a：植物砲台（葉の生成処理）
+
 export function spawn_vine(parent) {
         const enemy = new Enemy_15b(parent.scene);
         const pos = get_vine_pos(parent);
         enemy.parent = parent;
         enemy.energy = Math.max(1, parent.energy - 1);
         enemy.init(pos);
+        enemy.angle = parent.angle;
         GameState.enemies.push(enemy);
         return enemy;
 }

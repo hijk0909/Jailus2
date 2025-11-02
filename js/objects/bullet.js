@@ -10,6 +10,7 @@ export class Bullet extends Drawable {
     constructor(scene){
         super(scene);
         this.velocity = new Phaser.Math.Vector2(0,0);
+        this.angle = 0;
         this.speed = 10;
         this.life = 1;
     }
@@ -30,12 +31,14 @@ export class Bullet extends Drawable {
         const direction = pos2.clone().subtract(pos1).normalize();
         direction.rotate(Phaser.Math.DegToRad(angle));
         this.velocity = direction.scale(this.speed);
+        this.angle = angle;
     }
 
     set_velocity_fix(angle = 0){
         const direction = new Phaser.Math.Vector2(0, -1);
         direction.rotate(Phaser.Math.DegToRad(angle));
         this.velocity = direction.scale(this.speed);
+        this.angle = angle;
     }
 
     update(){

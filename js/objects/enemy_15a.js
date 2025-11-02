@@ -3,7 +3,7 @@ import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet } from './bullet.js';
-import { Enemy_15 } from './enemy_15.js';
+import { Enemy_15_ } from './enemy_15_.js';
 import { spawn_vine } from './enemy_15b_spawner.js';
 
 const SPAWN_INTERVAL = {
@@ -12,13 +12,13 @@ const SPAWN_INTERVAL = {
 }
 
 // Enemy_15a：植物砲台（根本）
-export class Enemy_15a extends Enemy_15 {
+export class Enemy_15a extends Enemy_15_ {
 
     constructor(scene){
         super(scene);
         this.spawn_count = SPAWN_INTERVAL.EASY;
         this.length = 32;
-        this.life = 5;
+        this.life = 4;
         this.energy = 10;
         this.angle = -90;
         this.score = 200;

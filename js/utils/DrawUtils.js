@@ -136,6 +136,7 @@ export class TrochoidPipeline extends Phaser.Renderer.WebGL.Pipelines.SinglePipe
     batchSprite(sprite, camera, parentMatrix) {
         this.flush();
         this.set3f('color', sprite.trochoid_color.r, sprite.trochoid_color.g, sprite.trochoid_color.b);
+        this.set1f('R', sprite.trochoid_R);
         this.set1f('r', sprite.trochoid_r);
         this.set1f('d', sprite.trochoid_d);
         this.set1f('k', sprite.trochoid_k);

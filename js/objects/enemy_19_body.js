@@ -1,14 +1,14 @@
 // enemy_19_body.js
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
-import { Enemy_19 } from './enemy_19.js';
+import { Enemy_19_ } from './enemy_19_.js';
 
 const STIFFNESS = 0.02;
 const DAMPING = 0.9;
 const IDEAL_LENGTH = 52;
 
 // Enemy_19_body：火炎竜（胴体クラス）
-export class Enemy_19_body extends Enemy_19 {
+export class Enemy_19_body extends Enemy_19_ {
 
     constructor(scene){
         super(scene);

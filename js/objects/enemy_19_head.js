@@ -2,18 +2,17 @@
 import { GLOBALS } from '../GameConst.js';
 import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
-import { Enemy_19 } from './enemy_19.js';
+import { Enemy_19_ } from './enemy_19_.js';
+
+const COOLDOWN_INTERVAL = {
+    EASY : 60,
+    HARD : 40
+}
 
 const STEP_ANGLE = 0.9;
 
-const COOLDOWN_INTERVAL = {
-    EASY : 120,
-    HARD : 80
-}
-
-
 // Enemy_19_head：火炎竜（頭部クラス）
-export class Enemy_19_head extends Enemy_19 {
+export class Enemy_19_head extends Enemy_19_ {
 
     constructor(scene){
         super(scene);
@@ -40,7 +39,7 @@ export class Enemy_19_head extends Enemy_19 {
         this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-            this.shoot_aim();
+            this.shoot_fix(this.angle + 90);
         }
         super.update();
     }
@@ -48,7 +47,7 @@ export class Enemy_19_head extends Enemy_19 {
     _update_child(){
         // this.pos.x -= GameState.scroll_dx;
 
-        this.angle = MyMath.rotate_towards_target(this.pos, GameState.player.pos, this.angle, STEP_ANGLE);
+        this.angle = MyMath.rotate_towards_target(this.angle, this.pos, GameState.player.pos, STEP_ANGLE);
         // console.log("this.angle", this.angle);
         if (this.sprite){
             this.sprite.angle = this.angle - 180;
@@ -59,7 +58,7 @@ export class Enemy_19_head extends Enemy_19 {
     }
 
     hit(amount){
-        this.parent.hit(2);
+        this.parent.hit(3);
         // super.hit(amount);
     }
 
