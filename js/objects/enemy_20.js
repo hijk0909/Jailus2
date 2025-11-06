@@ -9,7 +9,7 @@ const COOLDOWN_INTERVAL = {
     HARD : 45
 }
 
-// Enemy_20： トロコイド
+// Enemy_20： トロコイド（スピロデザイン）
 export class Enemy_20 extends Enemy {
 
     constructor(scene){

@@ -11,16 +11,19 @@ const SPAWN_INTERVAL = {
     HARD : 20
 }
 
+const MAX_ANGLE = 3;
+
 // Enemy_15a：植物砲台（根本）
 export class Enemy_15a extends Enemy_15_ {
 
     constructor(scene){
         super(scene);
         this.spawn_count = SPAWN_INTERVAL.EASY;
-        this.length = 32;
+        this.length = 20;
         this.life = 4;
         this.energy = 10;
         this.angle = -90;
+        this.max_angle = MAX_ANGLE;
         this.score = 200;
     }
 
@@ -31,6 +34,12 @@ export class Enemy_15a extends Enemy_15_ {
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_enemy')
         .setOrigin(0.5, 0.7)
         .setFrame(8);
+
+        if (this.parameter === "flipY"){
+            this.sprite.flipY = true;
+            this.sprite.setOrigin(0.5, 0.3);
+            this.angle = +90;
+        }
     }
 
     update(){

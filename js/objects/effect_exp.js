@@ -3,6 +3,8 @@ import { GLOBALS } from '../GameConst.js';
 import { Effect } from './effect.js';
 import { MyMath } from '../utils/MathUtils.js';
 
+const DRAG = 0.95;
+
 export class Effect_Exp extends Effect {
 
     constructor(scene){
@@ -22,7 +24,7 @@ export class Effect_Exp extends Effect {
         if (!this.scene.anims.exists('eff_exp_anims')) {
             this.scene.anims.create({key:'eff_exp_anims',
                 frames: this.scene.anims.generateFrameNumbers('ss_effect', { start: 0, end: 7 }),
-                frameRate: 12, repeat: 0
+                frameRate: 10, repeat: 0
             });
         }
         this.sprite.on('animationcomplete', (animation, frame) => {
@@ -33,38 +35,19 @@ export class Effect_Exp extends Effect {
         this.sprite.play('eff_exp_anims');
 
         // パーティクルの設定
+        this.update_position(this.sprite);
         this.set_particle();
     }
 
     set_particle(){
-        if (!this.scene.textures.exists('img_exp')){
-            let graphics = this.scene.add.graphics();
-            graphics.fillStyle(0xff7000, 1);
-            graphics.beginPath();
-            let ox = 20;
-            let oy = 20;
-            graphics.moveTo(0 + ox, -20 + oy);
-            graphics.lineTo(4 + ox, -4 + oy);
-            graphics.lineTo(20 + ox, 0 + oy);
-            graphics.lineTo(4 + ox, 4 + oy);
-            graphics.lineTo(0 + ox, 20 + oy);
-            graphics.lineTo(-4 + ox, 4 + oy);
-            graphics.lineTo(-20 + ox, 0 + oy);
-            graphics.lineTo(-4 + ox, -4 + oy);
-            graphics.closePath();
-            graphics.fillPath();
-            graphics.generateTexture('img_expl', 40, 40);
-            graphics.destroy();
-        }
         this.emitter = this.scene.add.particles(0, 0, 'img_expl',{
-            speed: { min: 155, max: 200 },
-            scale: { start: 1, end: 0.5 },
-            alpha: { start: 1, end: 0 },
-            lifespan: 500,
-            blendMode: 'ADD',
-            quantity: 60 // 一度に何個放出するか
+            speed: { min: 100, max: 140},
+            scale: { start: 1, end: 0.0 },
+            alpha: { start: 1, end: 0.5 },
+            lifespan: 500
+            // blendMode: 'ADD'
         });
-        this.emitter.explode(60, this.pos.x, this.pos.y); 
+        this.emitter.explode(30, this.sprite.x, this.sprite.y); 
     }
 
     update(){

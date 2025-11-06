@@ -27,6 +27,7 @@ export class Enemy_15b extends Enemy_15_ {
         this.spawn_count = SPAWN_INTERVAL_1;
         this.life = 1;
         this.angle = 0;
+        this.max_angle = MAX_ANGLE;
         this.length = 16;
         this.score = 10;
     }
@@ -79,7 +80,7 @@ export class Enemy_15b extends Enemy_15_ {
     }
 
     update_angle(){
-        this.angle = MyMath.rotate_towards_target(this.angle, this.pos, GameState.player.pos, STEP_ANGLE, this.parent.angle, MAX_ANGLE);
+        this.angle = MyMath.rotate_towards_target(this.angle, this.pos, GameState.player.pos, STEP_ANGLE, this.parent.angle, this.parent.max_angle);
         this.sprite.angle = this.angle + 90;
     }
 

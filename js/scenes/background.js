@@ -5,6 +5,8 @@ import { MyMath } from '../utils/MathUtils.js';
 import { GlitchPipeline } from '../utils/DrawUtils.js';
 import { Spawn } from './spawn.js';
 
+const SPAWN_WIDTH_RATIO = 0.7;
+
 export class Background {
     constructor(scene) {
         this.scene = scene;
@@ -53,8 +55,8 @@ export class Background {
         this.layer3.setDepth(MyMath.z_to_depth(GLOBALS.LAYER.LAYER3.Z) + 2);
         this.layer3_pending_objects = tilemap.getObjectLayer("object_1").objects;
         this.layer3_pending_objects = this.layer3_pending_objects.filter(
-              obj => obj.x >= MyMath.global_x_to_disp_x(GameState.scroll_x + GLOBALS.FIELD.WIDTH / 2, GLOBALS.LAYER.LAYER3.Z)
-        ); // 画面の左半分未満のオブジェクトは生成リストから外す
+              obj => obj.x >= MyMath.global_x_to_disp_x(GameState.scroll_x + GLOBALS.FIELD.WIDTH * SPAWN_WIDTH_RATIO, GLOBALS.LAYER.LAYER3.Z)
+        ); // 画面の左側の一定割合未満のオブジェクトは生成リストから外す
         this.layer3.x = - GameState.scroll_x * (GLOBALS.LAYER.LAYER3.HEIGHT / GLOBALS.FIELD.HEIGHT);
 
         this.layer4 = this.scene.add.tileSprite(0, 0, GLOBALS.FIELD.WIDTH, GLOBALS.LAYER.LAYER4.HEIGHT, stage_info.layer4)

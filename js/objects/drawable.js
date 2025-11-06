@@ -15,6 +15,7 @@ export class Drawable {
         this.collision = { width : 32, height : 32};
         this.drawCollision = false;
         this.grahpics = null;
+        this.parameter = null;
     }
 
     init(pos){
@@ -61,6 +62,10 @@ export class Drawable {
 
     set_z(z){
         this.z = z;
+    }
+
+    set_parameter(parameter){
+        this.parameter = parameter;
     }
 
     draw() {

@@ -9,6 +9,7 @@ export class Enemy_15_ extends Enemy {
     constructor(scene){
         super(scene);
         this.angle = 0;
+        this.max_angle = 0;
         this.length = 20;
         this.parent = null;
         this.child = null;

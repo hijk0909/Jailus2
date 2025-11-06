@@ -18,7 +18,7 @@ export class Enemy_22a extends Enemy {
     constructor(scene){
         super(scene);
         this.speed = 1.5;
-        this.shot_count = COOLDOWN_INTERVAL.EASY;
+        this.shot_count = COOLDOWN_INTERVAL.HARD;
         this.swing_count = 0;
     }
 

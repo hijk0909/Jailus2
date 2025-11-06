@@ -6,6 +6,7 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Effect } from './effect.js';
 
 const PERIOD = 250;
+const Z_OFFSET = 10;
 
 export class Effect_Pillar extends Effect {
 
@@ -16,7 +17,7 @@ export class Effect_Pillar extends Effect {
     init(pos){
         super.init(pos);
 
-        this.z = ((GameState.scroll_x % PERIOD)/PERIOD) *(GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z) + GLOBALS.LAYER.LAYER3.Z;
+        this.z = ((GameState.scroll_x % PERIOD)/PERIOD) *(GLOBALS.LAYER.LAYER1.Z - GLOBALS.LAYER.LAYER3.Z) + GLOBALS.LAYER.LAYER3.Z + Z_OFFSET;
         this.pos = new Phaser.Math.Vector2(MyMath.disp_x_to_global_x(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, this.z),
             GLOBALS.FIELD.HEIGHT / 2);
 

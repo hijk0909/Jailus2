@@ -23,6 +23,8 @@ import { Enemy_19a } from '../objects/enemy_19a.js';
 import { Enemy_20 } from '../objects/enemy_20.js';
 import { Enemy_21 } from '../objects/enemy_21.js';
 import { Enemy_22 } from '../objects/enemy_22.js';
+import { Enemy_23 } from '../objects/enemy_23.js';
+import { Enemy_24 } from '../objects/enemy_24.js';
 import { Enemy_B1 } from '../objects/enemy_b1.js';
 import { Enemy_B2 } from '../objects/enemy_b2.js';
 import { Enemy_B3 } from '../objects/enemy_b3.js';
@@ -58,6 +60,8 @@ const EnemyClassList = {
     'enemy_20': Enemy_20,
     'enemy_21': Enemy_21,
     'enemy_22': Enemy_22,
+    'enemy_23': Enemy_23,
+    'enemy_24': Enemy_24,
     'enemy_b1': Enemy_B1,
     'enemy_b2': Enemy_B2,
     'enemy_b3': Enemy_B3,
@@ -89,13 +93,22 @@ export class Spawn {
         const pos = MyMath.map_pos_to_global_pos(new Phaser.Math.Vector2(obj.x + obj.width / 2 ,obj.y + obj.height / 2));
         // パラメータの取り出し
         let val_subtype = "enemy_3"; // default
+        let val_parameter = null;
         if (obj.properties) {
             const prop_subtype = obj.properties.find(p => p.name === "subtype");
             if ( prop_subtype) { val_subtype = prop_subtype.value; }
+            const prop_parameter = obj.properties.find(p => p.name ==="parameter");
+            if ( prop_parameter) { val_parameter = prop_parameter.value; }
         }
 
         const EnemyClass = EnemyClassList[val_subtype];
         const enemy = new EnemyClass(scene);
+
+        // パラメータの設定
+        if (val_parameter){
+            enemy.set_parameter(val_parameter);
+            console.log("parameter:", val_parameter);
+        }
 
         enemy.init(pos);
         GameState.enemies.push(enemy);
@@ -131,6 +144,7 @@ export class Spawn {
         let val_subtype = "enemy_1"; // default
         let val_z = GLOBALS.LAYER.LAYER3.Z;
         let val_spawn_pos = GLOBALS.SPAWN_POS.RIGHT_MIDDLE;
+        let val_parameter = null;
         if (obj.properties) {
             const prop_subtype = obj.properties.find(p => p.name === "subtype");
             if ( prop_subtype) { val_subtype = prop_subtype.value; }
@@ -138,11 +152,14 @@ export class Spawn {
             if ( prop_z ) { val_z = parseInt(prop_z.value, 10); }
             const prop_spawn_pos = obj.properties.find(p => p.name === "spawn_pos");
             if ( prop_spawn_pos ) { val_spawn_pos = prop_spawn_pos.value; }
+            const prop_parameter = obj.properties.find(p => p.name ==="parameter");
+            if ( prop_parameter) { val_parameter = prop_parameter.value; }
         }
 
         // 敵の生成
         const EnemyClass = EnemyClassList[val_subtype];
         const enemy = new EnemyClass(scene);
+
         // 敵の初期位置
         const spawn_pos = SpawnPosList[val_spawn_pos];
         if (spawn_pos === GLOBALS.SPAWN_POS.MAP){
@@ -158,6 +175,11 @@ export class Spawn {
                 MyMath.disp_x_to_global_x(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, val_z),
                 map_pos.y));
             enemy.set_z(val_z);
+        }
+
+        // パラメータの設定
+        if (val_parameter){
+            enemy.set_parameter(val_parameter);
         }
 
         // 敵の生成
