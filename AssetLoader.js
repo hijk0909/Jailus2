@@ -135,6 +135,11 @@ export class AssetLoader extends Phaser.Scene {
         this.load.image('cursor', 'assets/images/cursor.png');
         this.load.image('keyboard', 'assets/images/keyboard.png');
 
+        // タイトル・イラスト等
+        this.load.image('title', 'assets/images/title.png');
+        this.load.image('attract', 'assets/images/attract.png');
+        this.load.image('epilogue', 'assets/images/epilogue.png');
+
         // 効果音
         this.load.audio('se_tap', './assets/audio/se/se_tap.mp3');
         this.load.audio('se_extend', './assets/audio/se/se_extend.mp3');

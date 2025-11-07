@@ -28,17 +28,24 @@ export class TitleScene extends Phaser.Scene {
         this.keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
         this.keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         this.my_input = new MyInput(this);
         this.my_input.registerPadConnect(() => this.show_pad());
         if (this.my_input.pad){this.show_pad();}
         this.my_input.registerNextAction(() => this.start_game());
 
-        this.add.text(this.cx, 50, 'Jailus 2', { fontSize: '64px', fill: '#ffee00' , stroke: '#ff0000', strokeThickness: 2}).setOrigin(0.5,0.5);
-        this.start_stage_txt = this.add.text(this.cx, 210, 'START STAGE: ', { fontSize: '24px', fill: '#eee' }).setOrigin(0.5,0.5).setVisible(false);
+        
+        this.add.image(this.cx,220,'title').setOrigin(0.5,0.5).setScale(0.45, 0.45);
+        // this.add.text(this.cx, 50, 'Jailus 2', { fontSize: '64px', fill: '#ffee00' , stroke: '#ff0000', strokeThickness: 2}).setOrigin(0.5,0.5);
+        this.add.text(this.cx, 10, 'Copyright Current Color Co. Ltd. All rights reserved.', { fontSize: '18px', fill: '#888' }).setOrigin(0.5,0);
+        this.start_stage_txt = this.add.text(this.cx, this.hy - 155, 'START STAGE: ', { fontSize: '24px', fill: '#eee' }).setOrigin(0.5,0.5).setVisible(false);
 
         this.add.text(this.cx, this.hy - 125, 'PUSH SPACE KEY',{ fontSize: '24px', fill: '#fff' }).setOrigin(0.5,0.5);
-        this.show_text(`VERSION : ${GLOBALS.VERSION}`);
+        this.clear_text();
+        const ver_text = `VERSION : ${GLOBALS.VERSION}`
+        const ver_text_x = (this.game.canvas.width - ver_text.length * FONT_SIZE) / 2;
+        this.add_text(ver_text_x,275,ver_text);
 
         const btn_play = this.add.image(this.cx, this.hy - 10, 'btn_tap')
         .setOrigin(0.5,1)
@@ -93,6 +100,9 @@ export class TitleScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.keyA)){
             this.scene.start('AttractScene');
         }
+        if (Phaser.Input.Keyboard.JustDown(this.keyC)){
+            this.scene.start('GameClearScene');
+        }
     }
     show_start_stage(){
         this.start_stage_txt.setText(`START STAGE : ${this.start_stage} - ${this.start_area}`).setVisible(true);
@@ -102,10 +112,8 @@ export class TitleScene extends Phaser.Scene {
         this.add.text(this.cx, this.hy - 100, ' or PRESS START BUTTON',{ fontSize: '24px', fill: '#fff' }).setOrigin(0.5, 0.5);
     }
 
-    show_text(text){
-        this.clear_text();
-        const pos_x = (this.game.canvas.width - text.length * FONT_SIZE) / 2;
-        this.add.bitmapText(pos_x, 100, 'myFont', text, FONT_SIZE)
+    add_text(x,y,text){
+        this.add.bitmapText(x, y, 'myFont', text, FONT_SIZE)
         .setName('titleText');        
     }
     clear_text(){

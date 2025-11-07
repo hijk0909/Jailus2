@@ -68,7 +68,8 @@ export class AttractScene extends Phaser.Scene {
         this.state = STATE.STORY;
         this.change_state();
 
-        // this.add.image(this.game.canvas.width / 2,this.game.canvas.height,'story').setOrigin(0.5,1).setDepth(-1);
+        // 背景の描画
+        this.add.image(this.game.canvas.width / 2,this.game.canvas.height / 2,'attract').setOrigin(0.5,0.5).setDepth(-1);
 
         // タイトルに戻る操作の登録
         this.my_input = new MyInput(this);
