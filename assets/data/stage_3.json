@@ -841,7 +841,7 @@
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"0.1"
+                         "value":"0.05"
                         }, 
                         {
                          "name":"subtype",

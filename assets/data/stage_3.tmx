@@ -143,7 +143,7 @@
   <object id="98" name="emitter" type="emitter" x="5536" y="0" width="32" height="32">
    <properties>
     <property name="duration" value="20"/>
-    <property name="interval" value="0.1"/>
+    <property name="interval" value="0.05"/>
     <property name="subtype" value="effect_bubble"/>
    </properties>
   </object>
