@@ -16,12 +16,12 @@ const STATE = {
 }
 const FONT_SIZE = 16;
 const STORY_SENTENCE = [
-    "In the year 2055,", 
+    "${0xd0d0d0}In the year 2055,", 
     "the transcendent AI",
     "uncovers the true essence of",
     "physical laws and mathematics,",
     "revealing the possibility that",
-    "the universe could collapse.",
+    "the universe could ${0xff00ff}collapse${0xd0d0d0}.",
     "The only solution is to dive",
     "into the mathematical space and",
     "destroy the causes of the problem.",
@@ -30,14 +30,20 @@ const STORY_SENTENCE = [
     "accessing abstract information,",
     "carrying the hopes of",
     "the entire universe,",
-    "dives into abstract space to",
-    "destroy the root cause of",
+    "dives into ${0x00ffff}abstract space${0xd0d0d0} to",
+    "${0xff0000}destroy${0xd0d0d0} the root cause of",
     "the universe's collapse."];
 const HOW_TO_PLAY_SENTENCE= [
-    "Use the up, down, left and right keys",
-    "to control your ship",
+    "${0xd0d0d0}Use the up, down, left and right keys",
+    "to ${0x00ff00}move${0xd0d0d0} your fighter jet",
     "and use the buttons",
-    "to fire shots and defeat enemies."];
+    "to ${0xff0000}fire${0xd0d0d0} shots and defeat enemies.",
+    "Hitting ${0x00ffff}the terrain${0xd0d0d0}",
+    "does not count as a failure.",
+    "${0xffff00}The difficulty${0xd0d0d0} increases over time,",
+    "if you fail, ${0xffff00}the difficulty${0xd0d0d0} decreases,",
+    "the score is multiplied by ${0xffff00}the difficulty${0xd0d0d0}."
+];
 
 export class AttractScene extends Phaser.Scene {
     constructor() {
@@ -141,7 +147,8 @@ export class AttractScene extends Phaser.Scene {
             this.sentenceMgr = new Sentences(this,
                 HOW_TO_PLAY_SENTENCE,
                    { speed: 2,
-                     onFinished: () => {
+                    baseColor: 0xd0d0d0,
+                    onFinished: () => {
                         this.time.addEvent({
                             delay: 6000,
                             callback: () => {

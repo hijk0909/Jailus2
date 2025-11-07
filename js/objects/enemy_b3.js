@@ -39,7 +39,7 @@ export class Enemy_B3 extends Enemy {
             this.scene.anims.create({key: "anims_boss_3",
                 frames: this.scene.anims.generateFrameNumbers('ss_boss_3',
                     { start: 0, end: 1}),
-                frameRate: 12, repeat: -1
+                frameRate: 6, repeat: -1
             });
         }
         this.sprite.play("anims_boss_3");
@@ -55,7 +55,11 @@ export class Enemy_B3 extends Enemy {
         this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-            this.shoot_aim();
+            this.shoot_aim(0,-120,-10);
+            if (GameState.difficulty >= 250){
+                this.shoot_aim(45,-120,-10);
+                this.shoot_aim(-45,-120,-10);
+            }
         }
     }
 

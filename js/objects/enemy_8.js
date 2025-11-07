@@ -35,6 +35,26 @@ export class Enemy_8 extends Enemy {
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_enemy')
         .setOrigin(0.5, 0.5)
         .setFrame(27);
+
+        // アニメーションの定義
+        if (!this.scene.anims.exists("anims_enemy8")) {
+            this.scene.anims.create({
+                key: "anims_enemy8",
+                defaultTextureKey: 'ss_enemy',
+                frames: [
+                    { frame: 27, duration: 500 },
+                    { frame: 29, duration: 50 },
+                    { frame: 27, duration: 50 },
+                    { frame: 30, duration: 50 },
+                    { frame: 27, duration: 50 },
+                    { frame: 29, duration: 50 },
+                    { frame: 27, duration: 50 },
+                    { frame: 30, duration: 50 },
+                    { frame: 27, duration: 50 }
+                ],
+                repeat: -1
+            });
+        }
     }
 
     update(){
@@ -51,6 +71,8 @@ export class Enemy_8 extends Enemy {
             this.state_count -= GameState.ff;
             if (this.state_count <= 0){
                 this.state = 2;
+                this.sprite.setFrame(27);
+                this.sprite.stop();
                 this.shot_count = 0;
                 this.dy = -20;
                 if (this.pos.x > RIGHT_AREA){
@@ -113,6 +135,7 @@ export class Enemy_8 extends Enemy {
                 this.state = 1;
                 this.state_count = WAIT_PERIOD;
                 this.sprite.setFrame(27);
+                this.sprite.play("anims_enemy8");
             }
         } else if (this.dy < 0) {
             // 上移動 → 上辺を確認
@@ -124,6 +147,7 @@ export class Enemy_8 extends Enemy {
                 this.dx = 0;
                 this.state = 0;
                 this.sprite.setFrame(28);
+                this.sprite.stop();
             }
         }
         this.pos.y = nextY;

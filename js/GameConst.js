@@ -1,7 +1,7 @@
 // GameConst.js
 
 export const GLOBALS = {
-    VERSION : "0.6a - 2025.11.7",
+    VERSION : "0.6b - 2025.11.7",
     STAGE_MAX : 8,
     INIT_LIVES : 3,
     EXTEND_FIRST : 50000,
@@ -78,15 +78,15 @@ export const GLOBALS = {
 
     RANKING_URL : "https://script.google.com/macros/s/AKfycbzNK_MQVWDv0sx-cvmKJSLi_C77gLK8SlRSTtCYh1ol1VwLmzRlFKLkjbDogeesPJrn/exec",
     RANKING_DEFAULT : [
-        {"name": "JAILUS2 ","score":  10000,"stage": 8,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   9000,"stage": 7,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   8000,"stage": 6,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   7000,"stage": 5,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   6000,"stage": 4,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   5000,"stage": 3,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   4000,"stage": 2,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   3000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   2000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"},
-        {"name": "JAILUS2 ","score":   1000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"}
+        {"name": "JAILUS2 ","score":  100000,"stage": 8,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   90000,"stage": 7,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   80000,"stage": 6,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   70000,"stage": 5,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   60000,"stage": 4,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   50000,"stage": 3,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   40000,"stage": 2,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   30000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   20000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"},
+        {"name": "JAILUS2 ","score":   10000,"stage": 1,"time": "2025-09-04T12:19:22.000Z"}
     ]
 };

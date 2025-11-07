@@ -636,7 +636,7 @@
                  "type":"enemy",
                  "visible":true,
                  "width":32,
-                 "x":5536,
+                 "x":5792,
                  "y":160
                 }, 
                 {
@@ -727,7 +727,7 @@
                  "type":"spawner",
                  "visible":true,
                  "width":32,
-                 "x":5536,
+                 "x":5792,
                  "y":224
                 }, 
                 {
@@ -781,7 +781,7 @@
                  "type":"event",
                  "visible":true,
                  "width":32,
-                 "x":5408,
+                 "x":5600,
                  "y":0
                 }, 
                 {
@@ -798,7 +798,7 @@
                  "type":"event",
                  "visible":true,
                  "width":32,
-                 "x":5504,
+                 "x":5760,
                  "y":0
                 }, 
                 {
@@ -852,8 +852,294 @@
                  "type":"emitter",
                  "visible":true,
                  "width":32,
-                 "x":5536,
+                 "x":5792,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":99,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":3872,
+                 "y":64
+                }, 
+                {
+                 "height":32,
+                 "id":100,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":3872,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":101,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":3872,
+                 "y":256
+                }, 
+                {
+                 "height":32,
+                 "id":102,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":3872,
+                 "y":352
+                }, 
+                {
+                 "height":32,
+                 "id":103,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4384,
+                 "y":96
+                }, 
+                {
+                 "height":32,
+                 "id":104,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4320,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":105,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4384,
+                 "y":224
+                }, 
+                {
+                 "height":32,
+                 "id":106,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4448,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":107,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4928,
+                 "y":224
+                }, 
+                {
+                 "height":32,
+                 "id":108,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4928,
+                 "y":96
+                }, 
+                {
+                 "height":32,
+                 "id":109,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":4992,
+                 "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":110,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":5056,
+                 "y":96
+                }, 
+                {
+                 "height":32,
+                 "id":111,
+                 "name":"enemy",
+                 "properties":[
+                        {
+                         "name":"spawn_pos",
+                         "type":"string",
+                         "value":"map"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"enemy_13"
+                        }],
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":32,
+                 "x":5056,
+                 "y":224
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -862,7 +1148,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":99,
+ "nextobjectid":112,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
