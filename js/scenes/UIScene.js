@@ -12,7 +12,7 @@ export class UIScene extends Phaser.Scene {
 
     create() {
         this.add_text( 0, 0,"1UP", 0xffff00);
-        this.add_text(17, 0,"HIGH SCORE", 0xff00ff);
+        this.add_text(17, 0,"HIGH SCORE", 0xff0000);
         this.add_text(33, 0,"DIFFICULTY:", 0xffffff);
         this.add_text( 0, 2,"LIVES:", 0x00ffff);
         this.add_text( 0,35,"STAGE:", 0xffffff);

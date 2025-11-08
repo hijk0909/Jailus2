@@ -42,15 +42,15 @@ export class Enemy_8 extends Enemy {
                 key: "anims_enemy8",
                 defaultTextureKey: 'ss_enemy',
                 frames: [
-                    { frame: 27, duration: 500 },
-                    { frame: 29, duration: 50 },
-                    { frame: 27, duration: 50 },
-                    { frame: 30, duration: 50 },
-                    { frame: 27, duration: 50 },
-                    { frame: 29, duration: 50 },
-                    { frame: 27, duration: 50 },
-                    { frame: 30, duration: 50 },
-                    { frame: 27, duration: 50 }
+                    { frame: 27, duration: 300 },
+                    { frame: 29, duration: 30 },
+                    { frame: 27, duration: 30 },
+                    { frame: 30, duration: 30 },
+                    { frame: 27, duration: 30 },
+                    { frame: 29, duration: 30 },
+                    { frame: 27, duration: 30 },
+                    { frame: 30, duration: 30 },
+                    { frame: 27, duration: 30 }
                 ],
                 repeat: -1
             });

@@ -34,7 +34,7 @@ export class GameClearScene extends Phaser.Scene {
         this.add.text(this.cx, 40, 'EPILOGUE', { fontSize: '64px', fill: '#00ffff' , stroke: '#008080', strokeThickness: 2}).setOrigin(0.5,0.5);
     
         this.time.addEvent({
-        delay: 30000,
+        delay: 32000,
         callback: () => {
             GameState.sound.bgm_game_clear.stop();
             this.goto_next();
