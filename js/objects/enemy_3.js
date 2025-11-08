@@ -7,7 +7,7 @@ import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = {
     EASY : 180,
-    HARD : 30
+    HARD : 60
 }
 
 // Enemy_3：固定砲台

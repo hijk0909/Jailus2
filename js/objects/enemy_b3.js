@@ -5,11 +5,11 @@ import { MyMath } from '../utils/MathUtils.js';
 import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = {
-    EASY : 80,
-    HARD : 40
+    EASY : 120,
+    HARD : 80
 }
 
-const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
+const MIN_X = GLOBALS.FIELD.WIDTH * 0.8;
 
 // Enemy_B3：ボス（ステージ３）
 export class Enemy_B3 extends Enemy {
