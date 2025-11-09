@@ -4,6 +4,7 @@ import { GameState } from '../GameState.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Effect_Exp } from '../objects/effect_exp.js';
 import { Effect_Ext } from '../objects/effect_ext.js';
+import { Effect_Exp_Spawner } from '../objects/effect_exp_spawner.js';
 
 export class Exec {
     constructor(scene) {
@@ -68,13 +69,21 @@ export class Exec {
                                     GameState.stage_state = GLOBALS.STAGE_STATE.CLEAR;
                                 }
                             }
+                            // 管理リストから削除
                             e.destroy();
                             GameState.enemies.splice(j,1);
-
+                            // 爆発
                             GameState.sound.se_explosion.play();
                             const eff = new Effect_Exp(this.scene);
                             eff.init(e.pos);
                             GameState.effects.push(eff);
+                            if (e.big_explosion){
+                                // 大爆発（爆発音は spawner側で生成）
+                                const eff = new Effect_Exp_Spawner(this.scene);
+                                eff.init(e.pos);
+                                eff.set_area(e.collision.width, e.collision.height);
+                                GameState.effects.push(eff);
+                            }
                         } else {
                             const eff = new Effect_Ext(this.scene);
                             eff.init(pb.pos);
@@ -85,6 +94,7 @@ export class Exec {
                     if (pb.life === -1){
                         // 破壊不可能な自弾（スプレッド）
                     } else {
+                        // 耐久力のある自弾
                         pb.life -= 1;
                         if (pb.life <= 0){
                             pb.alive = false;

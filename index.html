@@ -217,6 +217,7 @@
         uniform float uDisplace;   // 横方向ノイズ
         uniform float uHueShift;   // 色相ずれ
         uniform float uDesaturate; // 彩度減衰
+        uniform float alpha; // 透明度
         // 効果をかける範囲の設定
         uniform int frame;
         uniform float frameOffsetX;
@@ -285,7 +286,8 @@
             // 彩度減衰
             hsv.y *= 1.0 - uDesaturate;
 
-            texColor.rgb = hsv2rgb(hsv);
+            texColor.rgb = hsv2rgb(hsv) * alpha;
+            texColor.a *= alpha;
             gl_FragColor = texColor;
         }
     </script>

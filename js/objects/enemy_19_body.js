@@ -54,11 +54,12 @@ export class Enemy_19_body extends Enemy_19_ {
 
     hit(amount){
         this.parent.hit(1);
-        if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING &&
-            GameState.difficulty >= GLOBALS.DIFFICULTY.COUNTER_BULLET){
-            // 打ち返し弾
-            this.shoot_aim();
-        }
+        // if (GameState.stage_state === GLOBALS.STAGE_STATE.PLAYING &&
+        //     GameState.difficulty >= GLOBALS.DIFFICULTY.COUNTER_BULLET){
+        //     // 打ち返し弾
+        //     this.shoot_aim();
+        // }
+        // // 胴体単体で破壊されることは無い
         // super.hit(amount);
     }
 

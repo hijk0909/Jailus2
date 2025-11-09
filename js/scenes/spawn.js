@@ -37,6 +37,7 @@ import { Item_Point } from '../objects/item_point.js';
 import { Item_Runway } from '../objects/item_runway.js';
 import { Effect_Pillar } from '../objects/effect_pillar.js';
 import { Effect_Bubble } from '../objects/effect_bubble.js';
+import { Effect_Drop } from '../objects/effect_drop.js';
 
 const EnemyClassList = {
     'enemy_1' : Enemy_1,
@@ -82,7 +83,8 @@ const SpawnPosList = {
 
 const EffectClassList = {
     'effect_pillar' : Effect_Pillar,
-    'effect_bubble' : Effect_Bubble
+    'effect_bubble' : Effect_Bubble,
+    'effect_drop' : Effect_Drop
 }
 
 const RUNWAY_HEIGHT = 24;

@@ -19,11 +19,12 @@ export class Enemy_B6 extends Enemy {
         this.speed = 0.3;
         this.shot_count = COOLDOWN_INTERVAL;
         this.score = 3000;
+        this.boss = true;
+        this.big_explosion = true;
     }
 
     init(pos){
         super.init(pos);
-        this.boss = true;
 
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_boss_6')

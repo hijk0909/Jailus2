@@ -22,11 +22,12 @@ export class Enemy_B8 extends Enemy {
         this.speed = 0.3;
         this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.score = 3000;
+        this.boss = true;
+        this.big_explosion = true;
     }
 
     init(pos){
         super.init(pos);
-        this.boss = true;
 
         // スプライトの設定
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_boss_8')
@@ -50,6 +51,7 @@ export class Enemy_B8 extends Enemy {
         this.glitch.set1f('uDisplace', 1.0);
         this.glitch.set1f('uHueShift', 0.5);
         this.glitch.set1f('uDesaturate', 0.0);
+        this.glitch.set1f('alpha', 1.0);
 
         this.sprite.frameOffset = {x:0, y:0};
         this.sprite.frameScale  = {x:1, y:1};
@@ -101,7 +103,7 @@ export class Enemy_B8 extends Enemy {
         this.glitch.set1f('time', time);
         const p = (Math.sin(time / 200) + 1) / 2;
         this.glitch.set1f('uDisplace', p);
-        this.glitch.set1f('uHueShift', p);
+        // this.glitch.set1f('uHueShift', p);
         this.glitch.set1f('uDesaturate', p);
     }
 

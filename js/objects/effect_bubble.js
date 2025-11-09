@@ -9,11 +9,13 @@ const UP_SPEED = 1;
 const SWING_AMPLITUDE = 10.0;
 const SWING_FREQUENCY = Math.PI * 0.03;
 
+// 泡：ステージ３
 export class Effect_Bubble extends Effect {
 
     constructor(scene){
         super(scene);
         this.swing_counter = 0;
+        this.scale = 0.4;
     }
 
     init(pos){
@@ -29,8 +31,6 @@ export class Effect_Bubble extends Effect {
         .setFrame(16)
         .setTint(this.get_tint_from_z(this.z))
         .setVisible(false);
-
-        this.scale = 0.4;
 
         // アニメーションの定義
         if (!this.scene.anims.exists("anims_effect_bubble")) {

@@ -14,6 +14,7 @@ export class Enemy_5 extends Enemy {
         super(scene);
         this.speed = 1;
         this.life = 3;
+        this.score = 250;
     }
 
     init(pos){

@@ -69,12 +69,20 @@ export class AttractScene extends Phaser.Scene {
         this.change_state();
 
         // 背景の描画
-        this.add.image(this.game.canvas.width / 2,this.game.canvas.height / 2,'attract').setOrigin(0.5,0.5).setDepth(-1);
+        this.attract_background = this.add.image(this.game.canvas.width / 2,this.game.canvas.height / 2,'attract').setOrigin(0.5,0.5).setDepth(-1);
 
         // タイトルに戻る操作の登録
         this.my_input = new MyInput(this);
         this.my_input.registerNextAction(() => this.goto_title());
         this.input.on('pointerdown', this.goto_title, this);
+
+        // 波状シェーダの設定
+        this.attract_background.setPipeline('Ripple');
+        this.ripple = this.renderer.pipelines.get('Ripple');
+        this.ripple.set1f('time', 0);
+        this.ripple.set1f('frequency', 48.0);
+        this.ripple.set1f('amplitude', 0.010);
+        this.ripple.set1f('alpha', 1);
     }
 
     change_state(){
@@ -167,8 +175,11 @@ export class AttractScene extends Phaser.Scene {
         }
     }
 
-    update(){
+    update(time, delta){
         this.sentenceMgr.update();
+
+        // 波状シェーダーのパラメータ更新
+        this.ripple.set1f('time', time * 0.001);
 
         // 隠しキーボード操作
         if (GameState.debug){

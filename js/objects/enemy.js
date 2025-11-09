@@ -18,6 +18,7 @@ export class Enemy extends Drawable {
         this.speed = 1;
         this.score = 100;
         this.boss = false;
+        this.big_explosion = false;
     }
 
     init(pos){

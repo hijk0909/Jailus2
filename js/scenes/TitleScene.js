@@ -36,7 +36,7 @@ export class TitleScene extends Phaser.Scene {
         this.my_input.registerNextAction(() => this.start_game());
 
         
-        this.add.image(this.cx,220,'title').setOrigin(0.5,0.5).setScale(0.45, 0.45);
+        this.title_logo = this.add.image(this.cx,220,'title').setOrigin(0.5,0.5).setScale(0.45, 0.45);
         // this.add.text(this.cx, 50, 'Jailus 2', { fontSize: '64px', fill: '#ffee00' , stroke: '#ff0000', strokeThickness: 2}).setOrigin(0.5,0.5);
         this.add.text(this.cx, 10, 'Copyright Current Color Co. Ltd. All rights reserved.', { fontSize: '18px', fill: '#888' }).setOrigin(0.5,0);
         this.start_stage_txt = this.add.text(this.cx, this.hy - 155, 'START STAGE: ', { fontSize: '24px', fill: '#eee' }).setOrigin(0.5,0.5).setVisible(false);
@@ -59,6 +59,17 @@ export class TitleScene extends Phaser.Scene {
         this.add.image(50,300,'op_1').setOrigin(0,0);
         this.add.image(300,300,'op_2').setOrigin(0,0);
         this.add.image(550,300,'op_3').setOrigin(0,0);
+
+        // グリッチシェーダー
+        this.glitch_counter = 0;
+        this.title_logo.setPipeline('Glitch');
+        this.glitch = this.renderer.pipelines.get('Glitch');
+        this.glitch.set1i('frame', 0); //スプライトシート（フレーム）は使わない
+        this.glitch.set1f('time', 0);
+        this.glitch.set1f('uDisplace', 1.0);
+        this.glitch.set1f('uHueShift', 0.5);
+        this.glitch.set1f('uDesaturate', 0.0);
+        this.glitch.set1f('alpha', 1.0);
     }
 
     reset_attract_timer(){
@@ -78,6 +89,16 @@ export class TitleScene extends Phaser.Scene {
     }
 
     update(time, delta){
+
+        // グリッチシェーダー
+        this.glitch_counter += delta;
+        this.glitch.set1f('time', time);
+        const p = (- Math.cos(this.glitch_counter / 800) + 1) / 16;
+        this.glitch.set1f('uDisplace', p);
+        this.glitch.set1f('uHueShift', p * 12);
+        // this.glitch.set1f('uDesaturate', p);
+
+        // 隠しキー操作
         if (Phaser.Input.Keyboard.JustDown(this.keyF)){
             this.start_stage = Math.max(1, this.start_stage - 1);
             this.start_area = 1;

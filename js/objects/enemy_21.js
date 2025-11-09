@@ -67,7 +67,7 @@ export class Enemy_21 extends Enemy {
                 this.state = 1;
                 this.swing_times = SWING_TIMES;
                 this.swing_count = SWING_COUNT;
-                this.speed = 6;
+                this.speed = 4; //[1]の振れ幅
                 this.random_velocity();
             }
 
@@ -83,7 +83,10 @@ export class Enemy_21 extends Enemy {
                     this.state = 2;
                     this.collision = COLLISION_NULL;
                     this.pos_old = this.pos.clone();
-                    this.pos_new = this.pos.clone().add(GameState.player.pos).scale(0.5);
+                    // this.pos_new = this.pos.clone().add(GameState.player.pos).scale(0.5);
+                    // 自機に向かって15%ほど動く
+                    const p = 0.15;
+                    this.pos_new = this.pos_old.clone().lerp(GameState.player.pos, p);
                     this.warp_times = WARP_TIMES;
                     this.warp_count = WARP_COUNT;
                 }
@@ -105,7 +108,7 @@ export class Enemy_21 extends Enemy {
                     this.collision = COLLISION_NORMAL;
                     this.swing_times = SWING_TIMES;
                     this.swing_count = SWING_COUNT;
-                    this.speed = 2;
+                    this.speed = 1; //[2]の振れ幅
                     this.pos = this.pos_new;
                 }
             }

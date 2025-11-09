@@ -434,7 +434,6 @@ export class Background {
             create() {
                 // レイヤーの設定
                 this.layer2.setAlpha(0.8);
-                this.layer4.setAlpha(0.8);
 
                 // スクロールシェーダの初期化とレイヤーへの設定
                 const scale = MyMath.z_to_scale(GLOBALS.LAYER.LAYER1.Z);
@@ -450,12 +449,12 @@ export class Background {
                 this.scrollFloor.set1f('uScaleBottom', 1.0);
 
                 // レイヤー2 に ノイズシェーダーを適用
- 
                 this.glitch = this.scene.renderer.pipelines.get('Glitch2');
                 this.glitch.set1f('time', 0);
                 this.glitch.set1f('uDisplace', 1.0);
                 this.glitch.set1f('uHueShift', 0.5);
                 this.glitch.set1f('uDesaturate', 0.0);
+                this.glitch.set1f('alpha', 0.6);
                 this.glitch.set1i('frame', 0);
                 this.glitch.set1f('frameOffsetX', 0.0);
                 this.glitch.set1f('frameOffsetY', 0.0);
