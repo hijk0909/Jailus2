@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="400" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="152">
  <editorsettings>
   <export target="stage_2.json" format="json"/>
  </editorsettings>
@@ -13,7 +13,7 @@
  </tileset>
  <layer id="1" name="layer_1" width="400" height="16">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,23,23,23,23,23,23,23,24,23,23,23,22,22,21,22,22,22,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,21,22,22,22,22,23,23,23,23,24,24,24,24,24,24,24,22,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,22,22,22,22,22,22,22,22,22,24,24,24,24,24,24,0,0,0,0,0,0,24,24,24,23,23,23,23,22,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,23,24,24,24,24,24,24,0,0,0,0,0,24,24,24,24,23,23,22,22,21,20,20,21,21,22,23,24,24,24,0,0,0,0,0,0,0,24,24,24,23,23,23,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,21,21,21,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,22,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,24,23,23,23,23,23,23,23,24,23,23,23,22,22,21,22,22,22,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,21,22,22,22,22,23,23,23,23,24,24,24,24,24,24,24,22,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,22,22,22,22,22,22,22,22,22,24,24,24,24,24,24,0,0,0,0,0,0,24,24,24,23,23,23,23,22,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,23,24,24,24,24,24,24,0,0,0,0,0,24,24,24,24,23,23,22,22,21,20,20,21,21,22,23,24,24,24,0,0,0,0,0,0,0,24,24,24,23,23,23,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,21,21,21,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,22,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,24,0,0,0,0,0,0,24,23,23,23,23,22,22,22,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,22,22,23,23,23,23,23,23,24,0,0,0,0,24,24,22,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,22,22,22,22,22,22,22,24,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,22,22,23,23,24,24,24,24,24,24,24,24,24,24,24,23,24,24,24,24,0,0,0,0,0,0,0,0,0,24,24,24,23,23,22,21,21,20,21,22,22,23,24,24,0,0,0,0,0,0,0,0,0,24,24,24,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,22,22,22,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,22,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,0,0,0,0,0,0,0,24,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,24,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,23,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,24,24,24,24,24,24,24,24,24,24,24,24,23,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,24,23,23,22,22,21,21,21,22,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,24,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,24,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,24,24,0,0,0,0,0,24,24,24,24,24,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,22,22,22,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,24,23,24,24,0,0,0,0,0,0,0,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -26,8 +26,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,0,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,23,22,23,24,0,0,0,0,0,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,24,0,0,0,24,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,23,23,23,23,24,24,0,0,0,0,0,0,0,0,0,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,24,24,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,24,24,23,23,24,0,0,0,0,0,0,0,0,0,0,0,24,23,22,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,23,23,23,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,22,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,23,24,24,0,0,0,0,0,0,0,0,0,0,24,24,23,24,0,0,0,0,0,0,0,0,0,24,23,23,24,24,24,0,0,0,0,0,0,24,24,0,0,0,0,0,0,0,0,0,0,0,0,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,21,22,22,23,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,23,23,23,23,23,23,23,24,24,0,0,0,0,0,0,0,0,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,24,24,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,24,24,23,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,24,21,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,23,23,23,23,23,24,24,24,24,0,0,129,0,0,0,0,0,0,0,0,24,24,23,23,22,23,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,22,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,0,24,23,23,24,24,24,0,0,0,0,0,24,23,23,24,0,0,0,0,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,21,21,22,23,23,24,24,0,0,0,0,0,0,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,24,0,0,0,0,0,0,0,24,23,24,24,0,0,0,0,0,0,0,0,24,24,23,23,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,23,22,22,22,22,23,23,23,23,24,24,24,24,24,0,0,0,24,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,24,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,0,0,0,0,0,0,0,0,24,23,23,23,23,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,23,23,24,24,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,24,24,23,23,22,23,23,24,0,0,0,0,0,0,0,0,0,0,0,24,21,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,22,22,22,22,22,22,23,23,23,23,24,24,24,24,0,0,0,0,0,0,0,0,24,23,23,22,22,22,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,22,22,22,22,22,22,23,23,24,24,0,0,0,0,0,0,24,24,23,23,23,23,24,0,0,0,0,0,0,0,24,24,23,23,24,24,24,24,0,0,0,0,24,22,22,24,0,0,0,0,0,0,0,0,0,24,22,23,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,21,21,21,22,23,23,23,24,24,0,0,0,0,0,24,23,23,24,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,23,24,0,0,0,0,0,0,24,24,23,23,24,0,0,0,0,0,0,0,24,24,23,23,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,22,22,22,21,21,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,24,23,23,23,22,23,23,23,23,24,0,0,0,0,129,0,0,24,23,22,22,22,23,23,24,0,0,0,0,0,0,0,24,23,24,23,23,22,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,23,23,24,0,0,0,0,0,24,24,23,24,0,0,0,0,0,0,24,23,23,22,22,22,23,24,24,0,0,0,0,0,0,0,0,0,24,23,21,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,23,23,23,23,22,22,22,22,22,22,22,22,22,22,23,23,23,23,24,24,24,0,0,0,0,0,24,24,23,22,22,21,22,24,24,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,22,21,21,21,21,22,22,23,24,24,24,24,0,0,0,24,24,23,23,22,22,23,24,24,0,0,0,0,0,0,24,23,23,22,24,24,24,24,24,0,0,24,24,22,22,23,24,0,0,0,0,0,0,0,24,22,22,23,24,24,24,0,0,0,0,0,0,0,24,24,24,24,23,23,23,22,21,20,20,21,22,23,23,23,24,24,24,0,0,24,24,24,23,23,24,24,129,0,0,0,0,0,0,24,24,24,23,23,22,22,22,23,24,24,0,0,0,0,0,24,23,21,23,24,24,0,0,0,0,0,24,24,23,23,22,22,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,22,22,22,21,21,21,21,21,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,24,0,0,0,0,0,0,0,0,24,24,24,24,24,24,24,24,0,0,0,0,0,0,0,24,23,23,23,23,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,23,23,24,24,0,0,0,0,0,0,24,23,24,0,0,0,0,0,0,24,24,23,23,22,23,23,24,0,0,0,0,0,0,0,0,0,0,0,24,21,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,22,22,22,22,22,22,23,23,23,23,24,24,24,24,0,0,0,0,0,0,0,0,24,23,23,22,22,22,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,22,22,22,22,22,22,23,23,24,24,0,0,0,0,0,0,24,24,23,23,23,23,24,0,0,0,0,0,0,0,24,24,23,23,24,24,24,24,0,0,0,0,24,22,22,24,0,0,0,0,0,0,0,0,0,24,22,23,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,21,21,21,22,23,23,23,24,24,0,0,0,0,24,24,23,23,24,24,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,23,24,0,0,0,0,0,0,24,24,23,23,24,0,0,0,0,0,0,0,24,24,23,23,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,23,23,23,22,22,22,21,21,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,24,24,24,0,0,0,0,24,23,23,23,22,23,23,23,23,24,0,0,0,0,129,0,24,24,23,22,22,22,23,23,24,24,0,0,0,0,0,0,24,23,24,23,23,22,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,23,23,24,0,0,0,0,0,24,24,23,24,0,0,0,0,0,0,24,23,23,22,22,22,23,24,24,0,0,0,0,0,0,0,0,0,24,23,21,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,24,23,23,23,23,22,22,22,22,22,22,22,22,22,22,23,23,23,23,24,24,24,0,0,0,0,0,24,24,23,22,22,21,22,24,24,24,24,24,24,0,0,0,0,0,0,0,0,0,0,0,24,24,23,23,22,22,22,21,21,21,21,22,22,23,24,24,24,24,0,0,0,24,24,23,23,22,22,23,24,24,0,0,0,0,0,0,24,23,23,22,24,24,24,24,24,0,0,24,24,22,22,23,24,0,0,0,0,0,0,0,24,22,22,23,24,24,24,0,0,0,0,0,0,0,24,24,24,24,23,23,23,22,21,20,20,21,22,23,23,23,24,24,24,0,0,24,24,24,23,23,24,24,129,0,0,0,0,0,0,24,24,24,23,23,22,22,22,23,24,24,0,0,0,0,0,24,23,21,23,24,24,0,0,0,0,0,24,24,23,23,22,22,22,22,22,23,23,24,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,24,24,23,23,23,23,22,22,22,21,21,21,21,21,22,22,23,23,23,23,24,24,24,24,24,24,24,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 24,24,23,24,24,24,24,24,23,23,23,24,24,24,24,24,23,23,23,22,22,22,23,23,23,24,24,24,22,24,24,24,24,23,22,22,22,22,23,24,24,24,24,24,24,22,22,24,24,24,23,22,21,22,23,23,23,23,23,23,23,23,23,23,21,21,23,23,23,23,23,23,23,23,22,21,21,22,22,23,24,24,24,129,24,24,24,24,23,24,24,24,24,24,24,24,24,23,22,22,21,22,23,23,24,24,24,24,24,23,24,24,24,24,24,23,21,23,24,24,24,23,23,23,23,23,23,23,23,24,24,24,24,24,24,23,23,23,23,22,22,22,22,22,22,21,22,22,22,22,22,22,22,22,23,23,23,24,24,24,23,23,24,24,23,23,22,21,21,22,23,24,24,24,24,24,24,24,23,24,24,24,24,24,24,24,24,24,23,23,22,22,21,21,21,20,20,21,21,22,23,23,24,24,24,24,24,24,24,23,23,22,22,21,23,23,24,24,24,23,23,24,24,24,23,22,22,22,24,24,24,24,24,24,24,23,23,23,23,23,24,24,24,24,24,24,23,23,23,23,23,24,24,24,24,24,24,24,24,24,24,24,23,23,23,23,22,22,22,21,20,20,21,22,23,23,23,24,24,23,24,24,24,23,23,22,22,23,24,24,24,23,23,24,24,24,24,23,23,23,22,22,21,22,23,23,24,24,24,23,23,24,24,23,21,23,23,24,24,23,24,24,24,24,23,23,22,22,21,21,21,22,22,23,23,24,24,24,24,24,24,24,23,23,23,23,23,23,24,24,24,24,24,24,24,23,23,23,23,23,22,22,21,21,21,20,20,20,21,21,22,22,23,23,23,24,24,24,24,24,22,22,24,24,23,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -215,6 +215,366 @@
    <properties>
     <property name="spawn_pos" value="map"/>
     <property name="subtype" value="enemy_19a"/>
+   </properties>
+  </object>
+  <object id="91" name="effect" type="effect" x="1024" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="92" name="effect" type="effect" x="1248" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="93" name="effect" type="effect" x="1504" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="94" name="effect" type="effect" x="2560" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="95" name="effect" type="effect" x="3072" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="97" name="effect" type="effect" x="3328" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="98" name="effect" type="effect" x="3712" y="128" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="99" name="effect" type="effect" x="4576" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="100" name="effect" type="effect" x="4608" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="101" name="effect" type="effect" x="4640" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="102" name="effect" type="effect" x="4672" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="103" name="effect" type="effect" x="4704" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="104" name="effect" type="effect" x="8000" y="320" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="105" name="effect" type="effect" x="8800" y="192" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="106" name="effect" type="effect" x="8832" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="107" name="effect" type="effect" x="8864" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="108" name="effect" type="effect" x="8928" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="109" name="effect" type="effect" x="9024" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="110" name="effect" type="effect" x="9088" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="111" name="effect" type="effect" x="9216" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="112" name="effect" type="effect" x="9312" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="113" name="effect" type="effect" x="9344" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="114" name="effect" type="effect" x="9376" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="115" name="effect" type="effect" x="9408" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="116" name="effect" type="effect" x="9472" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="117" name="effect" type="effect" x="9536" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="118" name="effect" type="effect" x="9600" y="320" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="119" name="effect" type="effect" x="9760" y="320" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="120" name="effect" type="effect" x="9792" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="121" name="effect" type="effect" x="9856" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="122" name="effect" type="effect" x="9888" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="123" name="effect" type="effect" x="9920" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="124" name="effect" type="effect" x="9984" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="125" name="effect" type="effect" x="10024" y="293.333" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="126" name="effect" type="effect" x="10112" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="127" name="effect" type="effect" x="10208" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="128" name="effect" type="effect" x="10240" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="129" name="effect" type="effect" x="10272" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="130" name="effect" type="effect" x="10336" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="131" name="effect" type="effect" x="10400" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="132" name="effect" type="effect" x="10464" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="133" name="effect" type="effect" x="10592" y="288" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="134" name="effect" type="effect" x="10656" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="135" name="effect" type="effect" x="10720" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="136" name="effect" type="effect" x="10816" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="137" name="effect" type="effect" x="10880" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="138" name="effect" type="effect" x="10944" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="139" name="effect" type="effect" x="11008" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="140" name="effect" type="effect" x="11072" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="141" name="effect" type="effect" x="11136" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="142" name="effect" type="effect" x="11200" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="143" name="effect" type="effect" x="11264" y="448" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="144" name="effect" type="effect" x="11360" y="416" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="145" name="effect" type="effect" x="11424" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="146" name="effect" type="effect" x="11712" y="224" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="147" name="effect" type="effect" x="11744" y="224" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="148" name="effect" type="effect" x="11776" y="224" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="149" name="effect" type="effect" x="12128" y="384" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="150" name="effect" type="effect" x="12032" y="352" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
+   </properties>
+  </object>
+  <object id="151" name="effect" type="effect" x="12224" y="192" width="32" height="32">
+   <properties>
+    <property name="spawn_pos" value="map"/>
+    <property name="subtype" value="effect_flame"/>
    </properties>
   </object>
  </objectgroup>

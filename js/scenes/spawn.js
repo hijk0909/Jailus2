@@ -38,6 +38,7 @@ import { Item_Runway } from '../objects/item_runway.js';
 import { Effect_Pillar } from '../objects/effect_pillar.js';
 import { Effect_Bubble } from '../objects/effect_bubble.js';
 import { Effect_Drop } from '../objects/effect_drop.js';
+import { Effect_Flame } from '../objects/effect_flame.js';
 
 const EnemyClassList = {
     'enemy_1' : Enemy_1,
@@ -84,7 +85,8 @@ const SpawnPosList = {
 const EffectClassList = {
     'effect_pillar' : Effect_Pillar,
     'effect_bubble' : Effect_Bubble,
-    'effect_drop' : Effect_Drop
+    'effect_drop'   : Effect_Drop,
+    'effect_flame'  : Effect_Flame
 }
 
 const RUNWAY_HEIGHT = 24;
@@ -193,17 +195,25 @@ export class Spawn {
 
         // パラメータの取り出し
         let val_subtype = "effect_pillar"; //default
+        let val_spawn_pos = "right_middle"; //defalut
         if (obj.properties) {
             const prop_subtype = obj.properties.find(p => p.name === "subtype");
             if ( prop_subtype) { val_subtype = prop_subtype.value; }
+            const prop_spawn_pos = obj.properties.find(p => p.name === "spawn_pos");
+            if ( prop_spawn_pos ) { val_spawn_pos = prop_spawn_pos.value; }
         }
 
         // 画面効果の生成
         const EffectClass = EffectClassList[val_subtype];
         const effect = new EffectClass(scene);
         // 画面効果の初期位置
-        const pos = new Phaser.Math.Vector2(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, GLOBALS.FIELD.HEIGHT / 2);
-        effect.init(pos);
+        const spawn_pos = SpawnPosList[val_spawn_pos];
+        if (spawn_pos === GLOBALS.SPAWN_POS.MAP){
+            const map_pos = MyMath.map_pos_to_global_pos(new Phaser.Math.Vector2(obj.x + obj.width / 2 ,obj.y + obj.height / 2));
+            effect.init(map_pos);
+        } else if (spawn_pos === GLOBALS.SPAWN_POS.RIGHT_MIDDLE){
+            effect.init(new Phaser.Math.Vector2(GLOBALS.FIELD.WIDTH + GLOBALS.FIELD.MARGIN, GLOBALS.FIELD.HEIGHT / 2));
+        }
 
         // 画面効果の生成
         GameState.effects.push(effect);
