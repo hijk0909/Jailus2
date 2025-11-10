@@ -30,6 +30,7 @@ export class Effect_Drop extends Effect {
         .setOrigin(0.5, 0.5)
         .setFrame(23)
         .setTint(this.get_tint_from_z(this.z))
+        .setAlpha(0.4)
         .setVisible(false);
         this.sprite.flipY = true;
 
