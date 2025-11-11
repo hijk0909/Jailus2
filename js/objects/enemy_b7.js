@@ -6,7 +6,7 @@ import { Enemy } from './enemy.js';
 
 const COOLDOWN_INTERVAL = {
     EASY : 60,
-    HARD : 20
+    HARD : 28
 }
 const MIN_X = GLOBALS.FIELD.WIDTH * 0.7;
 

@@ -5,6 +5,7 @@ import { Drawable } from './drawable.js';
 import { MyMath } from '../utils/MathUtils.js';
 import { Bullet_E } from './bullet_e.js';
 import { Bullet_EH } from './bullet_eh.js';
+import { Bullet_EF } from './bullet_ef.js';
 
 const ENEMY_CLIP_MARGIN = 400;
 
@@ -57,6 +58,15 @@ export class Enemy extends Drawable {
         beh.init(pos);
         beh.set_velocity_fix(angle);
         GameState.bullets_e.push(beh);
+    }
+
+    shoot_flame_fix(angle = 0, offset_x = 0, offset_y = 0){
+        // 火炎弾の射出（固定方向）
+        const bef = new Bullet_EF(this.scene);
+        const pos = new Phaser.Math.Vector2(this.pos.x + offset_x, this.pos.y + offset_y);
+        bef.init(pos);
+        bef.set_velocity_fix(angle);
+        GameState.bullets_e.push(bef);
     }
 
     hit(amount){

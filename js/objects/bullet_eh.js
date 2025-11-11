@@ -7,7 +7,7 @@ import { Bullet } from './bullet.js';
 const STEP_ANGLE = 3.0;
 const ACCEL = 0.2;
 const MIN_SPEED = 3.0;
-const MAX_SPEED = 10.0;
+const MAX_SPEED = 8.8;
 
 export class Bullet_EH extends Bullet {
 // 敵・追跡弾（homing bullet)

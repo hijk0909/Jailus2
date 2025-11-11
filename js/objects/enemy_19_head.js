@@ -39,7 +39,7 @@ export class Enemy_19_head extends Enemy_19_ {
         this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
             this.shot_count = MyMath.lerp_by_difficulty(COOLDOWN_INTERVAL.EASY, COOLDOWN_INTERVAL.HARD);
-            this.shoot_fix(this.angle + 90);
+            this.shoot_flame_fix(this.angle + 90);
         }
         super.update();
     }

@@ -35,7 +35,7 @@ export class Enemy_B2 extends Enemy {
             this.scene.anims.create({key: "anims_boss_2",
                 frames: this.scene.anims.generateFrameNumbers('ss_boss_2',
                     { start: 0, end: 1}),
-                frameRate: 12, repeat: -1
+                frameRate: 6, repeat: -1
             });
         }
         this.sprite.play("anims_boss_2");
