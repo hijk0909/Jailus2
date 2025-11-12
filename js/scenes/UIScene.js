@@ -23,6 +23,7 @@ export class UIScene extends Phaser.Scene {
         this.ui_stage_val = this.add_text(6,35, `1-1`);
         this.ui_scroll_val = this.add_text(10,35, 0, 0xffffff);
         this.ui_pause_txt = this.add_text(24, 18, 'PAUSE', 0x00ffff).setVisible(false);
+        this.ui_ready_txt = this.add_text(20,16, 'GET READY', 0x80ff00).setVisible(false);
     }
 
     update(){
@@ -56,6 +57,11 @@ export class UIScene extends Phaser.Scene {
     // 一時停止文字表示
     show_pause(visible){
         this.ui_pause_txt.setVisible(visible);
+    }
+
+    // 開始文字列
+    show_ready(visible){
+        this.ui_ready_txt.setVisible(visible);
     }
 
     destroy(){

@@ -56,9 +56,9 @@ export class TitleScene extends Phaser.Scene {
 
         this.reset_attract_timer();
 
-        this.add.image(50,300,'op_1').setOrigin(0,0);
+        this.add.image(80,300,'op_1').setOrigin(0,0);
         this.add.image(300,300,'op_2').setOrigin(0,0);
-        this.add.image(550,300,'op_3').setOrigin(0,0);
+        this.add.image(520,300,'op_3').setOrigin(0,0);
 
         // グリッチシェーダー
         this.glitch_counter = 0;

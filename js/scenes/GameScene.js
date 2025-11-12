@@ -76,6 +76,7 @@ export class GameScene extends Phaser.Scene {
             GameState.scroll = true;
             GameState.bg = new Background(this);
             GameState.bg.create();
+            GameState.ui.show_ready(true);
             // [SOUND] BGM停止
             GameState.bgm.stop();
             // ワイプイン
@@ -95,6 +96,7 @@ export class GameScene extends Phaser.Scene {
             this.stage_state_count -= GameState.ff;
             if (this.stage_state_count < 0){
                 GameState.stage_state = GLOBALS.STAGE_STATE.PLAYING;
+                GameState.ui.show_ready(false);
                 // [SOUND] メインBGM
                 GameState.bgm.set_by_stage();
                 GameState.bgm.play();

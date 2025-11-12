@@ -1908,12 +1908,12 @@
                         {
                          "name":"duration",
                          "type":"string",
-                         "value":"45"
+                         "value":"30"
                         }, 
                         {
                          "name":"interval",
                          "type":"string",
-                         "value":"0.2"
+                         "value":"0.4"
                         }, 
                         {
                          "name":"subtype",
@@ -1953,6 +1953,33 @@
                  "width":32,
                  "x":7712,
                  "y":0
+                }, 
+                {
+                 "height":32,
+                 "id":189,
+                 "name":"emitter",
+                 "properties":[
+                        {
+                         "name":"duration",
+                         "type":"string",
+                         "value":"30"
+                        }, 
+                        {
+                         "name":"interval",
+                         "type":"string",
+                         "value":"0.2"
+                        }, 
+                        {
+                         "name":"subtype",
+                         "type":"string",
+                         "value":"effect_drop"
+                        }],
+                 "rotation":0,
+                 "type":"emitter",
+                 "visible":true,
+                 "width":32,
+                 "x":4768,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1961,7 +1988,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":189,
+ "nextobjectid":190,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
