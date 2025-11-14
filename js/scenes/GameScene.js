@@ -57,8 +57,6 @@ export class GameScene extends Phaser.Scene {
     update(time, delta){
 
         GameState.ff = delta / GLOBALS.DELTA;
-        // console.log("ff", GameState.ff, delta, GLOBALS.DELTA);
-        GameState.difficulty = Math.min(GameState.difficulty + GLOBALS.DIFFICULTY.UP_PAR_TIME * GameState.ff, GLOBALS.DIFFICULTY.MAX);
 
         if (GameState.stage_state === GLOBALS.STAGE_STATE.START){
             // ◆開始
@@ -106,6 +104,8 @@ export class GameScene extends Phaser.Scene {
             this.my_input.update();
             GameState.player.update();
             this.exec.update(time, delta);
+            // 難易度の上昇
+            GameState.difficulty = Math.min(GameState.difficulty + GLOBALS.DIFFICULTY.UP_PAR_TIME * GameState.ff, GLOBALS.DIFFICULTY.MAX);
         } else if (GameState.stage_state === GLOBALS.STAGE_STATE.FAIL){
             // ◆失敗
             this.my_input.clear();
@@ -194,19 +194,21 @@ export class GameScene extends Phaser.Scene {
         GameState.shockwave.update();
 
         // 隠しキー
-        if (Phaser.Input.Keyboard.JustDown(this.keyQ)){
-            GameState.bgm.stop();
-            GameState.ui.destroy();
-            this.my_input.destroy();
-            this.scene.stop('UIScene');
-            this.scene.start('TitleScene');
-        }
-        // DIFFICULTYのリアルタイム調整
-        if (this.keyR.isDown){
-            GameState.difficulty = Math.max(GameState.difficulty - 50, GLOBALS.DIFFICULTY.MIN);
-        }
-        if (this.keyT.isDown){
-            GameState.difficulty = Math.min(GameState.difficulty + 50, GLOBALS.DIFFICULTY.MAX);
+        if (GameState.debug_key){
+            if (Phaser.Input.Keyboard.JustDown(this.keyQ)){
+                GameState.bgm.stop();
+                GameState.ui.destroy();
+                this.my_input.destroy();
+                this.scene.stop('UIScene');
+                this.scene.start('TitleScene');
+            }
+            // DIFFICULTYのリアルタイム調整
+            if (this.keyR.isDown){
+                GameState.difficulty = Math.max(GameState.difficulty - 50, GLOBALS.DIFFICULTY.MIN);
+            }
+            if (this.keyT.isDown){
+                GameState.difficulty = Math.min(GameState.difficulty + 50, GLOBALS.DIFFICULTY.MAX);
+            }
         }
 
     } // End of update

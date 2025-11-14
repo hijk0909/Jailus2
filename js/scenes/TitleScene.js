@@ -99,30 +99,32 @@ export class TitleScene extends Phaser.Scene {
         // this.glitch.set1f('uDesaturate', p);
 
         // 隠しキー操作
-        if (Phaser.Input.Keyboard.JustDown(this.keyF)){
-            this.start_stage = Math.max(1, this.start_stage - 1);
-            this.start_area = 1;
-            this.show_start_stage();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.keyG)){
-            this.start_stage = Math.min(GLOBALS.STAGE_MAX, this.start_stage + 1);
-            this.start_area = 1;
-            this.show_start_stage();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.keyV)){
-            this.start_area = Math.max(1, this.start_area - 1);
-            this.show_start_stage();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.keyB)){
-            const stage_info = this.stage_data.stages.find(s => s.stage === this.start_stage);
-            this.start_area = Math.min(stage_info.areas.length, this.start_area + 1);
-            this.show_start_stage();
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.keyA)){
-            this.scene.start('AttractScene');
-        }
-        if (Phaser.Input.Keyboard.JustDown(this.keyC)){
-            this.scene.start('GameClearScene');
+        if (GameState.debug_key){
+            if (Phaser.Input.Keyboard.JustDown(this.keyF)){
+                this.start_stage = Math.max(1, this.start_stage - 1);
+                this.start_area = 1;
+                this.show_start_stage();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.keyG)){
+                this.start_stage = Math.min(GLOBALS.STAGE_MAX, this.start_stage + 1);
+                this.start_area = 1;
+                this.show_start_stage();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.keyV)){
+                this.start_area = Math.max(1, this.start_area - 1);
+                this.show_start_stage();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.keyB)){
+                const stage_info = this.stage_data.stages.find(s => s.stage === this.start_stage);
+                this.start_area = Math.min(stage_info.areas.length, this.start_area + 1);
+                this.show_start_stage();
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.keyA)){
+                this.scene.start('AttractScene');
+            }
+            if (Phaser.Input.Keyboard.JustDown(this.keyC)){
+                this.scene.start('GameClearScene');
+            }
         }
     }
     show_start_stage(){

@@ -33,6 +33,7 @@ export class Item_Point extends Item {
         eff.set_text(score.toString());
         GameState.effects.push(eff);
         GameState.add_score(score);
+        GameState.sound.se_bonus.play();
     }
 
     destroy(){

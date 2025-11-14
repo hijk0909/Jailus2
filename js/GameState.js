@@ -28,6 +28,7 @@ export const GameState = {
     get_ranking : true, 
     shockwave : null,
     debug : false,
+    debug_key : false,
 
     // 入力状態（MyInput で設定）
     i_pointer : null,
