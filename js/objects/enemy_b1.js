@@ -21,6 +21,7 @@ export class Enemy_B1 extends Enemy {
         this.score = 3000;
         this.boss = true;
         this.big_explosion = true;
+        this.flash = true;
     }
 
     init(pos){

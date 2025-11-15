@@ -24,6 +24,7 @@ export class Enemy_19_head extends Enemy_19_ {
         this.life = -1;
         this.speed = 2.4;
         this.shot_count = COOLDOWN_INTERVAL.EASY;
+        this.flash = true;
     }
 
     init(pos){

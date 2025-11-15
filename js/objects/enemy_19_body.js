@@ -19,6 +19,7 @@ export class Enemy_19_body extends Enemy_19_ {
         this.life = -1;
         this.velocity = new Phaser.Math.Vector2(-1, 0);
         this.vy = 0;
+        this.flash = true;
     }
 
     init(pos){

@@ -85,6 +85,7 @@ export class Exec {
                                 GameState.effects.push(eff);
                             }
                         } else {
+                            e.set_flash();
                             const eff = new Effect_Ext(this.scene);
                             eff.init(pb.pos);
                             GameState.effects.push(eff);

@@ -8,6 +8,8 @@ import { Bullet_EH } from './bullet_eh.js';
 import { Bullet_EF } from './bullet_ef.js';
 
 const ENEMY_CLIP_MARGIN = 400;
+const FLASH_PERIOD = 2;
+const FLASH_THRESHOLD = 20;
 
 export class Enemy extends Drawable {
 
@@ -20,6 +22,8 @@ export class Enemy extends Drawable {
         this.score = 100;
         this.boss = false;
         this.big_explosion = false;
+        this.flash = false;
+        this.flash_counter = 0;
     }
 
     init(pos){
@@ -27,6 +31,12 @@ export class Enemy extends Drawable {
     }
 
     update(){
+        if (this.flash_counter > 0){
+            this.flash_counter -= 1;
+            if (this.flash_counter <= 0){
+                this.sprite.clearTint();
+            }
+        }
         if (!MyMath.inView(this.pos, this.z, ENEMY_CLIP_MARGIN)){
             this.alive = false;
         }
@@ -67,6 +77,14 @@ export class Enemy extends Drawable {
         bef.init(pos);
         bef.set_velocity_fix(angle);
         GameState.bullets_e.push(bef);
+    }
+
+    set_flash(){
+        if (this.flash){
+            this.flash_counter = FLASH_PERIOD;
+            const tint_color = this.life > FLASH_THRESHOLD ? 0xe0e0e0 : 0xe08080;
+            this.sprite.setTintFill(tint_color);
+        }
     }
 
     hit(amount){

@@ -1,7 +1,7 @@
 // GameConst.js
 
 export const GLOBALS = {
-    VERSION : "1.0 - 2025.11.14",
+    VERSION : "1.1 - 2025.11.16",
     STAGE_MAX : 8,
     INIT_LIVES : 3,
     EXTEND_FIRST : 50000,

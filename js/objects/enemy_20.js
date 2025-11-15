@@ -24,17 +24,21 @@ export class Enemy_20 extends Enemy {
         this.k_amplitude = 0;
         this.life = 10;
         this.score = 300;
+        this.flash = true;
     }
 
     init(pos){
         super.init(pos);
 
         // スプライトの設定
-        this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'enemy_20_canvas')
+        this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_enemy')
+        .setOrigin(0.5, 0.5)
+        .setFrame(85);
+        this.sprite_canvas = this.scene.add.sprite(this.pos.x, this.pos.y, 'enemy_20_canvas')
         .setOrigin(0.5, 0.5);
 
         // シェーダーの設定
-        this.sprite.setPipeline('Trochoid');
+        this.sprite_canvas.setPipeline('Trochoid');
         this.trochoid = this.scene.renderer.pipelines.get('Trochoid');
         // this.trochoid.set1f('k', this.k_counter);
         // this.trochoid.set3f('color', 1.0, 1.0, 0.0);
@@ -42,13 +46,13 @@ export class Enemy_20 extends Enemy {
         const H = Math.random();
         const L = 0.6 + 0.25 * Math.sin(H * 2 * Math.PI - Math.PI * 0.5);
         const phaserColorInstance = Phaser.Display.Color.HSLToColor(H, 1, L);
-        this.sprite.trochoid_color = { r: phaserColorInstance.red / 256, g: phaserColorInstance.green / 256, b: phaserColorInstance.blue / 256};
-        this.sprite.trochoid_R = 0.40;
+        this.sprite_canvas.trochoid_color = { r: phaserColorInstance.red / 256, g: phaserColorInstance.green / 256, b: phaserColorInstance.blue / 256};
+        this.sprite_canvas.trochoid_R = 0.40;
         // this.sprite.trochoid_r = 0.08 + 0.25 * Math.random();
         const fraction = this.get_reduced_fraction();
-        this.sprite.trochoid_r = this.sprite.trochoid_R * (fraction.numerator / fraction.denominator);
-        this.sprite.trochoid_d = 0.14 + 0.45 * Math.random();
-        this.sprite.trochoid_k = 0;
+        this.sprite_canvas.trochoid_r = this.sprite_canvas.trochoid_R * (fraction.numerator / fraction.denominator);
+        this.sprite_canvas.trochoid_d = 0.14 + 0.45 * Math.random();
+        this.sprite_canvas.trochoid_k = 0;
 
         this.k_speed = 0.032;
         this.k_phase = Math.random() * Math.PI * 2;
@@ -59,8 +63,11 @@ export class Enemy_20 extends Enemy {
     update(time, delta){
         this.pos.x -= GameState.scroll_dx;
 
+        this.sprite.angle -= delta / 20 * GameState.ff;
+
         this.k_phase += this.k_speed * GameState.ff;
-        this.sprite.trochoid_k = this.k_amplitude * (Math.cos(this.k_phase)*0.5 + 0.5) + this.k_offset;
+        this.sprite_canvas.trochoid_k = this.k_amplitude * (Math.cos(this.k_phase)*0.5 + 0.5) + this.k_offset;
+        this.update_position(this.sprite_canvas);
 
         this.shot_count -= GameState.ff;
         if (this.shot_count < 0){
@@ -68,6 +75,8 @@ export class Enemy_20 extends Enemy {
             this.shoot_aim();
         }
         super.update();
+
+        this.sprite.depth += 1;
     }
 
     hit(amount){
@@ -81,6 +90,10 @@ export class Enemy_20 extends Enemy {
 
     destroy(){
         super.destroy();
+        if ( this.sprite_canvas ){
+            this.sprite_canvas.destroy();
+            this.sprite_canvas = null;
+        }
     }
 
     get_reduced_fraction() {

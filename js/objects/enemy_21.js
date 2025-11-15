@@ -35,6 +35,7 @@ export class Enemy_21 extends Enemy {
         this.pos_old = new Phaser.Math.Vector2(0,0);
         this.pos_new = new Phaser.Math.Vector2(0,0);
         this.velocity = new Phaser.Math.Vector2(-1,0);
+        this.flash = true;
     }
 
     init(pos){

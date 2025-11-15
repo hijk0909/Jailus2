@@ -55,7 +55,7 @@ export class Effect_Drop extends Effect {
         this.sprite.on('animationcomplete', (animation, frame) => {
             if (animation.key === 'anims_effect_drop_start') {
                 this.state = 1;
-                console.log("animationComplete[state 0 end]", this.state);
+                // console.log("animationComplete[state 0 end]", this.state);
             } else if (animation.key === 'anims_effect_drop_end') {
                 this.alive = false;
             }

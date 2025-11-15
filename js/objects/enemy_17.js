@@ -20,6 +20,7 @@ export class Enemy_17 extends Enemy {
         this.life = 18;
         this.collision = { width : 350, height : 150};
         this.big_explosion = true;
+        this.flash = true;
     }
 
     init(pos){

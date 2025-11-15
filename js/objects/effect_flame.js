@@ -18,6 +18,7 @@ export class Effect_Flame extends Effect {
         this.sprite = this.scene.add.sprite(this.pos.x, this.pos.y, 'ss_effect')
         .setOrigin(0.5, 0.75)
         .setFrame(24)
+        .setAlpha(0.5)
         .setVisible(false);
 
         // アニメーションの定義

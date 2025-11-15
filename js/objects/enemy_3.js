@@ -17,6 +17,7 @@ export class Enemy_3 extends Enemy {
         super(scene);
         this.shot_count = COOLDOWN_INTERVAL.EASY;
         this.life = 2;
+        this.flash = true;
     }
 
     init(pos){

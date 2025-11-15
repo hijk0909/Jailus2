@@ -52,6 +52,10 @@ export class Enemy_19a extends Enemy {
     hit(amount){
         // console.log("life", amount, this.life);
         super.hit(amount);
+        for (let i = 0 ; i < NUM_CHILDREN; i++){
+            const child = this.children[i];
+            child.set_flash();
+        }
         if (this.life <= 0){
             // ライフが尽きたら全ての子パーツを削除
             for (let i = 0 ; i < NUM_CHILDREN; i++){

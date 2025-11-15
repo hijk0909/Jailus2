@@ -111,7 +111,7 @@ export class Spawn {
         // パラメータの設定
         if (val_parameter){
             enemy.set_parameter(val_parameter);
-            console.log("parameter:", val_parameter);
+            // console.log("parameter:", val_parameter);
         }
 
         enemy.init(pos);

@@ -25,6 +25,7 @@ export class Enemy_15a extends Enemy_15_ {
         this.angle = -90;
         this.max_angle = MAX_ANGLE;
         this.score = 200;
+        this.flash = true;
     }
 
     init(pos){
